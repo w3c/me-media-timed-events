@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Media Timed Events</title>
+    <meta charset="utf-8">
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async class="remove"></script>
+    <script class="remove">
+      var respecConfig = {
+        specStatus: "ED",
+        edDraftURI: "https://w3c.github.io/me-media-timed-events/",
+        shortName: "media-timed-events",
+        editors: [
+          {
+            name: "Chris Needham",
+            mailto: "chris.needham@bbc.co.uk",
+            company: "British Broadcasting Corporation",
+            companyURL: "https://www.bbc.co.uk"
+          },
+          {
+            name: "Giridhar Mandyam",
+            mailto: "mandyam@qti.qualcomm.com",
+            company: "Qualcomm",
+            companyURL: "https://www.qualcomm.com"
+          }
+        ],
+        wg: "Media & Entertainment Interest Group",
+        wgURI: "https://www.w3.org/2011/webtv/",
+        charterDisclosureURI: "https://www.w3.org/2017/03/webtv-charter.html",
+        wgPublicList: "public-web-and-tv",
+        localBiblio: {
+          "WEB-ISOBMFF": {
+            title: "ISO/IEC JTC1/SC29/WG11 N16944 Working Draft on Carriage of Web Resources in ISOBMFF",
+            href: "https://mpeg.chiariglione.org/standards/mpeg-4/timed-text-and-other-visual-overlays-iso-base-media-file-format/wd-carriage-web",
+            // href: "https://mpeg.chiariglione.org/sites/default/files/files/standards/parts/docs/w16944.zip",
+            authors: [
+              "Thomas Stockhammer",
+              "Cyril Concolato"
+            ],
+            publisher: "MPEG",
+            date: "July 2017",
+          },
+          "DASH-EVENTING": {
+            title: "DASH Eventing and HTML5",
+            href: "https://www.w3.org/2011/webtv/wiki/images/a/a5/DASH_Eventing_and_HTML5.pdf",
+            authors: [
+              "Giridhar Mandyam"
+            ],
+            date: "February 2018"
+          },
+          "WEB-MEDIA-GUIDELINES": {
+            title: "Web Media Application Developer Guidelines 2018",
+            href: "https://w3c.github.io/webmediaguidelines/",
+            authors: [
+              "Joel Korpi",
+              "Thasso Griebel",
+              "Jeff Burtoft"
+            ],
+            publisher: "W3C",
+            status: "CG-DRAFT",
+            date: "26 April 2018"
+          },
+          "HBBTV": {
+            title: "HbbTV 2.0.2 Specification",
+            href: "https://www.hbbtv.org/wp-content/uploads/2018/02/HbbTV_v202_specification_2018_02_16.pdf",
+            publisher: "HbbTV Association",
+            date: "16 February 2018"
+          }
+        }
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>
+        This document collects use cases and requirements for improved support
+        for timed events related to audio or video media on the Web, such as
+        subtitles, captions, or other web content, where synchronization to a
+        playing audio or video media stream is needed, and makes recommendations
+        for new or changed Web APIs to realize these requirements.
+      </p>
+    </section>
+    <section id="sotd">
+    </section>
+    <section>
+      <h2>Introduction</h2>
+      <p class="ednote">
+        Add a general introduction to media timed events, what they are, what
+        they're for...
+      </p>
+    </section>
+    <section>
+      <h2>Use cases</h2>
+      <p>
+        This section describes specific use cases for media timed events.
+      </p>
+      <section>
+        <h3>Synchronised event triggering</h3>
+        <p class="ednote">
+          Add use case descriptions for DASH and emsg events here.
+          Describe a few motivating application scenarios.
+        </p>
+        <p>
+          DASH events may be conveyed via an EventStream fragment in the MPD
+          (Media Presentation Description) document. Or, ISO BMFF files may
+          contain arbitrary binary data in <code>emsg</code> boxes, known as
+          'in-band' events.
+        </p>
+        <p>
+          Use cases for <code>emsg</code> boxes include playing an audio file or
+          displaying an image in sync with the audio/video media where close
+          synchronization is needed.
+        </p>
+        <p>
+          Reference: M&amp;E IG call 1 Feb 2018:
+          <a href="https://www.w3.org/2018/02/01-me-minutes.html">Minutes</a>,
+          [[DASH-EVENTING]].
+        </p>
+        <p class="ednote">
+          See also <a href="https://github.com/w3c/webmediaguidelines/issues/64">this issue</a>
+          against the [[WEB-MEDIA-GUIDELINES]]. TODO: Add detail here.
+        </p>
+      </section>
+      <section>
+        <h3>Synchronized rendering of web resources</h3>
+        <p class="ednote">
+          Add use case descriptions for synchronised rendering here. Note that
+          this could be rendering of any web resource, not necessarily those
+          embedded in media containers. Describe a few motivating application
+          scenarios.
+        </p>
+      </section>
+      <section>
+        <h3>Rendering of Web content embedded in media containers</h3>
+        <p class="ednote">
+          Add use case descriptions for rendering of Web content embedded in
+          media containers (e.g., [[WEB-ISOBMFF]]). Describe a few motivating
+          application scenarios.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>Related industry standards</h2>
+      <p class="ednote">
+        Link to and describe relevant documents from other standards groups here:
+        <ul class="ednote">
+          <li>[[MPEGDASH]] events</li>
+          <li>[[HBBTV]]</li>
+          <li>[[ISOBMFF]] <code>emsg</code></li>
+          <li>etc.</li>
+        </ul>
+      </p>
+      <section>
+        <h3>MPEG Working Draft on Carriage of Web Resources in ISOBMFF</h3>
+        <p>
+          [[WEB-ISOBMFF]] specifies the use of ISO BMFF tools for the storage
+          and delivery of web data. The specified storage is designed to enable
+          enriching audio/video content, as well as audio-only content, with
+          synchronized, animated, interactive web data, including overlays.
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>Gap analysis</h2>
+      <p>
+        This section describes gaps in existing existing Web platform
+        capabilities needed to support the use cases and requirements described
+        in this document. Where applicable, this section also describes how
+        existing Web platform features can be used as workarounds, and any
+        associated limitations.
+      </p>
+      <section>
+        <h3>Synchronized event triggering</h3>
+        <p>
+          The <code>DataCue</code> API could be used to deliver in-band event data
+          to Web applications, but this is not implemented in mainstream browser
+          engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+          in the 26 April 2018 HTML 5.3 draft [[HTML53-20180426]], but is
+          <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
+          in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
+          and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
+        </p>
+        <p>
+          Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
+          handling of <code>emsg</code> boxes.
+        </p>
+        <p>
+          The timing guarantees provided in HTML5 regarding the triggering of
+          <code>TextTrackCue</code> events may be not be enough to avoid
+          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">events being missed</a>.
+        </p>
+      </section>
+      <section>
+        <h3>Synchronized rendering of web resources</h3>
+        <p class="ednote">
+          Describe gaps relating to synchronized rendering of web resources.
+          Can we define a generic web API for scheduling page changes
+          synchronized to playing media? Related: [[css-animations-1]],
+          [[web-animations-1]], [[css-transitions-1]]. See also:
+          <a href="https://github.com/bbc/VideoContext">https://github.com/bbc/VideoContext</a>.
+          Should this be in scope for the TF?
+        </p>
+      </section>
+      <section>
+        <h3>Rendering of Web content embedded in media containers</h3>
+        <p>
+          There is no API for surfacing Web content embedded in ISO BMFF
+          containers into the browser (e.g., the <code>HTMLCue</code> proposal
+          discussed at <a href="https://www.w3.org/wiki/TPAC2015/HTMLcue">TPAC 2015</a>).
+        </p>
+        <p class="ednote">
+          Add more detail on what's required. Some questions / considerations:
+          <ul class="ednote">
+            <li>Are the web resources intended to be handed to a Web application
+            for rendering, or direct rendering by the UA?</li>
+            <li>How do we guarantee that resources are delivered to the browser
+            sufficiently ahead of time?</li>
+            <li>How does same-origin policy affect such resources?</li>
+          </ul>
+        </p>
+      </section>
+    </section>
+    <section>
+      <h2>Recommendations</h2>
+      <p class="ednote">
+        Add recommendations here.
+      </p>
+    </section>
+    <section>
+      <h2>Acknowledgments</h2>
+      <p>
+        Thanks to ... for their contributions to this document.
+      </p>
+    </section>
+  </body>
+</html>
