@@ -64,6 +64,12 @@
             href: "https://www.hbbtv.org/wp-content/uploads/2018/02/HbbTV_v202_specification_2018_02_16.pdf",
             publisher: "HbbTV Association",
             date: "16 February 2018"
+          },
+          "DVB-DASH": {
+            title: "DVB Document A168. Digital Video Broadcasting (DVB); MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks",
+            href: "https://www.dvb.org/resources/public/standards/a168_dvb_mpeg-dash_nov_2017.pdf",
+            publisher: "DVB",
+            date: "November 2017"
           }
         }
       };
@@ -100,15 +106,27 @@
           Describe a few motivating application scenarios.
         </p>
         <p>
-          DASH events may be conveyed via an EventStream fragment in the MPD
-          (Media Presentation Description) document. Or, ISO BMFF files may
-          contain arbitrary binary data in <code>emsg</code> boxes, known as
-          'in-band' events.
+          In MPEG DASH, events may be conveyed either via an EventStream fragment
+          in the MPD (Media Presentation Description) document, or as 'in-band'
+          events, i.e., <code>emsg</code> boxes in ISO BMFF files. In addition,
+          the MPD document may advertise the presence of <code>emsg</code>
+          events in the ISO BMFF content for given schemas.
         </p>
         <p>
-          Use cases for <code>emsg</code> boxes include playing an audio file or
-          displaying an image in sync with the audio/video media where close
-          synchronization is needed.
+          Use cases for <code>emsg</code> boxes include:
+          <ul>
+            <li>
+              Displaying of images alongside an audio stream. For example, in
+              RadioVIS in DVB, the <code>emsg</code> event contains an image URL,
+              which the UA requests. In this use case, synchronization of the
+              image rendering to within a second or so is acceptable
+              ([[DVB-DASH]], section 9.1.7).
+            </li>
+            <li>
+              Notifying the DASH player Web application that it should refresh
+              the MPD document ([[MPEGDASH]], section 5.10.4).
+            </li>
+          </ul>
         </p>
         <p>
           Reference: M&amp;E IG call 1 Feb 2018:
@@ -170,24 +188,53 @@
       </p>
       <section>
         <h3>Synchronized event triggering</h3>
-        <p>
-          The <code>DataCue</code> API could be used to deliver in-band event data
-          to Web applications, but this is not implemented in mainstream browser
-          engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
-          in the 26 April 2018 HTML 5.3 draft [[HTML53-20180426]], but is
-          <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
-          in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
-          and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
-        </p>
-        <p>
-          Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
-          handling of <code>emsg</code> boxes.
-        </p>
-        <p>
-          The timing guarantees provided in HTML5 regarding the triggering of
-          <code>TextTrackCue</code> events may be not be enough to avoid
-          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">events being missed</a>.
-        </p>
+        <section>
+          <h4>DASH and ISO BMFF emsg events</h4>
+          <p>
+            An <code>emsg</code> event contains the following information,
+            as specified in [[MPEGDASH]], section 5.10.3.3:
+            <ul>
+              <li><code>scheme_id_uri</code> &mdash; A URI that identifies
+              the message scheme</li>
+              <li><code>value</code> &mdash; The event value (string)</li>
+              <li><code>timescale</code> &mdash; Timescale units, in ticks
+              per second</li>
+              <li><code>presentation_time_delta</code> &mdash; Presentation
+              time delta (with respect to the media segment),
+              in <code>timescale</code> units</li>
+              <li><code>event_duration</code> &mdash; Event duration,
+              in <code>timescale</code> units</li>
+              <li><code>id</code> &mdash; Event message identifier</li>
+              <li><code>message_data</code> &mdash; Message body (may be empty)</li>
+            </ul>
+          </p>
+          <p>
+            The presence of <code>emsg</code> events in the media stream is signalled
+            in the DASH manifest document (MPD), using an <code>EventStream</code> XML
+            element ([[MPEGDASH]], section 5.10.2).
+          </p>
+          <p>
+            The <code>DataCue</code> API has been previously discussed as a means to
+            deliver in-band event data to Web applications, but this is not implemented
+            in mainstream browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+            in the 26 April 2018 HTML 5.3 draft [[HTML53-20180426]], but is
+            <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
+            in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
+            and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
+          </p>
+          <p>
+            Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
+            handling of <code>emsg</code> boxes.
+          </p>
+        </section>
+        <section>
+          <h4>Synchronization and timing</h4>
+          <p>
+            The timing guarantees provided in HTML5 regarding the triggering of
+            <code>TextTrackCue</code> events may be not be enough to avoid
+            <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">events being missed</a>.
+          </p>
+        </section>
       </section>
       <section>
         <h3>Synchronized rendering of web resources</h3>
