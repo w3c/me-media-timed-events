@@ -185,7 +185,7 @@
         <h3>HbbTV</h3>
         <p>
           HbbTV includes support for <code>emsg</code> events ([[DVB-DASH]],
-          section 9.1) and requires this be mapped to <codeDataCue></code>
+          section 9.1) and requires this be mapped to <code>DataCue</code>
           ([[HBBTV]], section 9.3.2). The HbbTV device test suite includes
           test pages and streams for this ([[HBBTV-TESTS]]). This feature is
           included in user agents shipping in connected TVs across Europe from
@@ -256,9 +256,9 @@
             <code>schemeIdUri</code> and <code>value</code>), and the
             <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
             <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
-            value. Because HbbTV devices include a native DASH client, parsing
-            of the MPD document and creation of the <code>TextTrack</code>s is
-            done by the UA.
+            and <code>value </code> values. Because HbbTV devices include a native
+            DASH client, parsing of the MPD document and creation of the
+            <code>TextTrack</code>s is done by the UA.
           </p>
           <p class="ednote">
             To support DASH clients implemented in Web applications, there is
@@ -315,7 +315,7 @@
     <section>
       <h2>Acknowledgments</h2>
       <p>
-        Thanks to John Piesing for his contributions to this document.
+        Thanks to Jon Piesing for his contributions to this document.
       </p>
     </section>
   </body>
