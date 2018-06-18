@@ -65,6 +65,12 @@
             publisher: "HbbTV Association",
             date: "16 February 2018"
           },
+          "HBBTV-TESTS": {
+            title: "HbbTV Test Suite 2018-1",
+            href: "https://www.hbbtv.org/wp-content/uploads/2018/03/HbbTV-testcases-2018-1.pdf",
+            publisher: "HbbTV Association",
+            date: "2018"
+          },
           "DVB-DASH": {
             title: "DVB Document A168. Digital Video Broadcasting (DVB); MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks",
             href: "https://www.dvb.org/resources/public/standards/a168_dvb_mpeg-dash_nov_2017.pdf",
@@ -162,7 +168,6 @@
         Link to and describe relevant documents from other standards groups here:
         <ul class="ednote">
           <li>[[MPEGDASH]] events</li>
-          <li>[[HBBTV]]</li>
           <li>[[ISOBMFF]] <code>emsg</code></li>
           <li>etc.</li>
         </ul>
@@ -174,6 +179,21 @@
           and delivery of web data. The specified storage is designed to enable
           enriching audio/video content, as well as audio-only content, with
           synchronized, animated, interactive web data, including overlays.
+        </p>
+      </section>
+      <section>
+        <h3>HbbTV</h3>
+        <p>
+          HbbTV includes support for <code>emsg</code> events ([[DVB-DASH]],
+          section 9.1) and requires this be mapped to <codeDataCue></code>
+          ([[HBBTV]], section 9.3.2). The HbbTV device test suite includes
+          test pages and streams for this ([[HBBTV-TESTS]]). This feature is
+          included in user agents shipping in connected TVs across Europe from
+          2017. HbbTV has a <a href="https://github.com/HbbTV-Association/ReferenceApplication">reference app</a>
+          and content for DASH+DRM which includes <code>emsg</code> support.
+          As well as HbbTV devices, this reference app and content have been
+          tested on Microsoft Edge with MSE and EME although <code>emsg</code>
+          support does not work there.
         </p>
       </section>
     </section>
@@ -226,6 +246,26 @@
             Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
             handling of <code>emsg</code> boxes.
           </p>
+          <p>
+            [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
+            fields described <a href="#dash-and-iso-bmff-emsg-events">above</a>
+            and the <a href="https://html.spec.whatwg.org/multipage/media.html#texttrack"><code>TextTrack</code></a>
+            and <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#datacue"><code>DataCue</code></a>
+            APIs. A <code>TextTrack</code> instance is created for each event
+            stream signalled in the MPD document (as identified by the
+            <code>schemeIdUri</code> and <code>value</code>), and the
+            <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
+            <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
+            value. Because HbbTV devices include a native DASH client, parsing
+            of the MPD document and creation of the <code>TextTrack</code>s is
+            done by the UA.
+          </p>
+          <p class="ednote">
+            To support DASH clients implemented in Web applications, there is
+            therefore either a need for an API that allows applications to tell
+            the UA which schemes it wants to receive, or the UA should simply
+            expose all event streams to applications. Which of these is preferred?
+          </p>
         </section>
         <section>
           <h4>Synchronization and timing</h4>
@@ -275,7 +315,7 @@
     <section>
       <h2>Acknowledgments</h2>
       <p>
-        Thanks to ... for their contributions to this document.
+        Thanks to John Piesing for his contributions to this document.
       </p>
     </section>
   </body>
