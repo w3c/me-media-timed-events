@@ -77,12 +77,12 @@
             publisher: "DVB",
             date: "November 2017"
           },
-          "BBC": {
-            title: "Subtitle Guidelines",
+          "BBC-SUBTITLES": {
+            title: "Subtitle Guidelines, Version 1.1.7",
             href: "http://bbc.github.io/subtitle-guidelines/",
             publisher: "BBC",
             date: "May 2018"
-          },          
+          },
         }
       };
     </script>
@@ -205,13 +205,53 @@
       <section>
         <h3>BBC Subtitle Guidelines</h3>
         <p>
-          The BBC in their guidelines for subtitles provide requirements for synchronisation
-          ([[BBC]], section 5).  In particular, the guidelines state: "The subtitles should match the pace of speaking as closely as possible. 
-          Ideally, when the speaker is in shot, your subtitles should not anticipate speech by more than 1.5 seconds or hang up on 
-          the screen for more than 1.5 seconds after speech has stopped."
+          The BBC Subtitle Guidelines ([[BBC-SUBTITLES]]) describe best practice
+          for authoring subtitles or captions. In particular, the guidelines state:
+        </p>
+        <blockquote>
+          <p>
+            <b>5.2 Match subtitle to pace of speaking</b>
+          </p>
+          <p>
+            The subtitles should match the pace of speaking as closely
+            as possible. Ideally, when the speaker is in shot, your subtitles
+            should not anticipate speech by more than 1.5 seconds or hang up on
+            the screen for more than 1.5 seconds after speech has stopped.
+          </p>
+          <p>
+            <b>6.1 Match subtitles to shot</b>
+          </p>
+          <p>
+            It is likely to be less tiring for the viewer if shot changes and
+            subtitle changes occur at the same time. Many subtitles therefore
+            start on the first frame of the shot and end on the last frame.
+          </p>
+          <p>
+            <b>6.2 Maintain a minimum gap when mismatched</b>
+          </p>
+          <p>
+            If you have to let a subtitle hang over a shot change, do not remove
+            it too soon after the cut. The duration of the overhang will depend
+            on the content.
+          </p>
+          <p>
+            <b>6.3 Avoid straddling shot changes</b>
+          </p>
+          <p>
+            Avoid creating subtitles that straddle a shot change (i.e., a subtitle
+            that starts in the middle of shot one and ends in the middle of shot
+            two). To do this, you may need to split a sentence at an appropriate
+            point, or delay the start of a new sentence to coincide with the shot
+            change.
+          </p>
+        </blockquote>
+        <p>
+          To meet these requirements, the playback system must honour the provided timings,
+          on the assumption that they are frame accurate to 25 frames per second, i.e.,
+          40 milliseconds per frame, and regardless of the actual video frame rate,
+          which may be adjusted dynamically according to the video encoding.
         </p>
       </section>
-    
     </section>
     <section>
       <h2>Gap analysis</h2>
