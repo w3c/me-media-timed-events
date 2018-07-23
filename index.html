@@ -246,10 +246,12 @@
           </p>
         </blockquote>
         <p>
-          To meet these requirements, the playback system must honour the provided timings,
-          on the assumption that they are frame accurate to 25 frames per second, i.e.,
-          40 milliseconds per frame, and regardless of the actual video frame rate,
-          which may be adjusted dynamically according to the video encoding.
+          To meet these requirements, the playback system must honour the provided
+          timings. Subtitles for video are typically authored against video at a
+          nominal frame rate, e.g., 25 frames per second (which corresponds to
+          40 milliseconds per frame). The actual video frame rate may be adjusted
+          dynamically according to the video encoding, but the subtitle timing
+          must remain the same ([[EBU-TT-D]], Annex E).
         </p>
       </section>
     </section>
