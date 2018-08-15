@@ -136,7 +136,11 @@
             </li>
             <li>
               Notifying the DASH player Web application that it should refresh
-              the MPD document ([[MPEGDASH]], section 5.10.4).
+              its copy of the MPD document ([[MPEGDASH]], section 5.10.4).
+              This is an alternative to setting a cache duration in the HTTP
+              response, so the client can refresh the MPD when it actually
+              changes, and reduces the load on HTTP servers caused by frequent
+              server requests.
             </li>
           </ul>
         </p>
