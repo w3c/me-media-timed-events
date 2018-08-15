@@ -107,6 +107,25 @@
       </p>
     </section>
     <section>
+      <h2>Terminology</h2>
+      <p>
+        The following terms are used in this document:
+        <ul>
+          <li>
+            <dfn>in-band</dfn> &mdash; timed event information that is contained
+            within the channel used to deliver the audio or video media, i.e.,
+            embedded in the media container or multiplexed with the audio or
+            video media stream.
+          </li>
+          <li>
+            <dfn>out-of-band</dfn> &mdash; timed event information that is
+            delivered over some other mechanism external to the media container
+            or media stream.
+          </li>
+        </ul>
+      </p>
+    </section>
+    <section>
       <h2>Use cases</h2>
       <p>
         This section describes specific use cases for media timed events.
@@ -118,11 +137,11 @@
           Describe a few motivating application scenarios.
         </p>
         <p>
-          In MPEG DASH, events may be conveyed either via an EventStream fragment
-          in the MPD (Media Presentation Description) document, or as 'in-band'
-          events, i.e., <code>emsg</code> boxes in ISO BMFF files. In addition,
-          the MPD document may advertise the presence of <code>emsg</code>
-          events in the ISO BMFF content for given schemas.
+          In MPEG DASH, events may be conveyed either as in-band events, e.g.,
+          as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
+          EventStream fragment in the MPD (Media Presentation Description)
+          document. In addition, the MPD document may advertise the presence of
+          <code>emsg</code> events in the ISO BMFF content for given schemas.
         </p>
         <p>
           Use cases for <code>emsg</code> boxes include:
