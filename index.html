@@ -336,6 +336,15 @@
             handling of <code>emsg</code> boxes.
           </p>
           <p>
+            On resource constrained devices such as smart TVs and streaming sticks,
+            parsing media segments to extract event information leads to a significant
+            performance penalty, which can have an impact on UI rendering updates if
+            this is done on the UI thread. There can also be an impact on the battery
+            life of mobile devices. Given that the media segments will be parsed anyway
+            by the user agent, parsing in JavaScript is an expensive overhead that
+            could be avoided.
+          </p>
+          <p>
             [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
             fields described <a href="#dash-and-iso-bmff-emsg-events">above</a>
             and the <a href="https://html.spec.whatwg.org/multipage/media.html#texttrack"><code>TextTrack</code></a>
