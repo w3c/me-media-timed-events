@@ -83,6 +83,18 @@
             publisher: "BBC",
             date: "May 2018"
           },
+          "3GPP-INTERACTIVITY-WID": {
+            title: "SP-170796: New WID on 3GPP Service Interactivity",
+            href: "http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip",
+            publisher: "3GPP",
+            date: "September 2017"
+          },
+          "3GPP-INTERACTIVITY-TR": {
+            title: "TR 26.953: Interactivity Support for 3GPP-Based Streaming and Download Services (Release 15)",
+            href: "http://www.3gpp.org/ftp/Specs/archive/26_series/26.953/26953-f00.zip",
+            publisher: "3GPP",
+            date: "June 2018"
+          }
         }
       };
     </script>
@@ -224,6 +236,46 @@
         </p>
       </section>
       <section>
+        <h3>DASH Industry Forum APIs for Interactivity</h3>
+        <p>
+          The DASH-IF InterOp Working Group has an ongoing work item,
+          <emph>DAInty</emph>, "DASH APIs for Interactivity", which aims to
+          specify a set of APIs between the DASH client/player and interactivity-capable
+          applications, for both Web and native applications. The origin of this
+          work is a related 3GPP work item on Service Interactivity
+          ([[3GPP-INTERACTIVITY-WID]], [[3GPP-INTERACTIVITY-TR]]).
+          The objective is to provide service enablers for user engagement with
+          auxiliary content and UIs on mobile device during live or time-shifted
+          viewing of streaming content delivered over 3GPP broadcast or unicast
+          bearers, and the measurement and reporting of such interactive consumption.
+        </p>
+        <p>
+          Two APIs are being developed that are relevant to the scope of the present
+          document:
+          <ul>
+            <li>
+              Application subscription/DASH client dispatch of DASH event stream
+              messages containing interactivity information. Events can be delivered
+              in-band (<code>emsg</code>) and/or as MPD events.
+            </li>
+            <li>
+              Application subscription/DASH client dispatch of ISO BMFF Timed
+              Metadata tracks providing similar functionality to DASH event streams.
+            </li>
+          </ul>
+        </p>
+        <p>
+          Two modes for dispatching events are defined. In Mode 1, events are dispatched
+          at the time the event arrives, and in Mode 2, events are dispatched at the
+          given time on the media timeline. The application can register with the DASH
+          client which Mode to use.
+        </p>
+        <p>
+          Reference: M&amp;E IG, Media Timed Events Task Force call 20 Aug 2018:
+          <a href="https://www.w3.org/2018/08/20-me-minutes.html">Minutes</a>.
+        </p>
+      </section>
+      <section>
         <h3>BBC Subtitle Guidelines</h3>
         <p>
           The BBC Subtitle Guidelines ([[BBC-SUBTITLES]]) describe best practice
@@ -354,7 +406,7 @@
             <code>schemeIdUri</code> and <code>value</code>), and the
             <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
             <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
-            and <code>value </code> values. Because HbbTV devices include a native
+            and <code>value</code> values. Because HbbTV devices include a native
             DASH client, parsing of the MPD document and creation of the
             <code>TextTrack</code>s is done by the UA.
           </p>
