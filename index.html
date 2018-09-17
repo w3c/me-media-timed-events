@@ -461,6 +461,60 @@
       <p class="ednote">
         Add recommendations here.
       </p>
+
+      <p>
+        To support DASH <code>emsg</code> and MPD events, we have the following
+        requirements:
+      </p>
+      <p>
+      <ul>
+          <li>
+            The API must allow Web applications to subscribe to receive media
+            timed events with specific id and (optional) value.
+          </li>
+          <li>
+            The user agent must deliver only those events to a Web application
+            for which the application has subscribed.
+          </li>
+          <li>
+            The API must allow a Web application to unsubscribe from receiving
+            events with a specific id and (optional) value.
+          </li>
+          <li>
+            To be able to handle out of band events, the API must allow Web
+            applications to create events to be added to the media timeline,
+            to be triggered by the user agent. Creating the event should allow
+            the Web application to provide all necessary parameters to define
+            the event, including start and end times, id and value, and data
+            payload.
+          </li>
+          <li>
+            For those events that the application has subscribed to receive,
+            the API must:
+            <ul>
+              <li>
+                Generate a JavaScript event when an in-band media timed event
+                is parsed from the media container or media stream (DAInty Mode 1)
+              </li>
+              <li>
+                Generate a JavaScript event when the current media playback
+                position reaches the start time of a media timed event during
+                playback (DAInty Mode 2)
+              </li>
+              <li>
+                Generate a JavaScript event when the current media playback
+                position reaches the end time of a media timed event during
+                playback (DAInty Mode 2)
+              </li>
+            </ul>
+            This applies equally to in-band events that the user agent has extracted
+            from the media container, and out-of-band events added by the Web application.
+          </li>
+          <li>
+            The user agent must ensure that no events are missed during normal playback.
+          </li>
+        </ul>
+      </p>
     </section>
     <section>
       <h2>Acknowledgments</h2>
