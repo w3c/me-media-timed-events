@@ -159,7 +159,8 @@
           In MPEG DASH, events may be conveyed either as in-band events, e.g.,
           as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
           EventStream fragment in the MPD (Media Presentation Description)
-          document. In addition, the MPD document may advertise the presence of
+          document (i.e., by an instance of the EventStream child of the MPD.Period element). 
+          In addition, the MPD document may advertise the presence of
           <code>emsg</code> events in the ISO BMFF content for given schemas.
         </p>
         <p>
@@ -170,7 +171,8 @@
               RadioVIS in DVB, the <code>emsg</code> event contains an image URL,
               which the UA requests. In this use case, synchronization of the
               image rendering to within a second or so is acceptable
-              ([[DVB-DASH]], section 9.1.7).
+              ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated 
+              at different intervals in the duration of the associated |emsg| event. 
             </li>
             <li>
               Notifying the DASH player Web application that it should refresh
@@ -275,8 +277,9 @@
         <p>
           Two modes for dispatching events are defined. In Mode 1, events are dispatched
           at the time the event arrives, and in Mode 2, events are dispatched at the
-          given time on the media timeline. The application can register with the DASH
-          client which Mode to use.
+          given time on the media timeline. The “arrival” of events from the DASH client perspective may be either 
+          static or pre-provisioned, in the case MPD Events, or dynamic in the case of inband events carried in the emsg. 
+          The application can register with the DASH client which Mode to use.
         </p>
         <p>
           Reference: M&amp;E IG, Media Timed Events Task Force call 20 Aug 2018:
