@@ -156,14 +156,6 @@
           Describe a few motivating application scenarios.
         </p>
         <p>
-          In MPEG DASH, events may be conveyed either as in-band events, e.g.,
-          as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
-          EventStream fragment in the MPD (Media Presentation Description)
-          document (i.e., by an instance of the EventStream child of the MPD.Period element). 
-          In addition, the MPD document may advertise the presence of
-          <code>emsg</code> events in the ISO BMFF content for given schemas.
-        </p>
-        <p>
           Use cases for <code>emsg</code> boxes include:
           <ul>
             <li>
@@ -171,8 +163,8 @@
               RadioVIS in DVB, the <code>emsg</code> event contains an image URL,
               which the UA requests. In this use case, synchronization of the
               image rendering to within a second or so is acceptable
-              ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated 
-              at different intervals in the duration of the associated |emsg| event. 
+              ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated
+              at different intervals in the duration of the associated <code>emsg</code> event.
             </li>
             <li>
               Notifying the DASH player Web application that it should refresh
@@ -230,6 +222,40 @@
     </section>
     <section>
       <h2>Related industry standards</h2>
+        <h3>MPEG-DASH</h3>
+        <p>
+          In MPEG DASH, events may be conveyed either as in-band events, e.g.,
+          as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
+          EventStream fragment in the MPD (Media Presentation Description)
+          document (i.e., by an instance of the <code>EventStream</code> child
+          of the <code>MPD.Period</code> element).
+          In addition, the MPD document may advertise the presence of
+          <code>emsg</code> events in the ISO BMFF content for given schemas.
+        </p>
+        <p>
+          An <code>emsg</code> event contains the following information,
+          as specified in [[MPEGDASH]], section 5.10.3.3:
+          <ul>
+            <li><code>scheme_id_uri</code> &mdash; A URI that identifies
+            the message scheme</li>
+            <li><code>value</code> &mdash; The event value (string)</li>
+            <li><code>timescale</code> &mdash; Timescale units, in ticks
+            per second</li>
+            <li><code>presentation_time_delta</code> &mdash; Presentation
+            time delta (with respect to the media segment),
+            in <code>timescale</code> units</li>
+            <li><code>event_duration</code> &mdash; Event duration,
+            in <code>timescale</code> units</li>
+            <li><code>id</code> &mdash; Event message identifier</li>
+            <li><code>message_data</code> &mdash; Message body (may be empty)</li>
+          </ul>
+        </p>
+        <p>
+          The presence of <code>emsg</code> events in the media stream is signalled
+          in the DASH manifest document (MPD), using an <code>EventStream</code> XML
+          element ([[MPEGDASH]], section 5.10.2).
+        </p>
+      </section>
       <section>
         <h3>HbbTV</h3>
         <p>
@@ -277,8 +303,9 @@
         <p>
           Two modes for dispatching events are defined. In Mode 1, events are dispatched
           at the time the event arrives, and in Mode 2, events are dispatched at the
-          given time on the media timeline. The “arrival” of events from the DASH client perspective may be either 
-          static or pre-provisioned, in the case MPD Events, or dynamic in the case of inband events carried in the emsg. 
+          given time on the media timeline. The "arrival" of events from the DASH client
+          perspective may be either static or pre-provisioned, in the case MPD Events,
+          or dynamic in the case of inband events carried in the <code>emsg</code>.
           The application can register with the DASH client which Mode to use.
         </p>
         <p>
@@ -362,29 +389,6 @@
         <h3>Synchronized event triggering</h3>
         <section>
           <h4>DASH and ISO BMFF emsg events</h4>
-          <p>
-            An <code>emsg</code> event contains the following information,
-            as specified in [[MPEGDASH]], section 5.10.3.3:
-            <ul>
-              <li><code>scheme_id_uri</code> &mdash; A URI that identifies
-              the message scheme</li>
-              <li><code>value</code> &mdash; The event value (string)</li>
-              <li><code>timescale</code> &mdash; Timescale units, in ticks
-              per second</li>
-              <li><code>presentation_time_delta</code> &mdash; Presentation
-              time delta (with respect to the media segment),
-              in <code>timescale</code> units</li>
-              <li><code>event_duration</code> &mdash; Event duration,
-              in <code>timescale</code> units</li>
-              <li><code>id</code> &mdash; Event message identifier</li>
-              <li><code>message_data</code> &mdash; Message body (may be empty)</li>
-            </ul>
-          </p>
-          <p>
-            The presence of <code>emsg</code> events in the media stream is signalled
-            in the DASH manifest document (MPD), using an <code>EventStream</code> XML
-            element ([[MPEGDASH]], section 5.10.2).
-          </p>
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
             deliver in-band event data to Web applications, but this is not implemented
