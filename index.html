@@ -190,6 +190,21 @@
       </section>
       <section>
         <h3>Synchronized rendering of web resources</h3>
+        <p>
+          Use cases for Web Video Map Tracks (WebVMT) include:
+          <ul>
+            <li>
+              <i>Geolocation Map Presentation:</i> Metadata cues, synchronised with the timed media file, can drive an online map, e.g. OpenStreetMap, rendered in a separate HTML element alongside the media container on the web page. The media play head position controls presentation and animation of the map, e.g. pan and zoom, and allows annotation to be added and removed, e.g. a marker, at specified times during media playback. Control can also be overridden by the user with the usual interactive features of the map at any time, e.g. zoom. Concrete examples are provided by the <a href="http://webvmt.org/demos">tech demos</a> at the WebVMT website.
+            </li>
+            <li>
+              <i>Geolocation Rapid Indexing:</i> The VMT track file forms a location-time index of the media file allowing a video archive to be rapidly searched for a particular location, e.g. 'what is the most recent image of location x?' Searching a few kilobytes of VMT file is faster than searching megabytes of media file for metadata embedded within it. Only the VMT file need be parsed to identify whether the linked media file contains the target location and, if so, when - making the process faster and more efficient, which is important for online search engines. The <a href="http://w3c.github.io/sdw/proposals/geotagging/webvmt/#areasurvey">Area Survey</a> use case in the WebVMT Editor's Draft is an example of this.
+            </li>
+          </ul>
+        </p>
+        <p>
+          Reference: M&amp;E IG TF call 17 Sept 2018:
+          <a href="https://www.w3.org/2018/09/17-me-minutes.html">Minutes</a>.
+        </p>
         <p class="ednote">
           Add use case descriptions for synchronised rendering here. Note that
           this could be rendering of any web resource, not necessarily those
