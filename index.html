@@ -163,17 +163,13 @@
       </p>
       <section>
         <h3>Synchronised event triggering</h3>
-        <p class="ednote">
-          Add use case descriptions for DASH and emsg events here.
-          Describe a few motivating application scenarios.
-        </p>
         <p>
-          Use cases for <code>emsg</code> boxes include:
+          Use cases for media timed events include:
           <ul>
             <li>
               Displaying of images alongside an audio stream. For example, in
-              RadioVIS in DVB, the <code>emsg</code> event contains an image URL,
-              which the UA requests. In this use case, synchronization of the
+              RadioVIS in DVB, an <code>emsg</code> event contains an image URL,
+              which the user agent requests. In this use case, synchronization of the
               image rendering to within a second or so is acceptable
               ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated
               at different intervals in the duration of the associated <code>emsg</code> event.
