@@ -452,12 +452,69 @@
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
             deliver in-band event data to Web applications, but this is not implemented
-            in mainstream browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+            in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
             in the 26 April 2018 HTML 5.3 draft [[HTML53-20180426]], but is
             <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
             in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
             and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
           </p>
+          <p>
+            WebKit <a href="https://discourse.wicg.io/t/media-timed-events-api-for-mpeg-dash-mpd-and-emsg-events/3096/2">supports</a>
+            a <code>DataCue</code> interface that extends HTML5 <code>DataCue</code>
+            with two attributes to support non-text metadata, <code>type</code> and
+            <code>value</code>.
+          </p>
+          <pre class="example">
+            interface DataCue : TextTrackCue {
+              attribute ArrayBuffer data; // Always empty
+
+              // Proposed extensions.
+              attribute any value;
+              readonly attribute DOMString type;
+            };
+          </pre>
+          <p>
+            <code>type</code> is a string identifying the type of metadata:
+          </p>
+          <table class="simple">
+            <thead>
+              <tr>
+                <th colspan="2">WebKit <code>DataCue</code> metadata types</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>"com.apple.quicktime.udta"</code></td>
+                <td>QuickTime User Data</td>
+              </tr>
+              <tr>
+                <td><code>"com.apple.quicktime.mdta"</code></td>
+                <td>QuickTime Metadata</td>
+              </tr>
+              <tr>
+                <td><code>"com.apple.itunes"</code></td>
+                <td>iTunes metadata</td>
+              </tr>
+              <tr>
+                <td><code>"org.mp4ra"</code></td>
+                <td>MPEG-4 metadata</td>
+              </tr>
+              <tr>
+                <td><code>"org.id3"</code></td>
+                <td>ID3 metadata</td>
+            </tr>
+            </tbody>
+          </table>
+          <p>
+            and <code>value</code> is an object with the metadata item key, data, and optionally a locale:
+          </p>
+          <pre class="example">
+            value = {
+              key: String
+              data: String | Number | Array | ArrayBuffer | Object
+              locale: String
+            }
+          </pre>
           <p>
             Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
             handling of <code>emsg</code> boxes.
