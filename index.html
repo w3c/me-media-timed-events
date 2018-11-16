@@ -172,30 +172,30 @@
     <section>
       <h2>Use cases</h2>
       <p>
-        This section describes specific use cases for media timed events.
+        Media-timed events carry metadata that is related to points in time,
+        or regions of time on the media timeline, which can be used to trigger
+        retrieval and/or rendering of web resources synchronized with media
+        playback. Such resources can be used to enhance user experience in
+        the context of media that is being rendered. Some examples include
+        display of social media feeds corresponding to a live broadcast such
+        as a sporting event, banner advertisements for sponsored content,
+        accessibility-related assets, such as large print rendering of
+        captions, and display of track titles or images alongside an audio
+        stream.
+      </p>
+      <p>
+        The following sections describe a few use cases in more detail.
       </p>
       <section>
-        <h3>Synchronised event triggering</h3>
+        <h3>MPEG DASH manifest expiry notifications</h3>
         <p>
-          Use cases for media timed events include:
-          <ul>
-            <li>
-              Displaying of images alongside an audio stream. For example, in
-              RadioVIS in DVB, an <code>emsg</code> event contains an image URL,
-              which the user agent requests. In this use case, synchronization of the
-              image rendering to within a second or so is acceptable
-              ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated
-              at different intervals in the duration of the associated <code>emsg</code> event.
-            </li>
-            <li>
-              Notifying the DASH player Web application that it should refresh
-              its copy of the MPD document ([[MPEGDASH]], section 5.10.4).
-              This is an alternative to setting a cache duration in the HTTP
-              response, so the client can refresh the MPD when it actually
-              changes, and reduces the load on HTTP servers caused by frequent
-              server requests.
-            </li>
-          </ul>
+          Section 5.10.4 of [[MPEGDASH]] describes a DASH specific event that
+          is used to notify a DASH player Web application that it should refresh
+          its copy of the manifest (MPD) document.
+          An in-band <code>emsg</code> event is used an alternative to setting
+          a cache duration in the response to the HTTP request for the manifest,
+          so the client can refresh the MPD when it actually changes, so reducing
+          the load on HTTP servers caused by frequent server requests.
         </p>
         <p>
           Reference: M&amp;E IG call 1 Feb 2018:
@@ -208,10 +208,10 @@
         </p>
       </section>
       <section>
-        <h3>Synchronized rendering of web resources</h3>
+        <h3>Synchronized map animations</h3>
         <p>
           [[WebVMT]] is a format for metadata cues, synchronised with
-          the timed media file, that can drive an online map, e.g., OpenStreetMap,
+          a timed media file, that can drive an online map, e.g., OpenStreetMap,
           rendered in a separate HTML element alongside the media element
           on the web page. The media playhead position controls presentation
           and animation of the map, e.g., pan and zoom, and allows annotations
@@ -231,9 +231,12 @@
           embedded in media containers. Describe a few motivating application
           scenarios.
         </p>
+      </section>
+      <section>
+        <h3>Presentation of auxiliary content in live media</h3>
         <p>
           During a live media presentation, dynamic and unpredictable events
-          may occur which causes temporary suspension of the media presentation.
+          may occur which cause temporary suspension of the media presentation.
           During that suspension interval, auxiliary content such as the presentation
           of UI controls and media files, may be unavailable. Depending on the
           specific user engagement (or not) with the UI controls and the time
@@ -242,30 +245,6 @@
           a multimedia A/V clip along with subtitles corresponding to an
           advertisement, and which were previously downloaded and cached
           by the UA, are played out.
-        </p>
-      </section>
-      <section>
-        <h3>Rendering of Web content embedded in media containers</h3>
-        <p>
-          Media-timed events can be used to trigger retrieval and/or rendering
-          of web resources.  Such resources can be used to enhance user experience
-          in the context of media that is being rendered.  Some examples include
-        <ul>
-          <li>
-            Display of social media feeds corresponding to a live broadcast such as a sporting event.
-          </li>
-          <li>
-            Banner advertisements for sponsored content.
-          </li>
-          <li>
-            Accessibility-related assets, such as large print rendering of captions.
-          </li>
-        </ul>
-        </p>
-        <p class="ednote">
-          Add use case descriptions for rendering of Web content embedded in
-          media containers (e.g., [[WEB-ISOBMFF]]). Describe a few motivating
-          application scenarios.
         </p>
       </section>
     </section>
