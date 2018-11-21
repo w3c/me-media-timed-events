@@ -613,58 +613,76 @@
     </section>
     <section>
       <h2>Recommendations</h2>
-      <p class="ednote">
-        Add recommendations here.
-      </p>
-
       <p>
-        To support DASH <code>emsg</code> and MPD events, we have the following
-        requirements:
+        This section describes recommendations from the Media &amp; Entertainment
+        Interest Group for the development of a generic media timed event API.
       </p>
-      <p>
-      <ul>
-          <li>
-            The API must allow Web applications to subscribe to receive media
-            timed events with specific id and (optional) value.
-          </li>
-          <li>
-            The user agent must deliver only those events to a Web application
-            for which the application has subscribed.
-          </li>
-          <li>
-            The API must allow a Web application to unsubscribe from receiving
-            events with a specific id and (optional) value.
-          </li>
-          <li>
-            To be able to handle out of band events, the API must allow Web
-            applications to create events to be added to the media timeline,
-            to be triggered by the user agent. Creating the event should allow
-            the Web application to provide all necessary parameters to define
-            the event, including start and end times, id and value, and data
-            payload.
-          </li>
-          <li>
-            For those events that the application has subscribed to receive,
-            the API must:
-            <ul>
-              <li>
-                Generate a JavaScript event when an in-band media timed event
-                is parsed from the media container or media stream (DAInty Mode 1)
-              </li>
-              <li>
-                Generate a JavaScript event when the current media playback
-                position reaches the start time of a media timed event during
-                playback (DAInty Mode 2)
-              </li>
-            </ul>
-            This applies equally to in-band events that the user agent has extracted
-            from the media container, and out-of-band events added by the Web application.
-          </li>
-          <li>
-            The user agent must ensure that no events are missed during normal playback.
-          </li>
-        </ul>
-      </p>
+      <section>
+        <h3>Subscribing to event streams</h3>
+        <p>
+          The API should allow Web applications to subscribe to receive specific
+          event types. For example, to support DASH <code>emsg</code> and MPD events,
+          the API may subscription by <code>id</code> and (optional) <code>value</code>.
+          This is to make receiving events opt-in from the application point of view.
+          Therefore, the user agent should deliver only those events to a Web application
+          for which the application has subscribed. The API should also allow Web
+          applications to unsubscribe from specific event streams by event type.
+        </p>
+      </section>
+      <section>
+        <h3>Out-of-band events</h3>
+        <p>
+          To be able to handle out of band events, the API must allow Web
+          applications to create events to be added to the media timeline,
+          to be triggered by the user agent. The API should allow the
+          Web application to provide all necessary parameters to define
+          the event, including start and end times, event type, and data
+          payload. The payload should be any data type (e.g., the set of
+          types supported by the WebKit <code>DataCue</code>). For DASH MPD
+          events, the event type is defined by the <code>id</code> and
+          (optional) <code>value</code> fields.
+        </p>
+      </section>
+      <section>
+        <h3>Event triggering</h3>
+        <p>
+          For those events that the application has subscribed to receive,
+          the API must:
+          <ul>
+            <li>
+              Generate a JavaScript event when an in-band media timed event
+              is parsed from the media container or media stream (DAInty Mode 1)
+            </li>
+            <li>
+              Generate a JavaScript event when the current media playback
+              position reaches the start time of a media timed event during
+              playback (DAInty Mode 2)
+            </li>
+          </ul>
+          This applies equally to in-band events that the user agent has extracted
+          from the media container, and out-of-band events added by the Web application.
+          The user agent must ensure that no events are missed during linear
+          playback of the media.
+        </p>
+      </section>
+      <section>
+        <h3>In-band event processing</h3>
+        <p>
+          We recommend updating [[INBANDTRACKS]] to describe handling of in-band media
+          timed events supported on the web platform, following a registry approach
+          with one specification per media format that describes the event details
+          for that format. In particular, we recommend that browser engines support
+          <code>emsg</code> events.
+        </p>
+      </section>
+      <section>
+        <h3>Synchronization</h3>
+        <p>
+          The <em>time marches on algorithm</em> should be reviewed and updated
+          to ensure that events are delivered to the Web application within
+          time constraints described elsewhere in this report.
+        </p>
+      </section>
     </section>
     <section>
       <h2>Acknowledgments</h2>
