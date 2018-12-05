@@ -153,27 +153,27 @@
       <h2>Terminology</h2>
       <p>
         The following terms are used in this document:
-        <ul>
-          <li>
-            <dfn>in-band</dfn> &mdash; timed event information that is delivered
-            within the audio or video media container or multiplexed with the
-            media stream.
-          </li>
-          <li>
-            <dfn>out-of-band</dfn> &mdash; timed event information that is
-            delivered over some other mechanism external to the media container
-            or media stream.
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <dfn>in-band</dfn> &mdash; timed event information that is delivered
+          within the audio or video media container or multiplexed with the
+          media stream.
+        </li>
+        <li>
+          <dfn>out-of-band</dfn> &mdash; timed event information that is
+          delivered over some other mechanism external to the media container
+          or media stream.
+        </li>
+      </ul>
       <p>
         The following terms are defined in [[HTML52]]:
-        <ul>
-          <li>
-            <dfn><a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#media-timeline">media timeline</a></dfn>
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <dfn><a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#media-timeline">media timeline</a></dfn>
+        </li>
+      </ul>
     </section>
     <section>
       <h2>Use cases</h2>
@@ -184,25 +184,25 @@
         <h3>Synchronised event triggering</h3>
         <p>
           Use cases for media timed events include:
-          <ul>
-            <li>
-              Displaying of images alongside an audio stream. For example, in
-              RadioVIS in DVB, an <code>emsg</code> event contains an image URL,
-              which the user agent requests. In this use case, synchronization of the
-              image rendering to within a second or so is acceptable
-              ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated
-              at different intervals in the duration of the associated <code>emsg</code> event.
-            </li>
-            <li>
-              Notifying the DASH player Web application that it should refresh
-              its copy of the MPD document ([[MPEGDASH]], section 5.10.4).
-              This is an alternative to setting a cache duration in the HTTP
-              response, so the client can refresh the MPD when it actually
-              changes, and reduces the load on HTTP servers caused by frequent
-              server requests.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            Displaying of images alongside an audio stream. For example, in
+            RadioVIS in DVB, an <code>emsg</code> event contains an image URL,
+            which the user agent requests. In this use case, synchronization of the
+            image rendering to within a second or so is acceptable
+            ([[DVB-DASH]], section 9.1.7). Such image displays may be activated and deactivated
+            at different intervals in the duration of the associated <code>emsg</code> event.
+          </li>
+          <li>
+            Notifying the DASH player Web application that it should refresh
+            its copy of the MPD document ([[MPEGDASH]], section 5.10.4).
+            This is an alternative to setting a cache duration in the HTTP
+            response, so the client can refresh the MPD when it actually
+            changes, and reduces the load on HTTP servers caused by frequent
+            server requests.
+          </li>
+        </ul>
         <p>
           Reference: M&amp;E IG call 1 Feb 2018:
           <a href="https://www.w3.org/2018/02/01-me-minutes.html">Minutes</a>,
@@ -255,7 +255,8 @@
         <p>
           Media-timed events can be used to trigger retrieval and/or rendering
           of web resources.  Such resources can be used to enhance user experience
-          in the context of media that is being rendered.  Some examples include
+          in the context of media that is being rendered.  Some examples include:
+        </p>
         <ul>
           <li>
             Display of social media feeds corresponding to a live broadcast such as a sporting event.
@@ -267,7 +268,6 @@
             Accessibility-related assets, such as large print rendering of captions.
           </li>
         </ul>
-        </p>
         <p class="ednote">
           Add use case descriptions for rendering of Web content embedded in
           media containers (e.g., [[WEB-ISOBMFF]]). Describe a few motivating
@@ -291,21 +291,21 @@
         <p>
           An <code>emsg</code> event contains the following information,
           as specified in [[MPEGDASH]], section 5.10.3.3:
-          <ul>
-            <li><code>scheme_id_uri</code> &mdash; A URI that identifies
-            the message scheme</li>
-            <li><code>value</code> &mdash; The event value (string)</li>
-            <li><code>timescale</code> &mdash; Timescale units, in ticks
-            per second</li>
-            <li><code>presentation_time_delta</code> &mdash; Presentation
-            time delta (with respect to the media segment),
-            in <code>timescale</code> units</li>
-            <li><code>event_duration</code> &mdash; Event duration,
-            in <code>timescale</code> units</li>
-            <li><code>id</code> &mdash; Event message identifier</li>
-            <li><code>message_data</code> &mdash; Message body (may be empty)</li>
-          </ul>
         </p>
+        <ul>
+          <li><code>scheme_id_uri</code> &mdash; A URI that identifies
+          the message scheme</li>
+          <li><code>value</code> &mdash; The event value (string)</li>
+          <li><code>timescale</code> &mdash; Timescale units, in ticks
+          per second</li>
+          <li><code>presentation_time_delta</code> &mdash; Presentation
+          time delta (with respect to the media segment),
+          in <code>timescale</code> units</li>
+          <li><code>event_duration</code> &mdash; Event duration,
+          in <code>timescale</code> units</li>
+          <li><code>id</code> &mdash; Event message identifier</li>
+          <li><code>message_data</code> &mdash; Message body (may be empty)</li>
+        </ul>
         <p>
           The presence of <code>emsg</code> events in the media stream is signalled
           in the DASH manifest document (MPD), using an <code>EventStream</code> XML
@@ -331,7 +331,7 @@
         <h3>DASH Industry Forum APIs for Interactivity</h3>
         <p>
           The DASH-IF InterOp Working Group has an ongoing work item,
-          <emph>DAInty</emph>, "DASH APIs for Interactivity", which aims to
+          <em>DAInty</em>, "DASH APIs for Interactivity", which aims to
           specify a set of APIs between the DASH client/player and interactivity-capable
           applications, for both Web and native applications. The origin of this
           work is a related 3GPP work item on Service Interactivity
@@ -344,18 +344,18 @@
         <p>
           Two APIs are being developed that are relevant to the scope of the present
           document:
-          <ul>
-            <li>
-              Application subscription/DASH client dispatch of DASH event stream
-              messages containing interactivity information. Events can be delivered
-              in-band (<code>emsg</code>) and/or as MPD events.
-            </li>
-            <li>
-              Application subscription/DASH client dispatch of ISO BMFF Timed
-              Metadata tracks providing similar functionality to DASH event streams.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            Application subscription/DASH client dispatch of DASH event stream
+            messages containing interactivity information. Events can be delivered
+            in-band (<code>emsg</code>) and/or as MPD events.
+          </li>
+          <li>
+            Application subscription/DASH client dispatch of ISO BMFF Timed
+            Metadata tracks providing similar functionality to DASH event streams.
+          </li>
+        </ul>
         <p>
           Two modes for dispatching events are defined. In Mode 1, events are dispatched
           at the time the event arrives, and in Mode 2, events are dispatched at the
@@ -601,14 +601,14 @@
         </p>
         <p class="ednote">
           Add more detail on what's required. Some questions / considerations:
-          <ul class="ednote">
-            <li>Are the web resources intended to be handed to a Web application
-            for rendering, or direct rendering by the UA?</li>
-            <li>How do we guarantee that resources are delivered to the browser
-            sufficiently ahead of time?</li>
-            <li>How does same-origin policy affect such resources?</li>
-          </ul>
         </p>
+        <ul class="ednote">
+          <li>Are the web resources intended to be handed to a Web application
+          for rendering, or direct rendering by the UA?</li>
+          <li>How do we guarantee that resources are delivered to the browser
+          sufficiently ahead of time?</li>
+          <li>How does same-origin policy affect such resources?</li>
+        </ul>
       </section>
     </section>
     <section>
@@ -648,21 +648,23 @@
         <p>
           For those events that the application has subscribed to receive,
           the API must:
-          <ul>
-            <li>
-              Generate a JavaScript event when an in-band media timed event
-              is parsed from the media container or media stream (DAInty Mode 1)
-            </li>
-            <li>
-              Generate a JavaScript event when the current media playback
-              position reaches the start time of a media timed event during
-              playback (DAInty Mode 2)
-            </li>
-          </ul>
-          This applies equally to in-band events that the user agent has extracted
-          from the media container, and out-of-band events added by the Web application.
-          The user agent must ensure that no events are missed during linear
-          playback of the media.
+        </p>
+        <ul>
+          <li>
+            Generate a JavaScript event when an in-band media timed event
+            is parsed from the media container or media stream (DAInty Mode 1)
+          </li>
+          <li>
+            Generate a JavaScript event when the current media playback
+            position reaches the start time of a media timed event during
+            playback (DAInty Mode 2). This applies equally to in-band events
+            that the user agent has extracted from the media container, and
+            out-of-band events added by the Web application.
+          </li>
+        </ul>
+        <p>
+          The API must provide guarantees that no events can be missed during
+          linear playback of the media.
         </p>
       </section>
       <section>
