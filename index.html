@@ -123,6 +123,10 @@
             publisher: "W3C",
             status: "ED",
             date: "11 October 2018"
+          },
+          "HLS-TIMED-METADATA": {
+            title: "Timed Metadata for HTTP Live Streaming",
+            href: "https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTTP_Live_Streaming_Metadata_Spec/Introduction/Introduction.html"
           }
         }
       };
@@ -193,6 +197,23 @@
         The following sections describe a few use cases in more detail.
       </p>
       <section>
+        <h3>Audio stream with titles and images</h3>
+        <p>
+          A media content provider wants to provide visual information alongside
+          an audio stream, such as an image of the artist and title of the
+          current playing track, to give users live information about the
+          content they are listening to.
+        </p>
+        <p>
+          Examples include HLS timed metadata [[HLS-TIMED-METADATA]], which uses
+          in-band ID3 metadata to carry the image content, and RadioVIS in DVB
+          ([[DVB-DASH]], section 9.1.7), which defines an in-band event messages
+          that contain image URLs and text messages to be displayed, with
+          information about when the content should be displayed, in relation to
+          the media timeline.
+        </p>
+      </section>
+      <section>
         <h3>MPEG DASH manifest expiry notifications</h3>
         <p>
           Section 5.10.4 of [[MPEGDASH]] describes a DASH specific event that
@@ -231,11 +252,16 @@
           Reference: M&amp;E IG TF call 17 Sept 2018:
           <a href="https://www.w3.org/2018/09/17-me-minutes.html">Minutes</a>.
         </p>
-        <p class="ednote">
-          Add use case descriptions for synchronised rendering here. Note that
-          this could be rendering of any web resource, not necessarily those
-          embedded in media containers. Describe a few motivating application
-          scenarios.
+      </section>
+      <section>
+        <h3>Media analysis visualization</h3>
+        <p>
+          A video image analysis system processes a media stream to detect and
+          recognize objects shown in the videox. This system generates metadata
+          describing the objects, including timestamps that describe the when
+          the objects are visible, together with position information (e.g.,
+          bounding boxes). A web application then uses this timed metadata to
+          overlay labels and annotations on the video using HTML and CSS.
         </p>
       </section>
       <section>
