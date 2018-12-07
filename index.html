@@ -96,6 +96,12 @@
             publisher: "BBC",
             date: "May 2018"
           },
+          "SCTE-35": {
+            title: "Digital Program Insertion Cueing Message for Cable",
+            href: "https://www.scte.org/SCTEDocs/Standards/SCTE%2035%202016.pdf",
+            publisher: "The Society of Cable and Television Engineers",
+            date: "2016"
+          },
           "3GPP-INTERACTIVITY-WID": {
             title: "SP-170796: New WID on 3GPP Service Interactivity",
             href: "http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip",
@@ -147,27 +153,27 @@
       <h2>Terminology</h2>
       <p>
         The following terms are used in this document:
-        <ul>
-          <li>
-            <dfn>in-band</dfn> &mdash; timed event information that is delivered
-            within the audio or video media container or multiplexed with the
-            media stream.
-          </li>
-          <li>
-            <dfn>out-of-band</dfn> &mdash; timed event information that is
-            delivered over some other mechanism external to the media container
-            or media stream.
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <dfn>in-band</dfn> &mdash; timed event information that is delivered
+          within the audio or video media container or multiplexed with the
+          media stream.
+        </li>
+        <li>
+          <dfn>out-of-band</dfn> &mdash; timed event information that is
+          delivered over some other mechanism external to the media container
+          or media stream.
+        </li>
+      </ul>
       <p>
         The following terms are defined in [[HTML52]]:
-        <ul>
-          <li>
-            <dfn><a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#media-timeline">media timeline</a></dfn>
-          </li>
-        </ul>
       </p>
+      <ul>
+        <li>
+          <dfn><a href="https://www.w3.org/TR/html52/semantics-embedded-content.html#media-timeline">media timeline</a></dfn>
+        </li>
+      </ul>
     </section>
     <section>
       <h2>Use cases</h2>
@@ -264,21 +270,21 @@
         <p>
           An <code>emsg</code> event contains the following information,
           as specified in [[MPEGDASH]], section 5.10.3.3:
-          <ul>
-            <li><code>scheme_id_uri</code> &mdash; A URI that identifies
-            the message scheme</li>
-            <li><code>value</code> &mdash; The event value (string)</li>
-            <li><code>timescale</code> &mdash; Timescale units, in ticks
-            per second</li>
-            <li><code>presentation_time_delta</code> &mdash; Presentation
-            time delta (with respect to the media segment),
-            in <code>timescale</code> units</li>
-            <li><code>event_duration</code> &mdash; Event duration,
-            in <code>timescale</code> units</li>
-            <li><code>id</code> &mdash; Event message identifier</li>
-            <li><code>message_data</code> &mdash; Message body (may be empty)</li>
-          </ul>
         </p>
+        <ul>
+          <li><code>scheme_id_uri</code> &mdash; A URI that identifies
+          the message scheme</li>
+          <li><code>value</code> &mdash; The event value (string)</li>
+          <li><code>timescale</code> &mdash; Timescale units, in ticks
+          per second</li>
+          <li><code>presentation_time_delta</code> &mdash; Presentation
+          time delta (with respect to the media segment),
+          in <code>timescale</code> units</li>
+          <li><code>event_duration</code> &mdash; Event duration,
+          in <code>timescale</code> units</li>
+          <li><code>id</code> &mdash; Event message identifier</li>
+          <li><code>message_data</code> &mdash; Message body (may be empty)</li>
+        </ul>
         <p>
           The presence of <code>emsg</code> events in the media stream is signalled
           in the DASH manifest document (MPD), using an <code>EventStream</code> XML
@@ -304,7 +310,7 @@
         <h3>DASH Industry Forum APIs for Interactivity</h3>
         <p>
           The DASH-IF InterOp Working Group has an ongoing work item,
-          <emph>DAInty</emph>, "DASH APIs for Interactivity", which aims to
+          <em>DAInty</em>, "DASH APIs for Interactivity", which aims to
           specify a set of APIs between the DASH client/player and interactivity-capable
           applications, for both Web and native applications. The origin of this
           work is a related 3GPP work item on Service Interactivity
@@ -317,18 +323,18 @@
         <p>
           Two APIs are being developed that are relevant to the scope of the present
           document:
-          <ul>
-            <li>
-              Application subscription/DASH client dispatch of DASH event stream
-              messages containing interactivity information. Events can be delivered
-              in-band (<code>emsg</code>) and/or as MPD events.
-            </li>
-            <li>
-              Application subscription/DASH client dispatch of ISO BMFF Timed
-              Metadata tracks providing similar functionality to DASH event streams.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            Application subscription/DASH client dispatch of DASH event stream
+            messages containing interactivity information. Events can be delivered
+            in-band (<code>emsg</code>) and/or as MPD events.
+          </li>
+          <li>
+            Application subscription/DASH client dispatch of ISO BMFF Timed
+            Metadata tracks providing similar functionality to DASH event streams.
+          </li>
+        </ul>
         <p>
           Two modes for dispatching events are defined. In Mode 1, events are dispatched
           at the time the event arrives, and in Mode 2, events are dispatched at the
@@ -395,6 +401,29 @@
         </p>
       </section>
       <section>
+        <h3>SCTE Media Splicing Requirements</h3>
+        <p>
+          The Society for Cable and Televison Engineers (SCTE) has produced the
+          SCTE-35 specification "Digital Program Insertion Cueing for Cable"
+          [[SCTE-35]]. In it, the requirements for splicing (Sec. 9.1) are "In
+          order to give advance warning of the impending splice (a pre-roll
+          function), the splice_insert() command could be sent multiple times
+          before the splice point. For example, the splice_insert() command
+          could be sent at 8, 5, 4 and 2 seconds prior to the packet containing
+          the related splice point. In order to meet other splicing deadlines in
+          the system, any message received with less than 4 seconds of advance
+          notice may not create the desired result."
+        </p>
+        <p>
+          This places an implicit requirement on the user agent in handling
+          media-timed events related to insertion cues. The content originator
+          may provide the cue in advance with as little as 2 seconds of the
+          insertion time. Therefore the propagation of the event data associated
+          with the insertion cue to the application by the user agent should be
+          considerably less than 2 seconds.
+        </p>
+      </section>
+      <section>
         <h3>MPEG Working Draft on Carriage of Web Resources in ISO BMFF</h3>
         <p>
           [[WEB-ISOBMFF]] is a draft document that specifies the use of ISO BMFF
@@ -430,12 +459,69 @@
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
             deliver in-band event data to Web applications, but this is not implemented
-            in mainstream browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
-            in the 26 April 2018 HTML 5.3 draft [[HTML53-20180426]], but is
+            in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+            in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
             <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
             in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
             and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
           </p>
+          <p>
+            WebKit <a href="https://discourse.wicg.io/t/media-timed-events-api-for-mpeg-dash-mpd-and-emsg-events/3096/2">supports</a>
+            a <code>DataCue</code> interface that extends HTML5 <code>DataCue</code>
+            with two attributes to support non-text metadata, <code>type</code> and
+            <code>value</code>.
+          </p>
+          <pre class="example">
+            interface DataCue : TextTrackCue {
+              attribute ArrayBuffer data; // Always empty
+
+              // Proposed extensions.
+              attribute any value;
+              readonly attribute DOMString type;
+            };
+          </pre>
+          <p>
+            <code>type</code> is a string identifying the type of metadata:
+          </p>
+          <table class="simple">
+            <thead>
+              <tr>
+                <th colspan="2">WebKit <code>DataCue</code> metadata types</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>"com.apple.quicktime.udta"</code></td>
+                <td>QuickTime User Data</td>
+              </tr>
+              <tr>
+                <td><code>"com.apple.quicktime.mdta"</code></td>
+                <td>QuickTime Metadata</td>
+              </tr>
+              <tr>
+                <td><code>"com.apple.itunes"</code></td>
+                <td>iTunes metadata</td>
+              </tr>
+              <tr>
+                <td><code>"org.mp4ra"</code></td>
+                <td>MPEG-4 metadata</td>
+              </tr>
+              <tr>
+                <td><code>"org.id3"</code></td>
+                <td>ID3 metadata</td>
+            </tr>
+            </tbody>
+          </table>
+          <p>
+            and <code>value</code> is an object with the metadata item key, data, and optionally a locale:
+          </p>
+          <pre class="example">
+            value = {
+              key: String
+              data: String | Number | Array | ArrayBuffer | Object
+              locale: String
+            }
+          </pre>
           <p>
             Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
             handling of <code>emsg</code> boxes.
@@ -499,70 +585,90 @@
         </p>
         <p class="ednote">
           Add more detail on what's required. Some questions / considerations:
-          <ul class="ednote">
-            <li>Are the web resources intended to be handed to a Web application
-            for rendering, or direct rendering by the UA?</li>
-            <li>How do we guarantee that resources are delivered to the browser
-            sufficiently ahead of time?</li>
-            <li>How does same-origin policy affect such resources?</li>
-          </ul>
         </p>
+        <ul class="ednote">
+          <li>Are the web resources intended to be handed to a Web application
+          for rendering, or direct rendering by the UA?</li>
+          <li>How do we guarantee that resources are delivered to the browser
+          sufficiently ahead of time?</li>
+          <li>How does same-origin policy affect such resources?</li>
+        </ul>
       </section>
     </section>
     <section>
       <h2>Recommendations</h2>
-      <p class="ednote">
-        Add recommendations here.
-      </p>
-
       <p>
-        To support DASH <code>emsg</code> and MPD events, we have the following
-        requirements:
+        This section describes recommendations from the Media &amp; Entertainment
+        Interest Group for the development of a generic media timed event API.
       </p>
-      <p>
-      <ul>
+      <section>
+        <h3>Subscribing to event streams</h3>
+        <p>
+          The API should allow Web applications to subscribe to receive specific
+          event types. For example, to support DASH <code>emsg</code> and MPD events,
+          the API should allow subscription by <code>id</code> and (optional) <code>value</code>.
+          This is to make receiving events opt-in from the application point of view.
+          The user agent should deliver only those events to a Web application
+          for which the application has subscribed. The API should also allow Web
+          applications to unsubscribe from specific event streams by event type.
+        </p>
+      </section>
+      <section>
+        <h3>Out-of-band events</h3>
+        <p>
+          To be able to handle out of band events, the API must allow Web
+          applications to create events to be added to the media timeline,
+          to be triggered by the user agent. The API should allow the
+          Web application to provide all necessary parameters to define
+          the event, including start and end times, event type, and data
+          payload. The payload should be any data type (e.g., the set of
+          types supported by the WebKit <code>DataCue</code>). For DASH MPD
+          events, the event type is defined by the <code>id</code> and
+          (optional) <code>value</code> fields.
+        </p>
+      </section>
+      <section>
+        <h3>Event triggering</h3>
+        <p>
+          For those events that the application has subscribed to receive,
+          the API must:
+        </p>
+        <ul>
           <li>
-            The API must allow Web applications to subscribe to receive media
-            timed events with specific id and (optional) value.
+            Generate a JavaScript event when an in-band media timed event
+            is parsed from the media container or media stream (DAInty Mode 1)
           </li>
           <li>
-            The user agent must deliver only those events to a Web application
-            for which the application has subscribed.
-          </li>
-          <li>
-            The API must allow a Web application to unsubscribe from receiving
-            events with a specific id and (optional) value.
-          </li>
-          <li>
-            To be able to handle out of band events, the API must allow Web
-            applications to create events to be added to the media timeline,
-            to be triggered by the user agent. Creating the event should allow
-            the Web application to provide all necessary parameters to define
-            the event, including start and end times, id and value, and data
-            payload.
-          </li>
-          <li>
-            For those events that the application has subscribed to receive,
-            the API must:
-            <ul>
-              <li>
-                Generate a JavaScript event when an in-band media timed event
-                is parsed from the media container or media stream (DAInty Mode 1)
-              </li>
-              <li>
-                Generate a JavaScript event when the current media playback
-                position reaches the start time of a media timed event during
-                playback (DAInty Mode 2)
-              </li>
-            </ul>
-            This applies equally to in-band events that the user agent has extracted
-            from the media container, and out-of-band events added by the Web application.
-          </li>
-          <li>
-            The user agent must ensure that no events are missed during normal playback.
+            Generate a JavaScript event when the current media playback
+            position reaches the start time of a media timed event during
+            playback (DAInty Mode 2). This applies equally to in-band events
+            that the user agent has extracted from the media container, and
+            out-of-band events added by the Web application.
           </li>
         </ul>
-      </p>
+        <p>
+          The API must provide guarantees that no events can be missed during
+          linear playback of the media.
+        </p>
+      </section>
+      <section>
+        <h3>In-band event processing</h3>
+        <p>
+          We recommend updating [[INBANDTRACKS]] to describe handling of in-band media
+          timed events supported on the web platform, following a registry approach
+          with one specification per media format that describes the event details
+          for that format. In particular, we recommend that browser engines support
+          <code>emsg</code> events.
+        </p>
+      </section>
+      <section>
+        <h3>Synchronization</h3>
+        <p>
+          The <em>time marches on algorithm</em> should be reviewed and updated
+          to ensure that events are delivered to the Web application within
+          time constraints described elsewhere in this report.
+        </p>
+      </section>
     </section>
     <section>
       <h2>Acknowledgments</h2>
