@@ -168,10 +168,10 @@
     <section id="abstract">
       <p>
         This document collects use cases and requirements for improved support
-        for timed events related to audio or video media on the Web, such as
+        for timed events related to audio or video media on the web, such as
         subtitles, captions, or other web content, where synchronization to a
         playing audio or video media stream is needed, and makes recommendations
-        for new or changed Web APIs to realize these requirements.
+        for new or changed web APIs to realize these requirements.
       </p>
     </section>
     <section id="sotd">
@@ -180,7 +180,7 @@
       <h2>Introduction</h2>
       <p>
         Media timed events describes a generic capability for making
-        changes to a Web page, or executing application code triggered from
+        changes to a web page, or executing application code triggered from
         JavaScript events, at specific points on the media timeline of an
         audio or video media stream.
       </p>
@@ -239,9 +239,9 @@
         <p>
           Examples include HLS timed metadata [[HLS-TIMED-METADATA]], which uses
           in-band ID3 metadata to carry the image content, and RadioVIS in DVB
-          ([[DVB-DASH]], section 9.1.7), which defines an in-band event messages
+          ([[DVB-DASH]], section 9.1.7), which defines in-band event messages
           that contain image URLs and text messages to be displayed, with
-          information about when the content should be displayed, in relation to
+          information about when the content should be displayed in relation to
           the media timeline.
         </p>
       </section>
@@ -249,7 +249,7 @@
         <h3>MPEG DASH manifest expiry notifications</h3>
         <p>
           Section 5.10.4 of [[MPEGDASH]] describes a DASH specific event that
-          is used to notify a DASH player Web application that it should refresh
+          is used to notify a DASH player web application that it should refresh
           its copy of the manifest (MPD) document.
           An in-band <code>emsg</code> event is used an alternative to setting
           a cache duration in the response to the HTTP request for the manifest,
@@ -269,7 +269,7 @@
       <section>
         <h3>Synchronized map animations</h3>
         <p>
-          [[WebVMT]] is a format for metadata cues, synchronised with
+          [[WebVMT]] is a format for metadata cues, synchronized with
           a timed media file, that can drive an online map, e.g., OpenStreetMap,
           rendered in a separate HTML element alongside the media element
           on the web page. The media playhead position controls presentation
@@ -289,7 +289,7 @@
         <h3>Media analysis visualization</h3>
         <p>
           A video image analysis system processes a media stream to detect and
-          recognize objects shown in the videox. This system generates metadata
+          recognize objects shown in the video. This system generates metadata
           describing the objects, including timestamps that describe the when
           the objects are visible, together with position information (e.g.,
           bounding boxes). A web application then uses this timed metadata to
@@ -370,7 +370,7 @@
           The DASH-IF InterOp Working Group has an ongoing work item,
           <em>DAInty</em>, "DASH APIs for Interactivity", which aims to
           specify a set of APIs between the DASH client/player and interactivity-capable
-          applications, for both Web and native applications. The origin of this
+          applications, for both web and native applications. The origin of this
           work is a related 3GPP work item on Service Interactivity
           ([[3GPP-INTERACTIVITY-WID]], [[3GPP-INTERACTIVITY-TR]]).
           The objective is to provide service enablers for user engagement with
@@ -504,10 +504,10 @@
     <section>
       <h2>Gap analysis</h2>
       <p>
-        This section describes gaps in existing existing Web platform
+        This section describes gaps in existing existing web platform
         capabilities needed to support the use cases and requirements described
         in this document. Where applicable, this section also describes how
-        existing Web platform features can be used as workarounds, and any
+        existing web platform features can be used as workarounds, and any
         associated limitations.
       </p>
       <section>
@@ -516,7 +516,7 @@
           <h4>DASH and ISO BMFF emsg events</h4>
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
-            deliver in-band event data to Web applications, but this is not implemented
+            deliver in-band event data to web applications, but this is not implemented
             in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
             in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
             <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
@@ -608,7 +608,7 @@
             <code>TextTrack</code>s is done by the UA.
           </p>
           <p class="ednote">
-            To support DASH clients implemented in Web applications, there is
+            To support DASH clients implemented in web applications, there is
             therefore either a need for an API that allows applications to tell
             the UA which schemes it wants to receive, or the UA should simply
             expose all event streams to applications. Which of these is preferred?
@@ -635,9 +635,9 @@
         </p>
       </section>
       <section>
-        <h3>Rendering of Web content embedded in media containers</h3>
+        <h3>Rendering of web content embedded in media containers</h3>
         <p>
-          There is no API for surfacing Web content embedded in ISO BMFF
+          There is no API for surfacing web content embedded in ISO BMFF
           containers into the browser (e.g., the <code>HTMLCue</code> proposal
           discussed at <a href="https://www.w3.org/wiki/TPAC2015/HTMLcue">TPAC 2015</a>).
         </p>
@@ -645,7 +645,7 @@
           Add more detail on what's required. Some questions / considerations:
         </p>
         <ul class="ednote">
-          <li>Are the web resources intended to be handed to a Web application
+          <li>Are the web resources intended to be handed to a web application
           for rendering, or direct rendering by the UA?</li>
           <li>How do we guarantee that resources are delivered to the browser
           sufficiently ahead of time?</li>
@@ -662,22 +662,22 @@
       <section>
         <h3>Subscribing to event streams</h3>
         <p>
-          The API should allow Web applications to subscribe to receive specific
+          The API should allow web applications to subscribe to receive specific
           event types. For example, to support DASH <code>emsg</code> and MPD events,
           the API should allow subscription by <code>id</code> and (optional) <code>value</code>.
           This is to make receiving events opt-in from the application point of view.
-          The user agent should deliver only those events to a Web application
-          for which the application has subscribed. The API should also allow Web
+          The user agent should deliver only those events to a web application
+          for which the application has subscribed. The API should also allow web
           applications to unsubscribe from specific event streams by event type.
         </p>
       </section>
       <section>
         <h3>Out-of-band events</h3>
         <p>
-          To be able to handle out of band events, the API must allow Web
+          To be able to handle out of band events, the API must allow web
           applications to create events to be added to the media timeline,
           to be triggered by the user agent. The API should allow the
-          Web application to provide all necessary parameters to define
+          web application to provide all necessary parameters to define
           the event, including start and end times, event type, and data
           payload. The payload should be any data type (e.g., the set of
           types supported by the WebKit <code>DataCue</code>). For DASH MPD
@@ -701,7 +701,7 @@
             position reaches the start time of a media timed event during
             playback (DAInty Mode 2). This applies equally to in-band events
             that the user agent has extracted from the media container, and
-            out-of-band events added by the Web application.
+            out-of-band events added by the web application.
           </li>
         </ul>
         <p>
@@ -730,7 +730,7 @@
         <h3>Synchronization</h3>
         <p>
           The <em>time marches on algorithm</em> should be reviewed and updated
-          to ensure that events are delivered to the Web application within
+          to ensure that events are delivered to the web application within
           time constraints described elsewhere in this report.
         </p>
       </section>
