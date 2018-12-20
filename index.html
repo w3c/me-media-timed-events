@@ -449,7 +449,10 @@
           [[WEBVTT]] is a W3C specification that provides a format for web video
           text tracks. A <code>VTTCue</code> is a text track cue, and may have
           attributes that affect rendering of the cue text on a web page.
-          WebVTT metadata cues are text that is time-aligned.
+          WebVTT metadata cues are text that is time-aligned. Web applications can
+          use <code>VTTCue</code> to schedule out-of-band metadata events by
+          serializing the event data to a string format (JSON, for example) when
+          creating the cue, and deserializing the data when the cue is triggered.
         </p>
       </section>
     </section>
