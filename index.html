@@ -198,11 +198,11 @@
         </p>
       </section>
       <section>
-        <h3>MPEG DASH manifest expiry notifications</h3>
+        <h3>MPEG-DASH manifest expiry notifications</h3>
         <p>
-          Section 5.10.4 of [[MPEGDASH]] describes a DASH specific event that
-          is used to notify a DASH player web application that it should refresh
-          its copy of the manifest (MPD) document.
+          Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific event
+          that is used to notify a DASH player web application that it should
+          refresh its copy of the manifest (MPD) document.
           An in-band <code>emsg</code> event is used an alternative to setting
           a cache duration in the response to the HTTP request for the manifest,
           so the client can refresh the MPD when it actually changes, so reducing
@@ -269,7 +269,7 @@
       <section>
         <h3>MPEG-DASH</h3>
         <p>
-          In MPEG DASH, events may be conveyed either as in-band events, e.g.,
+          In MPEG-DASH, events may be conveyed either as in-band events, e.g.,
           as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
           EventStream fragment in the MPD (Media Presentation Description)
           document (i.e., by an instance of the <code>EventStream</code> child
@@ -468,7 +468,7 @@
       <section>
         <h3>Synchronized event triggering</h3>
         <section>
-          <h4>DASH and ISO BMFF emsg events</h4>
+          <h4>MPEG-DASH and ISO BMFF emsg events</h4>
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
             deliver in-band event data to web applications, but this is not implemented
@@ -674,11 +674,11 @@
         </p>
       </section>
       <section>
-        <h3>DASH events</h3>
+        <h3>MPEG-DASH events</h3>
         <p>
-          We recommend that browser engines support DASH <code>emsg</code>
+          We recommend that browser engines support MPEG-DASH <code>emsg</code>
           in-band events and MPD out-of-band events, as part of their support
-          for the MPEG Common Media Application Format (CMAF).
+          for the MPEG Common Media Application Format (CMAF) [[MPEGCMAF]].
         </p>
       </section>
       <section>
