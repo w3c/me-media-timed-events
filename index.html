@@ -133,7 +133,7 @@
       <p>
         Media timed events describes a generic capability for making
         changes to a web page, or executing application code triggered from
-        JavaScript events, at specific points on the media timeline of an
+        JavaScript events, at specific points on the <a>media timeline</a> of an
         audio or video media stream.
       </p>
     </section>
@@ -167,7 +167,7 @@
       <h2>Use cases</h2>
       <p>
         Media-timed events carry metadata that is related to points in time,
-        or regions of time on the media timeline, which can be used to trigger
+        or regions of time on the <a>media timeline</a>, which can be used to trigger
         retrieval and/or rendering of web resources synchronized with media
         playback. Such resources can be used to enhance user experience in
         the context of media that is being rendered. Some examples include
@@ -190,11 +190,11 @@
         </p>
         <p>
           Examples include HLS timed metadata [[HLS-TIMED-METADATA]], which uses
-          in-band ID3 metadata to carry the image content, and RadioVIS in DVB
-          ([[DVB-DASH]], section 9.1.7), which defines in-band event messages
-          that contain image URLs and text messages to be displayed, with
-          information about when the content should be displayed in relation to
-          the media timeline.
+          <a>in-band</a> ID3 metadata to carry the image content, and RadioVIS
+          in DVB ([[DVB-DASH]], section 9.1.7), which defines <a>in-band</a>
+          event messages that contain image URLs and text messages to be
+          displayed, with information about when the content should be displayed
+          in relation to the <a>media timeline</a>.
         </p>
       </section>
       <section>
@@ -203,7 +203,7 @@
           Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific event
           that is used to notify a DASH player web application that it should
           refresh its copy of the manifest (MPD) document.
-          An in-band <code>emsg</code> event is used an alternative to setting
+          An <a>in-band</a> <code>emsg</code> event is used an alternative to setting
           a cache duration in the response to the HTTP request for the manifest,
           so the client can refresh the MPD when it actually changes, so reducing
           the load on HTTP servers caused by frequent server requests.
@@ -269,9 +269,9 @@
       <section>
         <h3>MPEG-DASH</h3>
         <p>
-          In MPEG-DASH, events may be conveyed either as in-band events, e.g.,
-          as <code>emsg</code> boxes in ISO BMFF files, or out-of-band, via an
-          EventStream fragment in the MPD (Media Presentation Description)
+          In MPEG-DASH, events may be conveyed either as <a>in-band</a> events,
+          e.g., as <code>emsg</code> boxes in ISO BMFF files, or <a>out-of-band</a>,
+          via an EventStream fragment in the MPD (Media Presentation Description)
           document (i.e., by an instance of the <code>EventStream</code> child
           of the <code>MPD.Period</code> element).
           In addition, the MPD document may advertise the presence of
@@ -338,7 +338,7 @@
           <li>
             Application subscription/DASH client dispatch of DASH event stream
             messages containing interactivity information. Events can be delivered
-            in-band (<code>emsg</code>) and/or as MPD events.
+            <a>in-band</a> (<code>emsg</code>) and/or as MPD events.
           </li>
           <li>
             Application subscription/DASH client dispatch of ISO BMFF Timed
@@ -348,7 +348,7 @@
         <p>
           Two modes for dispatching events are defined. In Mode 1, events are dispatched
           at the time the event arrives, and in Mode 2, events are dispatched at the
-          given time on the media timeline. The "arrival" of events from the DASH client
+          given time on the <a>media timeline</a>. The "arrival" of events from the DASH client
           perspective may be either static or pre-provisioned, in the case MPD Events,
           or dynamic in the case of inband events carried in the <code>emsg</code>.
           The application can register with the DASH client which Mode to use.
@@ -450,7 +450,7 @@
           text tracks. A <code>VTTCue</code> is a text track cue, and may have
           attributes that affect rendering of the cue text on a web page.
           WebVTT metadata cues are text that is time-aligned. Web applications can
-          use <code>VTTCue</code> to schedule out-of-band metadata events by
+          use <code>VTTCue</code> to schedule <a>out-of-band</a> metadata events by
           serializing the event data to a string format (JSON, for example) when
           creating the cue, and deserializing the data when the cue is triggered.
         </p>
@@ -471,7 +471,7 @@
           <h4>MPEG-DASH and ISO BMFF emsg events</h4>
           <p>
             The <code>DataCue</code> API has been previously discussed as a means to
-            deliver in-band event data to web applications, but this is not implemented
+            deliver <a>in-band</a> event data to web applications, but this is not implemented
             in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
             in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
             <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
@@ -630,7 +630,7 @@
         <h3>Out-of-band events</h3>
         <p>
           To be able to handle out of band events, the API must allow web
-          applications to create events to be added to the media timeline,
+          applications to create events to be added to the <a>media timeline</a>,
           to be triggered by the user agent. The API should allow the
           web application to provide all necessary parameters to define
           the event, including start and end times, event type, and data
@@ -648,15 +648,15 @@
         </p>
         <ul>
           <li>
-            Generate a JavaScript event when an in-band media timed event
+            Generate a JavaScript event when an <a>in-band</a> media timed event
             is parsed from the media container or media stream (DAInty Mode 1)
           </li>
           <li>
             Generate a JavaScript event when the current media playback
             position reaches the start time of a media timed event during
-            playback (DAInty Mode 2). This applies equally to in-band events
-            that the user agent has extracted from the media container, and
-            out-of-band events added by the web application.
+            playback (DAInty Mode 2). This applies equally to <a>in-band</a>
+            events that the user agent has extracted from the media container,
+            and <a>out-of-band</a> events added by the web application.
           </li>
         </ul>
         <p>
@@ -667,18 +667,19 @@
       <section>
         <h3>In-band event processing</h3>
         <p>
-          We recommend updating [[INBANDTRACKS]] to describe handling of in-band media
-          timed events supported on the web platform, following a registry approach
-          with one specification per media format that describes the event details
-          for that format.
+          We recommend updating [[INBANDTRACKS]] to describe handling of
+          <a>in-band</a> media timed events supported on the web platform,
+          following a registry approach with one specification per media format
+          that describes the event details for that format.
         </p>
       </section>
       <section>
         <h3>MPEG-DASH events</h3>
         <p>
           We recommend that browser engines support MPEG-DASH <code>emsg</code>
-          in-band events and MPD out-of-band events, as part of their support
-          for the MPEG Common Media Application Format (CMAF) [[MPEGCMAF]].
+          <a>in-band</a> events and MPD <a>out-of-band</a> events, as part of
+          their support for the MPEG Common Media Application Format (CMAF)
+          [[MPEGCMAF]].
         </p>
       </section>
       <section>
