@@ -266,6 +266,11 @@
     </section>
     <section>
       <h2>Related industry standards</h2>
+      <p>
+        This section describes existing media industry standards that specify
+        carriage of media timed events, or otherwise provide requirements for
+        web APIs related to the triggering of media timed events.
+      </p>
       <section>
         <h3>MPEG-DASH</h3>
         <p>
@@ -362,52 +367,25 @@
         <h3>BBC Subtitle Guidelines</h3>
         <p>
           The BBC Subtitle Guidelines ([[BBC-SUBTITLES]]) describe best practice
-          for authoring subtitles or captions. In particular, the guidelines state:
+          for authoring subtitles or captions. In particular, the guidelines
+          place requirements on the synchronization accuracy of caption
+          rendering. For example, in section 6.1, caption authors are advised
+          "it is likely to be less tiring for the viewer if shot changes and
+          subtitle changes occur at the same time. Many subtitles therefore start
+          on the first frame of the shot and end on the last frame."
         </p>
-        <blockquote>
-          <p>
-            <b>5.2 Match subtitle to pace of speaking</b>
-          </p>
-          <p>
-            The subtitles should match the pace of speaking as closely
-            as possible. Ideally, when the speaker is in shot, your subtitles
-            should not anticipate speech by more than 1.5 seconds or hang up on
-            the screen for more than 1.5 seconds after speech has stopped.
-          </p>
-          <p>
-            <b>6.1 Match subtitles to shot</b>
-          </p>
-          <p>
-            It is likely to be less tiring for the viewer if shot changes and
-            subtitle changes occur at the same time. Many subtitles therefore
-            start on the first frame of the shot and end on the last frame.
-          </p>
-          <p>
-            <b>6.2 Maintain a minimum gap when mismatched</b>
-          </p>
-          <p>
-            If you have to let a subtitle hang over a shot change, do not remove
-            it too soon after the cut. The duration of the overhang will depend
-            on the content.
-          </p>
-          <p>
-            <b>6.3 Avoid straddling shot changes</b>
-          </p>
-          <p>
-            Avoid creating subtitles that straddle a shot change (i.e., a subtitle
-            that starts in the middle of shot one and ends in the middle of shot
-            two). To do this, you may need to split a sentence at an appropriate
-            point, or delay the start of a new sentence to coincide with the shot
-            change.
-          </p>
-        </blockquote>
         <p>
-          To meet these requirements, the playback system must honour the provided
-          timings. Subtitles for video are typically authored against video at a
-          nominal frame rate, e.g., 25 frames per second (which corresponds to
-          40 milliseconds per frame). The actual video frame rate may be adjusted
+          Subtitles for video are typically authored against video at
+          a nominal frame rate, e.g., 25 frames per second, which corresponds to
+          40 milliseconds per frame. The actual video frame rate may be adjusted
           dynamically according to the video encoding, but the subtitle timing
           must remain the same ([[EBU-TT-D]], Annex E).
+        </p>
+        <p>
+          Where captions are rendered by application JavaScript code, in
+          response to <code>TextTrackCue</code> events, this places a
+          requirement on user agents for timely delivery of these events,
+          so that application code can respond and render the cues.
         </p>
       </section>
       <section>
@@ -560,7 +538,8 @@
             <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
             and <code>value</code> values. Because HbbTV devices include a native
             DASH client, parsing of the MPD document and creation of the
-            <code>TextTrack</code>s is done by the UA.
+            <code>TextTrack</code>s is done by the user agent, rather than by
+            application JavaScript code.
           </p>
           <p class="ednote">
             To support DASH clients implemented in web applications, there is
