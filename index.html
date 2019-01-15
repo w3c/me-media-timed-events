@@ -310,16 +310,25 @@
       <section>
         <h3>HbbTV</h3>
         <p>
+          HbbTV is an interactive TV application standard that supports both
+          broadcast (DVB) media delivery, and internet streaming using
+          MPEG-DASH. The HbbTV application environment is based on HTML and
+          JavaScript. MPEG-DASH streaming is implemented nativey by the user
+          agent, rather than through a JavaScript web application using Media
+          Source Extensions.
+        </p>
+        <p>
           HbbTV includes support for <code>emsg</code> events ([[DVB-DASH]],
-          section 9.1) and requires this be mapped to <code>DataCue</code>
-          ([[HBBTV]], section 9.3.2). The HbbTV device test suite includes
-          test pages and streams for this ([[HBBTV-TESTS]]). This feature is
-          included in user agents shipping in connected TVs across Europe from
-          2017. HbbTV has a <a href="https://github.com/HbbTV-Association/ReferenceApplication">reference app</a>
+          section 9.1) and requires this be mapped to HTML5 <code>DataCue</code>
+          ([[HBBTV]], section 9.3.2). The revision of HTML5 referenced
+          by [[HBBTV]] is [[html51-20151008]]. This feature is included in user
+          agents shipping in connected TVs across Europe from 2017.
+        </p>
+        <p>
+          The HbbTV device test suite includes test pages and streams that
+          cover <code>emsg</code> support ([[HBBTV-TESTS]]). HbbTV has a
+          <a href="https://github.com/HbbTV-Association/ReferenceApplication">reference application</a>
           and content for DASH+DRM which includes <code>emsg</code> support.
-          As well as HbbTV devices, this reference app and content have been
-          tested on Microsoft Edge with MSE and EME although <code>emsg</code>
-          support does not work there.
         </p>
       </section>
       <section>
