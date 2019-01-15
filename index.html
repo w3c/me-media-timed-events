@@ -263,14 +263,31 @@
       <section>
         <h3>MPEG-DASH</h3>
         <p>
-          In MPEG-DASH, events may be conveyed either as <a>in-band</a> events,
-          e.g., as <code>emsg</code> boxes in ISO BMFF files, or <a>out-of-band</a>,
-          via an EventStream fragment in the MPD (Media Presentation Description)
-          document (i.e., by an instance of the <code>EventStream</code> child
-          of the <code>MPD.Period</code> element).
-          In addition, the MPD document may advertise the presence of
-          <code>emsg</code> events in the ISO BMFF content for given schemas.
+          MPEG-DASH is an adaptive bitrate streaming technique in which the
+          audio and video media is partitioned into segments. The Media
+          Presentation Description (MPD) is an XML document that contains
+          metadata required by a DASH client to access the media segments and to
+          provide the streaming service to the user. The media segments can use
+          any codec, typically within a fragmented MP4 (ISO BMFF) container or
+          MPEG-2 transport stream.
         </p>
+        <p>
+          In MPEG-DASH, media timed events may be delivered either
+          <a>in-band</a> or <a>out-of-band</a>:
+        </p>
+        <ul>
+          <li>
+            <a>In-band</a> events are <code>emsg</code> boxes in ISO BMFF files.
+            The presence of <code>emsg</code> events in the media container for
+            given event schemes is signalled in the MPD document using an
+            <code>EventStream</code> XML element ([[MPEGDASH]], section 5.10.2).
+          </li>
+          <li>
+            <a>Out-of-band</a> events are represented by <code>Event</code>
+            XML elements </code>contained within an <code>EventStream</code>
+            element in the MPD.
+          </li>
+        </ul>
         <p>
           An <code>emsg</code> event contains the following information,
           as specified in [[MPEGDASH]], section 5.10.3.3:
@@ -289,11 +306,6 @@
           <li><code>id</code> &mdash; Event message identifier</li>
           <li><code>message_data</code> &mdash; Message body (may be empty)</li>
         </ul>
-        <p>
-          The presence of <code>emsg</code> events in the media stream is signalled
-          in the DASH manifest document (MPD), using an <code>EventStream</code> XML
-          element ([[MPEGDASH]], section 5.10.2).
-        </p>
       </section>
       <section>
         <h3>HbbTV</h3>
