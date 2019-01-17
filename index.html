@@ -109,10 +109,13 @@
     <section id="abstract">
       <p>
         This document collects use cases and requirements for improved support
-        for timed events related to audio or video media on the web, such as
-        subtitles, captions, or other web content, where synchronization to a
-        playing audio or video media stream is needed, and makes recommendations
-        for new or changed web APIs to realize these requirements.
+        for timed events related to audio or video media on the web, where
+        synchronization to a playing audio or video media stream is needed,
+        and makes recommendations for new or changed web APIs to realize these
+        requirements. The goal is to extend the existing support in HTML for
+        text track cue events to add support for dynamic content replacement
+        cues and generic metadata events that drive synchronized interactive
+        media experiences.
       </p>
     </section>
     <section id="sotd">
@@ -120,10 +123,16 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        Media timed events describes a generic capability for making
-        changes to a web page, or executing application code triggered from
-        JavaScript events, at specific points on the <a>media timeline</a> of an
-        audio or video media stream.
+        There is a need in the media industry for an API to support metadata
+        events synchronized to audio or video media, specifically for both
+        <a>out-of-band</a> event streams and <a>in-band</a> discrete events
+        (for example, MPD and <code>emsg</code> events in MPEG-DASH).
+        These <em>media timed events</em> can be used to support use cases such as
+        dynamic content replacement, ad insertion, or presentation of
+        supplemental content alongside the audio or video, or more generally,
+        making changes to a web page, or executing application code triggered
+        from JavaScript events, at specific points on the <a>media timeline</a>
+        of an audio or video media stream.
       </p>
     </section>
     <section>
