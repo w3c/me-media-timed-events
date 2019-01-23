@@ -1,6 +1,5 @@
 {
-  "group":     ["46300"],
-  "contacts":  ["ashimura"],
-  "shortName"  "me-media-timed-events",
-  "repo-type": "note"
+     "group":      ["46300"]
+ ,   "contacts":   ["ashimura"]
+ ,   "shortName":  "me-media-timed-events"
 }
