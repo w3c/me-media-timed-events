@@ -244,8 +244,7 @@
           Control can also be overridden by the user with the usual interactive
           features of the map at any time, e.g., zoom. Concrete examples are
           provided by the <a href="http://webvmt.org/demos">tech demos</a> at
-          the WebVMT
-          website.
+          the WebVMT website.
         </p>
         <p>
           Reference: M&amp;E IG TF call 17 Sept 2018:
@@ -286,6 +285,27 @@
         carriage of media timed events, or otherwise provide requirements for
         web APIs related to the triggering of media timed events.
       </p>
+      <section>
+        <h3>MPEG Common Media Application Format (CMAF)</h3>
+        <p>
+          MPEG Common Media Application Format (CMAF) [[MPEGCMAF]] is a media
+          container format optimized for large scale delivery of a single
+          encrypted, adaptable multimedia presentation to a wide range of
+          devices and adaptive streaming methods, including HTTP Live Streaming
+          [[RFC8216]] and MPEG-DASH [[MPEGDASH]]. It is based on the ISO BMFF
+          [[ISOBMFF]] and supports the AVC, AAC, HEVC codecs, Common Encryption
+          (CENC), and subtitles using IMSC1 and WebVTT. The goal is to reduce
+          media storage and delivery costs by using a single common media format
+          across different client devices.
+        </p>
+        <p>
+          CMAF media may contain <a>in-band</a> events in the form of
+          Event Message (<code>emsg</code>) boxes in ISO BMFF files.
+          <code>emsg</code> is specified in [[MPEGDASH]], section 5.10.3.3,
+          and described in more detail in the following section of this
+          document.
+        </p>
+      </section>
       <section>
         <h3>MPEG-DASH</h3>
         <p>
@@ -450,6 +470,7 @@
       <section>
         <h3>MPEG Working Draft on Carriage of Web Resources in ISO BMFF</h3>
         <p>
+          The MPEG Working Draft on Carriage of Web Resources in ISO BMFF
           [[WEB-ISOBMFF]] is a draft document that specifies the use of the
           ISO BMFF container format for the storage and delivery of web
           content. The goal is to allow web resources (HTML, JavaScript, etc.)
