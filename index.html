@@ -189,7 +189,7 @@
       <p>
         The following sections describe a few use cases in more detail.
       </p>
-      <section>
+      <section id="dynamic-content-insertion">
         <h3>Dynamic content insertion</h3>
         <p>
           A media content provider wants to allow insertion of content,
@@ -463,18 +463,30 @@
         </p>
       </section>
       <section>
-        <h3>SCTE Media Splicing Requirements</h3>
+        <h3>SCTE-35</h3>
         <p>
           The Society for Cable and Televison Engineers (SCTE) has produced the
           SCTE-35 specification "Digital Program Insertion Cueing for Cable"
-          [[SCTE35]]. In it, the requirements for splicing (Sec. 9.1) are "In
-          order to give advance warning of the impending splice (a pre-roll
-          function), the splice_insert() command could be sent multiple times
-          before the splice point. For example, the splice_insert() command
-          could be sent at 8, 5, 4 and 2 seconds prior to the packet containing
-          the related splice point. In order to meet other splicing deadlines in
-          the system, any message received with less than 4 seconds of advance
-          notice may not create the desired result."
+          [[SCTE35]], which defines a data cue format for describing
+          insertion points, to support the
+          <a href="#dynamic-content-insertion">dynamic content insertion</a> use
+          case.
+        </p>
+        <p>
+          [[SCTE214-1]] section 6.7 describes the carriage of SCTE-35 events
+          in a MPEG-DASH MPD document, as <a>out-of-band</a> events.
+          [[SCTE214-2]] section 9 and [[SCTE214-3]] section 7.3 describe
+          the carriage of SCTE-35 events as <a>in-band</a> events in MPEG-DASH
+          using MPEG2-TS and ISO BMFF respectively, using <code>emsg</code>.
+        </p>
+          [[SCTE35]] section 9.1 describes the requirements for content
+          splicing: "In order to give advance warning of the impending splice
+          (a pre-roll function), the splice_insert() command could be sent
+          multiple times before the splice point. For example, the
+          splice_insert() command could be sent at 8, 5, 4 and 2 seconds prior
+          to the packet containing the related splice point. In order to meet
+          other splicing deadlines in the system, any message received with less
+          than 4 seconds of advance notice may not create the desired result."
         </p>
         <p>
           This places an implicit requirement on the user agent in handling
