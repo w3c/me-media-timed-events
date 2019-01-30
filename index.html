@@ -190,6 +190,24 @@
         The following sections describe a few use cases in more detail.
       </p>
       <section>
+        <h3>Dynamic content insertion</h3>
+        <p>
+          A media content provider wants to allow insertion of content,
+          such as personalised video, local news, or advertisements,
+          into a video media stream that contains the main program content.
+          To achieve this, media timed events used to describe the points
+          on the <a>media timeline</a>, known as splice points, where switching
+          playback to inserted content is possible.
+        </p>
+        <p>
+          The Society for Cable and Televison Engineers (SCTE) specification
+          "Digital Program Insertion Cueing for Cable" [[SCTE35]] defines a data
+          cue format for describing such insertion points. Use of these cues in
+          MPEG-DASH and HLS streams is described in [[SCTE35]], sections 12.1
+          and 12.2.
+        </p>
+      </section>
+      <section>
         <h3>Audio stream with titles and images</h3>
         <p>
           A media content provider wants to provide visual information alongside
