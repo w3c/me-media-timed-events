@@ -644,20 +644,61 @@
           must remain the same ([[EBU-TT-D]], Annex E).
         </p>
         <p>
-          Where captions are rendered by application JavaScript code, in
-          response to <code>VTTCue</code> or <code>TextTrackCue</code> events,
-          this places a requirement on user agents for timely delivery of these
-          events, so that application code can respond and render the cues.
+          This places a requirement on user agents for timely delivery of
+          <code>TextTrackCue</code> and <code>VTTCue</code> events, so that
+          application code can respond and render the cues. For subtitle
+          rendering to be possible with frame accuracy, we recommend that cue
+          events are fired within 20 milliseconds of their position on the
+          <a>media timeline</a>.
         </p>
         <p>
-          Reference: M&amp;E IG, Media Timed Events Task Force call 17 Dec 2018:
-          <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">Minutes</a>.
+          The <a href="https://html.spec.whatwg.org/multipage/media.html#time-marches-on"><em>time
+          marches on</em></a> steps in [[HTML]] control the firing of cue
+          events during media playback. <em>Time marches on</em> requires a
+          <code>timeupdate</code> event to be fired at the
+          <code>HTMLMediaElement</code> between 15 and 250 milliseconds since
+          the last such event, and this requirement therefore specifies the rate
+          at which <em>time marches on</em> is executed during playback. In
+          practice it <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
+          been found</a> that the timing varies between browser implementations.
         </p>
-        <p class="ednote">
-          TODO: The timing guarantees provided in [[HTML]] regarding the triggering of
-          <code>TextTrackCue</code> events may be not be enough to avoid
-          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">events being missed</a>.
-          Explain further.
+        <p>
+          There are two methods a web application can use to handle text track
+          cues:
+        </p>
+        <p>
+          <ul>
+            <li>
+              Add an <code>oncuechange</code> handler function to the
+              <code>TextTrack</code> and inspect the track's
+              <code>activeCues</code> list. Because <code>activeCues</code>
+              contains the list of cues that are active at the time that
+              <em>time marches on</em></a> is run, it is possible for cues to be
+              missed by a web application using this method, where cues appear
+              on the <a>media timeline</a> between successive executions of
+              <em>time marches on</em> during media playback. This may occur
+              if the cues have short duration, or by a long-running event
+              handler function.
+            </li>
+            <li>
+              Add <code>onenter</code> and <code>onexit</code> handler functions
+              to each cue. The <em>time marches on</em> steps guarantee that
+              <code>enter</code> and <code>exit</code> events will be fired for
+              all cues, including those that appear on the <a>media timeline</a>
+              between successive executions of <em>time marches on</em>
+              during media playback. This method is only possible for cues
+              created by the web application, i.e., <code>VTTCue</code> objects,
+              and not cue objects created by the user agent.
+            </li>
+          </ul>
+        </p>
+        <p>
+          An issue with handling of text track and data cue events in HbbTV
+          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">was
+          reported</a> in 2013. HbbTV requires the user agent to implement an
+          MPEG-DASH client, and so applications must use the first of the above
+          methods for cue handling, which means that applications can miss cues
+          as described above.
         </p>
       </section>
       <section>
@@ -694,7 +735,8 @@
       <h2>Recommendations</h2>
       <p>
         This section describes recommendations from the Media &amp; Entertainment
-        Interest Group for the development of a generic media timed event API.
+        Interest Group for the development of a generic media timed event API,
+        and associated synchronization considerations.
       </p>
       <section>
         <h3>Subscribing to event streams</h3>
@@ -726,19 +768,20 @@
         <h3>Event triggering</h3>
         <p>
           For those events that the application has subscribed to receive,
-          the API must:
+          the API should:
         </p>
         <ul>
           <li>
             Generate a JavaScript event when an <a>in-band</a> media timed event
-            is parsed from the media container or media stream (DAInty Mode 1)
+            is parsed from the media container or media stream (DAInty Mode 1).
           </li>
           <li>
-            Generate a JavaScript event when the current media playback
-            position reaches the start time of a media timed event during
-            playback (DAInty Mode 2). This applies equally to <a>in-band</a>
-            events that the user agent has extracted from the media container,
-            and <a>out-of-band</a> events added by the web application.
+            Generate JavaScript events when the current media playback
+            position reaches the start time and the end time of a media timed
+            event during playback (DAInty Mode 2). This applies equally to
+            <a>in-band</a> events that the user agent has extracted from the
+            media container, and <a>out-of-band</a> events added by the web
+            application.
           </li>
         </ul>
         <p>
@@ -767,9 +810,11 @@
       <section>
         <h3>Synchronization</h3>
         <p>
-          The <em>time marches on algorithm</em> should be reviewed and updated
-          to ensure that events are delivered to the web application within
-          time constraints described elsewhere in this report.
+          In order to acheive greater synchronization accuracy between media
+          playback and web content rendered by an application, the <em>time
+          marches on</em> steps in [[HTML]] should be modified to allow delivery
+          of media timed event start time and end time notifications within 20
+          milliseconds of their positions on the <a>media timeline</a>.
         </p>
       </section>
     </section>
