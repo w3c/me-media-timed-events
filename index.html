@@ -74,18 +74,6 @@
             publisher: "HbbTV Association",
             date: "2018"
           },
-          "DVB-DASH": {
-            title: "DVB Document A168. Digital Video Broadcasting (DVB); MPEG-DASH Profile for Transport of ISO BMFF Based DVB Services over IP Based Networks",
-            href: "https://www.dvb.org/resources/public/standards/a168_dvb_mpeg-dash_nov_2017.pdf",
-            publisher: "DVB",
-            date: "November 2017"
-          },
-          "BBC-SUBTITLES": {
-            title: "Subtitle Guidelines",
-            href: "http://bbc.github.io/subtitle-guidelines/",
-            publisher: "BBC",
-            date: "May 2018"
-          },
           "3GPP-INTERACTIVITY-WID": {
             title: "SP-170796: New WID on 3GPP Service Interactivity",
             href: "http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip",
@@ -126,7 +114,7 @@
         requirements. The goal is to extend the existing support in HTML for
         text track cue events to add support for dynamic content replacement
         cues and generic metadata events that drive synchronized interactive
-        media experiences.
+        media experiences, and improve synchronization timing accuracy.
       </p>
     </section>
     <section id="sotd">
@@ -138,8 +126,8 @@
         events synchronized to audio or video media, specifically for both
         <a>out-of-band</a> event streams and <a>in-band</a> discrete events
         (for example, MPD and <code>emsg</code> events in MPEG-DASH).
-        These <em>media timed events</em> can be used to support use cases such as
-        dynamic content replacement, ad insertion, or presentation of
+        These <em>media timed events</em> can be used to support use cases
+        such as dynamic content replacement, ad insertion, or presentation of
         supplemental content alongside the audio or video, or more generally,
         making changes to a web page, or executing application code triggered
         from JavaScript events, at specific points on the <a>media timeline</a>
@@ -176,10 +164,10 @@
       <h2>Use cases</h2>
       <p>
         Media-timed events carry metadata that is related to points in time,
-        or regions of time on the <a>media timeline</a>, which can be used to trigger
-        retrieval and/or rendering of web resources synchronized with media
-        playback. Such resources can be used to enhance user experience in
-        the context of media that is being rendered. Some examples include
+        or regions of time on the <a>media timeline</a>, which can be used to
+        trigger retrieval and/or rendering of web resources synchronized with
+        media playback. Such resources can be used to enhance user experience
+        in the context of media that is being rendered. Some examples include
         display of social media feeds corresponding to a live broadcast such
         as a sporting event, banner advertisements for sponsored content,
         accessibility-related assets, such as large print rendering of
@@ -189,6 +177,24 @@
       <p>
         The following sections describe a few use cases in more detail.
       </p>
+      <section id="dynamic-content-insertion">
+        <h3>Dynamic content insertion</h3>
+        <p>
+          A media content provider wants to allow insertion of content,
+          such as personalised video, local news, or advertisements,
+          into a video media stream that contains the main program content.
+          To achieve this, media timed events used to describe the points
+          on the <a>media timeline</a>, known as splice points, where switching
+          playback to inserted content is possible.
+        </p>
+        <p>
+          The Society for Cable and Televison Engineers (SCTE) specification
+          "Digital Program Insertion Cueing for Cable" [[SCTE35]] defines a data
+          cue format for describing such insertion points. Use of these cues in
+          MPEG-DASH and HLS streams is described in [[SCTE35]], sections 12.1
+          and 12.2.
+        </p>
+      </section>
       <section>
         <h3>Audio stream with titles and images</h3>
         <p>
@@ -228,6 +234,18 @@
         </p>
       </section>
       <section>
+        <h3>Subtitle and caption rendering synchronization</h3>
+        <p>
+          A subtitle or caption author wants ensure that subtitle changes are
+          aligned as closely as possible to shot changes in the video.
+          The BBC Subtitle Guidelines [[BBC-SUBTITLE]] describes authoring
+          best practices. In particular, in section 6.1 authors are advised
+          "it is likely to be less tiring for the viewer if shot changes
+          and subtitle changes occur at the same time. Many subtitles therefore
+          start on the first frame of the shot and end on the last frame."
+        </p>
+      </section>
+      <section>
         <h3>Synchronized map animations</h3>
         <p>
           A user records footage with metadata, including geolocation, on a
@@ -244,8 +262,7 @@
           Control can also be overridden by the user with the usual interactive
           features of the map at any time, e.g., zoom. Concrete examples are
           provided by the <a href="http://webvmt.org/demos">tech demos</a> at
-          the WebVMT
-          website.
+          the WebVMT website.
         </p>
         <p>
           Reference: M&amp;E IG TF call 17 Sept 2018:
@@ -280,12 +297,34 @@
       </section>
     </section>
     <section>
-      <h2>Related industry standards</h2>
+      <h2>Related industry specifications</h2>
       <p>
-        This section describes existing media industry standards that specify
-        carriage of media timed events, or otherwise provide requirements for
-        web APIs related to the triggering of media timed events.
+        This section describes existing media industry specifications and
+        standards that specify carriage of media timed events, or otherwise
+        provide requirements for web APIs related to the triggering of media
+        timed events.
       </p>
+      <section>
+        <h3>MPEG Common Media Application Format (CMAF)</h3>
+        <p>
+          MPEG Common Media Application Format (CMAF) [[MPEGCMAF]] is a media
+          container format optimized for large scale delivery of a single
+          encrypted, adaptable multimedia presentation to a wide range of
+          devices and adaptive streaming methods, including HTTP Live Streaming
+          [[RFC8216]] and MPEG-DASH [[MPEGDASH]]. It is based on the ISO BMFF
+          [[ISOBMFF]] and supports the AVC, AAC, HEVC codecs, Common Encryption
+          (CENC), and subtitles using IMSC1 and WebVTT. The goal is to reduce
+          media storage and delivery costs by using a single common media format
+          across different client devices.
+        </p>
+        <p>
+          CMAF media may contain <a>in-band</a> events in the form of
+          Event Message (<code>emsg</code>) boxes in ISO BMFF files.
+          <code>emsg</code> is specified in [[MPEGDASH]], section 5.10.3.3,
+          and described in more detail in the following section of this
+          document.
+        </p>
+      </section>
       <section>
         <h3>MPEG-DASH</h3>
         <p>
@@ -400,43 +439,30 @@
         </p>
       </section>
       <section>
-        <h3>BBC Subtitle Guidelines</h3>
-        <p>
-          The BBC Subtitle Guidelines ([[BBC-SUBTITLES]]) describe best practice
-          for authoring subtitles or captions. In particular, the guidelines
-          place requirements on the synchronization accuracy of caption
-          rendering. For example, in section 6.1, caption authors are advised
-          "it is likely to be less tiring for the viewer if shot changes and
-          subtitle changes occur at the same time. Many subtitles therefore start
-          on the first frame of the shot and end on the last frame."
-        </p>
-        <p>
-          Subtitles for video are typically authored against video at
-          a nominal frame rate, e.g., 25 frames per second, which corresponds to
-          40 milliseconds per frame. The actual video frame rate may be adjusted
-          dynamically according to the video encoding, but the subtitle timing
-          must remain the same ([[EBU-TT-D]], Annex E).
-        </p>
-        <p>
-          Where captions are rendered by application JavaScript code, in
-          response to <code>TextTrackCue</code> events, this places a
-          requirement on user agents for timely delivery of these events,
-          so that application code can respond and render the cues.
-        </p>
-      </section>
-      <section>
-        <h3>SCTE Media Splicing Requirements</h3>
+        <h3>SCTE-35</h3>
         <p>
           The Society for Cable and Televison Engineers (SCTE) has produced the
           SCTE-35 specification "Digital Program Insertion Cueing for Cable"
-          [[SCTE35]]. In it, the requirements for splicing (Sec. 9.1) are "In
-          order to give advance warning of the impending splice (a pre-roll
-          function), the splice_insert() command could be sent multiple times
-          before the splice point. For example, the splice_insert() command
-          could be sent at 8, 5, 4 and 2 seconds prior to the packet containing
-          the related splice point. In order to meet other splicing deadlines in
-          the system, any message received with less than 4 seconds of advance
-          notice may not create the desired result."
+          [[SCTE35]], which defines a data cue format for describing
+          insertion points, to support the
+          <a href="#dynamic-content-insertion">dynamic content insertion</a> use
+          case.
+        </p>
+        <p>
+          [[SCTE214-1]] section 6.7 describes the carriage of SCTE-35 events
+          in a MPEG-DASH MPD document, as <a>out-of-band</a> events.
+          [[SCTE214-2]] section 9 and [[SCTE214-3]] section 7.3 describe
+          the carriage of SCTE-35 events as <a>in-band</a> events in MPEG-DASH
+          using MPEG2-TS and ISO BMFF respectively, using <code>emsg</code>.
+        </p>
+          [[SCTE35]] section 9.1 describes the requirements for content
+          splicing: "In order to give advance warning of the impending splice
+          (a pre-roll function), the splice_insert() command could be sent
+          multiple times before the splice point. For example, the
+          splice_insert() command could be sent at 8, 5, 4 and 2 seconds prior
+          to the packet containing the related splice point. In order to meet
+          other splicing deadlines in the system, any message received with less
+          than 4 seconds of advance notice may not create the desired result."
         </p>
         <p>
           This places an implicit requirement on the user agent in handling
@@ -450,6 +476,7 @@
       <section>
         <h3>MPEG Working Draft on Carriage of Web Resources in ISO BMFF</h3>
         <p>
+          The MPEG Working Draft on Carriage of Web Resources in ISO BMFF
           [[WEB-ISOBMFF]] is a draft document that specifies the use of the
           ISO BMFF container format for the storage and delivery of web
           content. The goal is to allow web resources (HTML, JavaScript, etc.)
@@ -476,6 +503,11 @@
           event data to a string format (JSON, for example) when creating the
           cue, and deserializing the data when the cue is triggered.
         </p>
+        <p>
+          Web applications can also use <code>VTTCue</code> to trigger
+          rendering of <a>out-of-band</a> delivered timed text cues, such as
+          TTML or IMSC format captions.
+        </p>
       </section>
     </section>
     <section>
@@ -488,118 +520,168 @@
         associated limitations.
       </p>
       <section>
-        <h3>Synchronized event triggering</h3>
-        <section>
-          <h4>MPEG-DASH and ISO BMFF emsg events</h4>
-          <p>
-            The <code>DataCue</code> API has been previously discussed as a means to
-            deliver <a>in-band</a> event data to web applications, but this is not implemented
-            in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
-            in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
-            <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
-            in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
-            and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
-          </p>
-          <p>
-            WebKit <a href="https://discourse.wicg.io/t/media-timed-events-api-for-mpeg-dash-mpd-and-emsg-events/3096/2">supports</a>
-            a <code>DataCue</code> interface that extends HTML5 <code>DataCue</code>
-            with two attributes to support non-text metadata, <code>type</code> and
-            <code>value</code>.
-          </p>
-          <pre class="example">
-            interface DataCue : TextTrackCue {
-              attribute ArrayBuffer data; // Always empty
+        <h4>MPEG-DASH and ISO BMFF emsg events</h4>
+        <p>
+          The <code>DataCue</code> API has been previously discussed as a means to
+          deliver <a>in-band</a> event data to web applications, but this is not implemented
+          in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+          in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
+          <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
+          in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
+          and notes on implementation status <a href="https://lists.w3.org/Archives/Public/public-html/2016Apr/0005.html">here</a>.
+        </p>
+        <p>
+          WebKit <a href="https://discourse.wicg.io/t/media-timed-events-api-for-mpeg-dash-mpd-and-emsg-events/3096/2">supports</a>
+          a <code>DataCue</code> interface that extends HTML5 <code>DataCue</code>
+          with two attributes to support non-text metadata, <code>type</code> and
+          <code>value</code>.
+        </p>
+        <pre class="example">
+          interface DataCue : TextTrackCue {
+            attribute ArrayBuffer data; // Always empty
 
-              // Proposed extensions.
-              attribute any value;
-              readonly attribute DOMString type;
-            };
-          </pre>
-          <p>
-            <code>type</code> is a string identifying the type of metadata:
-          </p>
-          <table class="simple">
-            <thead>
-              <tr>
-                <th colspan="2">WebKit <code>DataCue</code> metadata types</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>"com.apple.quicktime.udta"</code></td>
-                <td>QuickTime User Data</td>
-              </tr>
-              <tr>
-                <td><code>"com.apple.quicktime.mdta"</code></td>
-                <td>QuickTime Metadata</td>
-              </tr>
-              <tr>
-                <td><code>"com.apple.itunes"</code></td>
-                <td>iTunes metadata</td>
-              </tr>
-              <tr>
-                <td><code>"org.mp4ra"</code></td>
-                <td>MPEG-4 metadata</td>
-              </tr>
-              <tr>
-                <td><code>"org.id3"</code></td>
-                <td>ID3 metadata</td>
+            // Proposed extensions.
+            attribute any value;
+            readonly attribute DOMString type;
+          };
+        </pre>
+        <p>
+          <code>type</code> is a string identifying the type of metadata:
+        </p>
+        <table class="simple">
+          <thead>
+            <tr>
+              <th colspan="2">WebKit <code>DataCue</code> metadata types</th>
             </tr>
-            </tbody>
-          </table>
-          <p>
-            and <code>value</code> is an object with the metadata item key, data, and optionally a locale:
-          </p>
-          <pre class="example">
-            value = {
-              key: String
-              data: String | Number | Array | ArrayBuffer | Object
-              locale: String
-            }
-          </pre>
-          <p>
-            Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
-            handling of <code>emsg</code> boxes.
-          </p>
-          <p>
-            On resource constrained devices such as smart TVs and streaming sticks,
-            parsing media segments to extract event information leads to a significant
-            performance penalty, which can have an impact on UI rendering updates if
-            this is done on the UI thread. There can also be an impact on the battery
-            life of mobile devices. Given that the media segments will be parsed anyway
-            by the user agent, parsing in JavaScript is an expensive overhead that
-            could be avoided.
-          </p>
-          <p>
-            [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
-            fields described <a href="#mpeg-dash">above</a>
-            and the <a href="https://html.spec.whatwg.org/multipage/media.html#texttrack"><code>TextTrack</code></a>
-            and <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#datacue"><code>DataCue</code></a>
-            APIs. A <code>TextTrack</code> instance is created for each event
-            stream signalled in the MPD document (as identified by the
-            <code>schemeIdUri</code> and <code>value</code>), and the
-            <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
-            <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
-            and <code>value</code> values. Because HbbTV devices include a native
-            DASH client, parsing of the MPD document and creation of the
-            <code>TextTrack</code>s is done by the user agent, rather than by
-            application JavaScript code.
-          </p>
-          <p class="ednote">
-            To support DASH clients implemented in web applications, there is
-            therefore either a need for an API that allows applications to tell
-            the UA which schemes it wants to receive, or the UA should simply
-            expose all event streams to applications. Which of these is preferred?
-          </p>
-        </section>
-        <section>
-          <h4>Synchronization and timing</h4>
-          <p>
-            The timing guarantees provided in [[HTML]] regarding the triggering of
-            <code>TextTrackCue</code> events may be not be enough to avoid
-            <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">events being missed</a>.
-          </p>
-        </section>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>"com.apple.quicktime.udta"</code></td>
+              <td>QuickTime User Data</td>
+            </tr>
+            <tr>
+              <td><code>"com.apple.quicktime.mdta"</code></td>
+              <td>QuickTime Metadata</td>
+            </tr>
+            <tr>
+              <td><code>"com.apple.itunes"</code></td>
+              <td>iTunes metadata</td>
+            </tr>
+            <tr>
+              <td><code>"org.mp4ra"</code></td>
+              <td>MPEG-4 metadata</td>
+            </tr>
+            <tr>
+              <td><code>"org.id3"</code></td>
+              <td>ID3 metadata</td>
+          </tr>
+          </tbody>
+        </table>
+        <p>
+          and <code>value</code> is an object with the metadata item key, data, and optionally a locale:
+        </p>
+        <pre class="example">
+          value = {
+            key: String
+            data: String | Number | Array | ArrayBuffer | Object
+            locale: String
+          }
+        </pre>
+        <p>
+          Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
+          handling of <code>emsg</code> boxes.
+        </p>
+        <p>
+          On resource constrained devices such as smart TVs and streaming sticks,
+          parsing media segments to extract event information leads to a significant
+          performance penalty, which can have an impact on UI rendering updates if
+          this is done on the UI thread. There can also be an impact on the battery
+          life of mobile devices. Given that the media segments will be parsed anyway
+          by the user agent, parsing in JavaScript is an expensive overhead that
+          could be avoided.
+        </p>
+        <p>
+          [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
+          fields described <a href="#mpeg-dash">above</a>
+          and the <a href="https://html.spec.whatwg.org/multipage/media.html#texttrack"><code>TextTrack</code></a>
+          and <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#datacue"><code>DataCue</code></a>
+          APIs. A <code>TextTrack</code> instance is created for each event
+          stream signalled in the MPD document (as identified by the
+          <code>schemeIdUri</code> and <code>value</code>), and the
+          <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
+          <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
+          and <code>value</code> values. Because HbbTV devices include a native
+          DASH client, parsing of the MPD document and creation of the
+          <code>TextTrack</code>s is done by the user agent, rather than by
+          application JavaScript code.
+        </p>
+      </section>
+      <section>
+        <h3>Synchronization of text track cue rendering</h3>
+        <p>
+          Subtitles for video are typically authored against video at
+          a nominal frame rate, e.g., 25 frames per second, which corresponds to
+          40 milliseconds per frame. The actual video frame rate may be adjusted
+          dynamically according to the video encoding, but the subtitle timing
+          must remain the same ([[EBU-TT-D]], Annex E).
+        </p>
+        <p>
+          This places a requirement on user agents for timely delivery of
+          <code>TextTrackCue</code> and <code>VTTCue</code> events, so that
+          application code can respond and render the cues. For subtitle
+          rendering to be possible with frame accuracy, we recommend that cue
+          events are fired within 20 milliseconds of their position on the
+          <a>media timeline</a>.
+        </p>
+        <p>
+          The <a href="https://html.spec.whatwg.org/multipage/media.html#time-marches-on"><em>time
+          marches on</em></a> steps in [[HTML]] control the firing of cue
+          events during media playback. <em>Time marches on</em> requires a
+          <code>timeupdate</code> event to be fired at the
+          <code>HTMLMediaElement</code> between 15 and 250 milliseconds since
+          the last such event, and this requirement therefore specifies the rate
+          at which <em>time marches on</em> is executed during playback. In
+          practice it <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
+          been found</a> that the timing varies between browser implementations.
+        </p>
+        <p>
+          There are two methods a web application can use to handle text track
+          cues:
+        </p>
+        <p>
+          <ul>
+            <li>
+              Add an <code>oncuechange</code> handler function to the
+              <code>TextTrack</code> and inspect the track's
+              <code>activeCues</code> list. Because <code>activeCues</code>
+              contains the list of cues that are active at the time that
+              <em>time marches on</em></a> is run, it is possible for cues to be
+              missed by a web application using this method, where cues appear
+              on the <a>media timeline</a> between successive executions of
+              <em>time marches on</em> during media playback. This may occur
+              if the cues have short duration, or by a long-running event
+              handler function.
+            </li>
+            <li>
+              Add <code>onenter</code> and <code>onexit</code> handler functions
+              to each cue. The <em>time marches on</em> steps guarantee that
+              <code>enter</code> and <code>exit</code> events will be fired for
+              all cues, including those that appear on the <a>media timeline</a>
+              between successive executions of <em>time marches on</em>
+              during media playback. This method is only possible for cues
+              created by the web application, i.e., <code>VTTCue</code> objects,
+              and not cue objects created by the user agent.
+            </li>
+          </ul>
+        </p>
+        <p>
+          An issue with handling of text track and data cue events in HbbTV
+          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">was
+          reported</a> in 2013. HbbTV requires the user agent to implement an
+          MPEG-DASH client, and so applications must use the first of the above
+          methods for cue handling, which means that applications can miss cues
+          as described above.
+        </p>
       </section>
       <section>
         <h3>Synchronized rendering of web resources</h3>
@@ -635,7 +717,8 @@
       <h2>Recommendations</h2>
       <p>
         This section describes recommendations from the Media &amp; Entertainment
-        Interest Group for the development of a generic media timed event API.
+        Interest Group for the development of a generic media timed event API,
+        and associated synchronization considerations.
       </p>
       <section>
         <h3>Subscribing to event streams</h3>
@@ -667,19 +750,20 @@
         <h3>Event triggering</h3>
         <p>
           For those events that the application has subscribed to receive,
-          the API must:
+          the API should:
         </p>
         <ul>
           <li>
             Generate a JavaScript event when an <a>in-band</a> media timed event
-            is parsed from the media container or media stream (DAInty Mode 1)
+            is parsed from the media container or media stream (DAInty Mode 1).
           </li>
           <li>
-            Generate a JavaScript event when the current media playback
-            position reaches the start time of a media timed event during
-            playback (DAInty Mode 2). This applies equally to <a>in-band</a>
-            events that the user agent has extracted from the media container,
-            and <a>out-of-band</a> events added by the web application.
+            Generate JavaScript events when the current media playback
+            position reaches the start time and the end time of a media timed
+            event during playback (DAInty Mode 2). This applies equally to
+            <a>in-band</a> events that the user agent has extracted from the
+            media container, and <a>out-of-band</a> events added by the web
+            application.
           </li>
         </ul>
         <p>
@@ -708,9 +792,11 @@
       <section>
         <h3>Synchronization</h3>
         <p>
-          The <em>time marches on algorithm</em> should be reviewed and updated
-          to ensure that events are delivered to the web application within
-          time constraints described elsewhere in this report.
+          In order to acheive greater synchronization accuracy between media
+          playback and web content rendered by an application, the <em>time
+          marches on</em> steps in [[HTML]] should be modified to allow delivery
+          of media timed event start time and end time notifications within 20
+          milliseconds of their positions on the <a>media timeline</a>.
         </p>
       </section>
     </section>
