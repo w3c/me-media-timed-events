@@ -175,15 +175,26 @@
         </p>
       </section>
       <section>
-        <h3>MPEG-DASH manifest expiry notifications</h3>
+        <h3>Control messages for media streaming clients</h3>
         <p>
-          Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific event
-          that is used to notify a DASH player web application that it should
-          refresh its copy of the manifest (MPD) document.
-          An <a>in-band</a> <code>emsg</code> event is used an alternative to setting
-          a cache duration in the response to the HTTP request for the manifest,
-          so the client can refresh the MPD when it actually changes, so reducing
-          the load on HTTP servers caused by frequent server requests.
+          A media streaming server uses <a>media timed events<a> to send control
+          messages to media client library, such as <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a>.
+          Typically segmented streaming protocols such as HLS and MPEG-DASH make
+          use of a manifest document that informs the client of the available
+          encodings of a media stream, e.g., the Media Presentation Description
+          (MPD) document in [[MPEGDASH]].
+        </p>
+        <p>
+          Should any of the content in the manifest document need to change, the
+          client should refresh it by requesting an updated copy from the
+          server. Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific
+          event that is used to notify a client application. An <a>in-band</a>
+          <code>emsg</code> event is used an alternative to setting a cache
+          duration in the response to the HTTP request for the manifest, so the
+          client can refresh the MPD when it actually changes, as opposed to
+          waiting for a cache duration expiry period to elapse. This also has
+          the benefit of reducing the load on HTTP servers caused by frequent
+          server requests.
         </p>
         <p>
           Reference: M&amp;E IG call 1 Feb 2018:
