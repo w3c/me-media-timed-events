@@ -685,32 +685,28 @@
       </section>
       <section>
         <h3>Synchronized rendering of web resources</h3>
-        <p class="ednote">
-          Describe gaps relating to synchronized rendering of web resources.
-          Can we define a generic web API for scheduling page changes
-          synchronized to playing media? Related: [[css-animations-1]],
-          [[web-animations-1]], [[css-transitions-1]]. See also:
-          <a href="https://github.com/bbc/VideoContext">https://github.com/bbc/VideoContext</a>.
-          Should this be in scope for the TF?
-        </p>
-      </section>
-      <section>
-        <h3>Rendering of web content embedded in media containers</h3>
         <p>
-          There is no API for surfacing web content embedded in ISO BMFF
-          containers into the browser (e.g., the <code>HTMLCue</code> proposal
-          discussed at <a href="https://www.w3.org/wiki/TPAC2015/HTMLcue">TPAC 2015</a>).
+          Another approach to synchronizing rendering of web content to media
+          playback is to use the <code>timeupdate</code> event, and for the
+          web application to manage the media timed events to be triggered,
+          rather than add use the text track cue APIs in [[HTML]]. This has the
+          same synchronization limitations as described above, because the 250
+          millisecond update rate specified in <em>time marches on</em> is too
+          infrequent to ensure that the web content can be updated smoothly
+          (for example, rendering a playhead position marker in an audio
+          waveform visualization), or to occur at specific points on the
+          <a>media timeline</a>. In addition, the timing variability of
+          <code>timeupdate</code> events between browser engines makes them
+          unreliable for the purpose of synchronized rendering of web content.
         </p>
-        <p class="ednote">
-          Add more detail on what's required. Some questions / considerations:
+        <p>
+          Synchronization accuracy can be improved by polling the media
+          element's <code>currentTime</code> property from a
+          <code>setInterval</code> callback, or by using
+          <code>requestAnimationFrame</code> for greater accuracy. However, the
+          use of <code>setInterval</code> or <code>requestAnimationFrame</code>
+          for media synchronized rendering is CPU intensive.
         </p>
-        <ul class="ednote">
-          <li>Are the web resources intended to be handed to a web application
-          for rendering, or direct rendering by the UA?</li>
-          <li>How do we guarantee that resources are delivered to the browser
-          sufficiently ahead of time?</li>
-          <li>How does same-origin policy affect such resources?</li>
-        </ul>
       </section>
     </section>
     <section>
