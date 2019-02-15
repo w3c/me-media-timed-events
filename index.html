@@ -76,7 +76,8 @@
         requirements. The goal is to extend the existing support in HTML for
         text track cue events to add support for dynamic content replacement
         cues and generic metadata events that drive synchronized interactive
-        media experiences, and improve synchronization timing accuracy.
+        media experiences, and improve the timing accuracy of rendering of web
+        content intended to be synchronized with audio or video media playback.
       </p>
     </section>
     <section id="sotd">
@@ -125,14 +126,14 @@
     <section>
       <h2>Use cases</h2>
       <p>
-        Media-timed events carry metadata that is related to points in time,
+        Media timed events carry metadata that is related to points in time,
         or regions of time on the <a>media timeline</a>, which can be used to
         trigger retrieval and/or rendering of web resources synchronized with
         media playback. Such resources can be used to enhance user experience
         in the context of media that is being rendered. Some examples include
-        display of social media feeds corresponding to a live broadcast such
+        display of social media feeds corresponding to a live video stream such
         as a sporting event, banner advertisements for sponsored content,
-        accessibility-related assets, such as large print rendering of
+        accessibility-related assets such as large print rendering of
         captions, and display of track titles or images alongside an audio
         stream.
       </p>
@@ -166,9 +167,9 @@
           content they are listening to.
         </p>
         <p>
-          Examples include HLS timed metadata [[HLS-TIMED-METADATA]], which uses
-          <a>in-band</a> ID3 metadata to carry the image content, and RadioVIS
-          in DVB ([[DVB-DASH]], section 9.1.7), which defines <a>in-band</a>
+          HLS timed metadata [[HLS-TIMED-METADATA]] uses
+          <a>in-band</a> ID3 metadata to carry the image content. RadioVIS
+          in DVB ([[DVB-DASH]], section 9.1.7) defines <a>in-band</a>
           event messages that contain image URLs and text messages to be
           displayed, with information about when the content should be displayed
           in relation to the <a>media timeline</a>.
@@ -189,7 +190,7 @@
           client should refresh it by requesting an updated copy from the
           server. Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific
           event that is used to notify a client application. An <a>in-band</a>
-          <code>emsg</code> event is used an alternative to setting a cache
+          <code>emsg</code> event is used as an alternative to setting a cache
           duration in the response to the HTTP request for the manifest, so the
           client can refresh the MPD when it actually changes, as opposed to
           waiting for a cache duration expiry period to elapse. This also has
@@ -317,7 +318,7 @@
           <li>
             <a>In-band</a> events are <code>emsg</code> boxes in ISO BMFF files.
             The presence of <code>emsg</code> events in the media container for
-            given event schemes is signalled in the MPD document using an
+            given event schemes is signaled in the MPD document using an
             <code>EventStream</code> XML element ([[MPEGDASH]], section 5.10.2).
           </li>
           <li>
@@ -401,12 +402,13 @@
           </li>
         </ul>
         <p>
-          Two modes for dispatching events are defined. In Mode 1, events are dispatched
-          at the time the event arrives, and in Mode 2, events are dispatched at the
-          given time on the <a>media timeline</a>. The "arrival" of events from the DASH client
-          perspective may be either static or pre-provisioned, in the case MPD Events,
-          or dynamic in the case of inband events carried in the <code>emsg</code>.
-          The application can register with the DASH client which Mode to use.
+          Two modes for dispatching events are defined. In Mode 1 events are
+          dispatched at the time the event arrives, and in Mode 2 events are
+          dispatched at the given time on the <a>media timeline</a>. The
+          "arrival" of events from the DASH client perspective may be either
+          static or pre-provisioned, in the case MPD Events, or dynamic in the
+          case of <a>in-band</a> events carried in the <code>emsg</code>. The
+          application can register with the DASH client which Mode to use.
         </p>
         <p>
           Reference: M&amp;E IG, Media Timed Events Task Force call 20 Aug 2018:
@@ -440,7 +442,7 @@
           than 4 seconds of advance notice may not create the desired result."
         </p>
         <p>
-          This places an implicit requirement on the user agent in handling
+          This places an implicit requirement on the user agent in handling of
           media-timed events related to insertion cues. The content originator
           may provide the cue in advance with as little as 2 seconds of the
           insertion time. Therefore the propagation of the event data associated
@@ -495,11 +497,12 @@
         associated limitations.
       </p>
       <section>
-        <h4>MPEG-DASH and ISO BMFF emsg events</h4>
+        <h3>MPEG-DASH and ISO BMFF emsg events</h3>
         <p>
-          The <code>DataCue</code> API has been previously discussed as a means to
-          deliver <a>in-band</a> event data to web applications, but this is not implemented
-          in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+          The <code>DataCue</code> API has been previously discussed as a means
+          to deliver <a>in-band</a> event data to web applications, but this is
+          not implemented in all of the main browser engines. It is
+          <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
           in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
           <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
           in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
@@ -784,3 +787,4 @@
     </section>
   </body>
 </html>
+
