@@ -61,44 +61,6 @@
             publisher: "W3C",
             status: "CG-DRAFT",
             date: "26 April 2018"
-          },
-          "HBBTV": {
-            title: "HbbTV 2.0.2 Specification",
-            href: "https://www.hbbtv.org/wp-content/uploads/2018/02/HbbTV_v202_specification_2018_02_16.pdf",
-            publisher: "HbbTV Association",
-            date: "16 February 2018"
-          },
-          "HBBTV-TESTS": {
-            title: "HbbTV Test Suite 2018-1",
-            href: "https://www.hbbtv.org/wp-content/uploads/2018/03/HbbTV-testcases-2018-1.pdf",
-            publisher: "HbbTV Association",
-            date: "2018"
-          },
-          "3GPP-INTERACTIVITY-WID": {
-            title: "SP-170796: New WID on 3GPP Service Interactivity",
-            href: "http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip",
-            publisher: "3GPP",
-            date: "September 2017"
-          },
-          "3GPP-INTERACTIVITY-TR": {
-            title: "TR 26.953: Interactivity Support for 3GPP-Based Streaming and Download Services (Release 15)",
-            href: "http://www.3gpp.org/ftp/Specs/archive/26_series/26.953/26953-f00.zip",
-            publisher: "3GPP",
-            date: "June 2018"
-          },
-          "WebVMT": {
-            title: "WebVMT: The Web Video Map Tracks Format",
-            href: "https://w3c.github.io/sdw/proposals/geotagging/webvmt/",
-            authors: [
-              "Rob Smith"
-            ],
-            publisher: "W3C",
-            status: "ED",
-            date: "11 October 2018"
-          },
-          "HLS-TIMED-METADATA": {
-            title: "Timed Metadata for HTTP Live Streaming",
-            href: "https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTTP_Live_Streaming_Metadata_Spec/Introduction/Introduction.html"
           }
         }
       };
@@ -114,7 +76,8 @@
         requirements. The goal is to extend the existing support in HTML for
         text track cue events to add support for dynamic content replacement
         cues and generic metadata events that drive synchronized interactive
-        media experiences, and improve synchronization timing accuracy.
+        media experiences, and improve the timing accuracy of rendering of web
+        content intended to be synchronized with audio or video media playback.
       </p>
     </section>
     <section id="sotd">
@@ -163,14 +126,14 @@
     <section>
       <h2>Use cases</h2>
       <p>
-        Media-timed events carry metadata that is related to points in time,
+        Media timed events carry metadata that is related to points in time,
         or regions of time on the <a>media timeline</a>, which can be used to
         trigger retrieval and/or rendering of web resources synchronized with
         media playback. Such resources can be used to enhance user experience
         in the context of media that is being rendered. Some examples include
-        display of social media feeds corresponding to a live broadcast such
+        display of social media feeds corresponding to a live video stream such
         as a sporting event, banner advertisements for sponsored content,
-        accessibility-related assets, such as large print rendering of
+        accessibility-related assets such as large print rendering of
         captions, and display of track titles or images alongside an audio
         stream.
       </p>
@@ -204,24 +167,35 @@
           content they are listening to.
         </p>
         <p>
-          Examples include HLS timed metadata [[HLS-TIMED-METADATA]], which uses
-          <a>in-band</a> ID3 metadata to carry the image content, and RadioVIS
-          in DVB ([[DVB-DASH]], section 9.1.7), which defines <a>in-band</a>
+          HLS timed metadata [[HLS-TIMED-METADATA]] uses
+          <a>in-band</a> ID3 metadata to carry the image content. RadioVIS
+          in DVB ([[DVB-DASH]], section 9.1.7) defines <a>in-band</a>
           event messages that contain image URLs and text messages to be
           displayed, with information about when the content should be displayed
           in relation to the <a>media timeline</a>.
         </p>
       </section>
       <section>
-        <h3>MPEG-DASH manifest expiry notifications</h3>
+        <h3>Control messages for media streaming clients</h3>
         <p>
-          Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific event
-          that is used to notify a DASH player web application that it should
-          refresh its copy of the manifest (MPD) document.
-          An <a>in-band</a> <code>emsg</code> event is used an alternative to setting
-          a cache duration in the response to the HTTP request for the manifest,
-          so the client can refresh the MPD when it actually changes, so reducing
-          the load on HTTP servers caused by frequent server requests.
+          A media streaming server uses <a>media timed events<a> to send control
+          messages to media client library, such as <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a>.
+          Typically segmented streaming protocols such as HLS and MPEG-DASH make
+          use of a manifest document that informs the client of the available
+          encodings of a media stream, e.g., the Media Presentation Description
+          (MPD) document in [[MPEGDASH]].
+        </p>
+        <p>
+          Should any of the content in the manifest document need to change, the
+          client should refresh it by requesting an updated copy from the
+          server. Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific
+          event that is used to notify a client application. An <a>in-band</a>
+          <code>emsg</code> event is used as an alternative to setting a cache
+          duration in the response to the HTTP request for the manifest, so the
+          client can refresh the MPD when it actually changes, as opposed to
+          waiting for a cache duration expiry period to elapse. This also has
+          the benefit of reducing the load on HTTP servers caused by frequent
+          server requests.
         </p>
         <p>
           Reference: M&amp;E IG call 1 Feb 2018:
@@ -253,7 +227,7 @@
           alongside a map, e.g., OpenStreetMap.
         </p>
         <p>
-          [[WebVMT]] is an open format for metadata cues, synchronized with a
+          [[WEBVMT]] is an open format for metadata cues, synchronized with a
           timed media file, that can be used to drive an online map rendered in
           a separate HTML element alongside the media element on the web page.
           The media playhead position controls presentation and animation of the
@@ -344,7 +318,7 @@
           <li>
             <a>In-band</a> events are <code>emsg</code> boxes in ISO BMFF files.
             The presence of <code>emsg</code> events in the media container for
-            given event schemes is signalled in the MPD document using an
+            given event schemes is signaled in the MPD document using an
             <code>EventStream</code> XML element ([[MPEGDASH]], section 5.10.2).
           </li>
           <li>
@@ -390,8 +364,9 @@
           agents shipping in connected TVs across Europe from 2017.
         </p>
         <p>
-          The HbbTV device test suite includes test pages and streams that
-          cover <code>emsg</code> support ([[HBBTV-TESTS]]). HbbTV has a
+          The <a href="https://www.hbbtv.org/wp-content/uploads/2018/03/HbbTV-testcases-2018-1.pdf">HbbTV
+          device test suite</a> includes test pages and streams that
+          cover <code>emsg</code> support. HbbTV has a
           <a href="https://github.com/HbbTV-Association/ReferenceApplication">reference application</a>
           and content for DASH+DRM which includes <code>emsg</code> support.
         </p>
@@ -402,9 +377,10 @@
           The DASH-IF InterOp Working Group has an ongoing work item,
           <em>DAInty</em>, "DASH APIs for Interactivity", which aims to
           specify a set of APIs between the DASH client/player and interactivity-capable
-          applications, for both web and native applications. The origin of this
-          work is a related 3GPP work item on Service Interactivity
-          ([[3GPP-INTERACTIVITY-WID]], [[3GPP-INTERACTIVITY-TR]]).
+          applications, for both web and native applications [[DASHIFIOP]]. The origin of this
+          work is a related
+          <a href="http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip">3GPP
+          work item</a> on Service Interactivity [[3GPP-INTERACTIVITY]].
           The objective is to provide service enablers for user engagement with
           auxiliary content and UIs on mobile device during live or time-shifted
           viewing of streaming content delivered over 3GPP broadcast or unicast
@@ -426,12 +402,13 @@
           </li>
         </ul>
         <p>
-          Two modes for dispatching events are defined. In Mode 1, events are dispatched
-          at the time the event arrives, and in Mode 2, events are dispatched at the
-          given time on the <a>media timeline</a>. The "arrival" of events from the DASH client
-          perspective may be either static or pre-provisioned, in the case MPD Events,
-          or dynamic in the case of inband events carried in the <code>emsg</code>.
-          The application can register with the DASH client which Mode to use.
+          Two modes for dispatching events are defined. In Mode 1 events are
+          dispatched at the time the event arrives, and in Mode 2 events are
+          dispatched at the given time on the <a>media timeline</a>. The
+          "arrival" of events from the DASH client perspective may be either
+          static or pre-provisioned, in the case MPD Events, or dynamic in the
+          case of <a>in-band</a> events carried in the <code>emsg</code>. The
+          application can register with the DASH client which Mode to use.
         </p>
         <p>
           Reference: M&amp;E IG, Media Timed Events Task Force call 20 Aug 2018:
@@ -465,7 +442,7 @@
           than 4 seconds of advance notice may not create the desired result."
         </p>
         <p>
-          This places an implicit requirement on the user agent in handling
+          This places an implicit requirement on the user agent in handling of
           media-timed events related to insertion cues. The content originator
           may provide the cue in advance with as little as 2 seconds of the
           insertion time. Therefore the propagation of the event data associated
@@ -520,11 +497,12 @@
         associated limitations.
       </p>
       <section>
-        <h4>MPEG-DASH and ISO BMFF emsg events</h4>
+        <h3>MPEG-DASH and ISO BMFF emsg events</h3>
         <p>
-          The <code>DataCue</code> API has been previously discussed as a means to
-          deliver <a>in-band</a> event data to web applications, but this is not implemented
-          in all of the main browser engines. It is <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
+          The <code>DataCue</code> API has been previously discussed as a means
+          to deliver <a>in-band</a> event data to web applications, but this is
+          not implemented in all of the main browser engines. It is
+          <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
           in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
           <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
           in [[HTML]]. See discussion <a href="https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/U06zrT2N-Xk">here</a>
@@ -805,3 +783,4 @@
     </section>
   </body>
 </html>
+
