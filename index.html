@@ -132,6 +132,11 @@
         <li>
           <dfn data-cite="HTML/media.html#time-marches-on">time marches on</dfn>
         </li>
+        <li>
+          <dfn data-cite="HTML/media.html#current-playback-position">current
+          playback position</dfn>
+          </dfn>
+        </li>
       </ul>
     </section>
     <section>
@@ -624,13 +629,13 @@
         </p>
         <p>
           The <a>time marches on</a> steps in [[HTML]] control the firing of cue
-          events during media playback. <a>Time marches on</a> requires a
-          <code>timeupdate</code> event to be fired at the
-          <code>HTMLMediaElement</code> between 15 and 250 milliseconds since
-          the last such event, and this requirement therefore specifies the rate
-          at which <a>time marches on</a> is executed during playback. In
-          practice it <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
-          been found</a> that the timing varies between browser implementations.
+          events during media playback. The steps must run whenever the
+          <a>current playback position</a> of a media element changes, but the
+          specification does not require a specific rate at which this needs to
+          happen. In practice it
+          <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
+          been found</a> that the timing varies between browser implementations
+          and may exceed 20 milliseconds.
         </p>
         <p>
           There are two methods a web application can use to handle text track
@@ -676,16 +681,17 @@
         <p>
           Another approach to synchronizing rendering of web content to media
           playback is to use the <code>timeupdate</code> event, and for the
-          web application to manage the <a>media timed events</a> to be triggered,
-          rather than add use the text track cue APIs in [[HTML]]. This has the
-          same synchronization limitations as described above, because the 250
-          millisecond update rate specified in <a>time marches on</a> is too
-          infrequent to ensure that the web content can be updated smoothly
-          (for example, rendering a playhead position marker in an audio
-          waveform visualization), or to occur at specific points on the
-          <a>media timeline</a>. In addition, the timing variability of
-          <code>timeupdate</code> events between browser engines makes them
-          unreliable for the purpose of synchronized rendering of web content.
+          web application to manage the <a>media timed events</a> to be
+          triggered, rather than add use the text track cue APIs in [[HTML]].
+          On top of the synchronization limitations described above, <a>time
+          marches on</a> allows implementations to fire <code>timeupdate</code>
+          events every 250 milliseconds, which is too infrequent to ensure that
+          the web content can be updated smoothly (for example, rendering a
+          playhead position marker in an audio waveform visualization), or to
+          occur at specific points on the <a>media timeline</a>. In addition,
+          the timing variability of <code>timeupdate</code> events between
+          browser engines makes them unreliable for the purpose of synchronized
+          rendering of web content.
         </p>
         <p>
           Synchronization accuracy can be improved by polling the media
