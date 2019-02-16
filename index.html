@@ -89,7 +89,7 @@
         events synchronized to audio or video media, specifically for both
         <a>out-of-band</a> event streams and <a>in-band</a> discrete events
         (for example, MPD and <code>emsg</code> events in MPEG-DASH).
-        These <dfn data-lt="media timed event">media timed events</dfn> can be used to support use cases
+        These <a>media timed events</a> can be used to support use cases
         such as dynamic content replacement, ad insertion, or presentation of
         supplemental content alongside the audio or video, or more generally,
         making changes to a web page, or executing application code triggered
@@ -103,6 +103,11 @@
         The following terms are used in this document:
       </p>
       <ul>
+        <li>
+          <dfn data-lt="media timed event">media timed events</dfn> &mdash;
+          metadata events synchronized to the <a>media timeline</a> of a
+          <a>media resource</a>.
+        </li>
         <li>
           <dfn>in-band</dfn> &mdash; timed event information that is delivered
           within the audio or video media container or multiplexed with the
@@ -119,7 +124,13 @@
       </p>
       <ul>
         <li>
-          <dfn><a href="https://html.spec.whatwg.org/multipage/media.html#media-timeline">media timeline</a></dfn>
+          <dfn data-cite="HTML/media.html#media-timeline">media timeline</dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#media-resource">media resource</dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#time-marches-on">time marches on</dfn>
         </li>
       </ul>
     </section>
@@ -612,13 +623,12 @@
           <a>media timeline</a>.
         </p>
         <p>
-          The <a href="https://html.spec.whatwg.org/multipage/media.html#time-marches-on"><em>time
-          marches on</em></a> steps in [[HTML]] control the firing of cue
-          events during media playback. <em>Time marches on</em> requires a
+          The <a>time marches on</a> steps in [[HTML]] control the firing of cue
+          events during media playback. <a>Time marches on</a> requires a
           <code>timeupdate</code> event to be fired at the
           <code>HTMLMediaElement</code> between 15 and 250 milliseconds since
           the last such event, and this requirement therefore specifies the rate
-          at which <em>time marches on</em> is executed during playback. In
+          at which <a>time marches on</a> is executed during playback. In
           practice it <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
           been found</a> that the timing varies between browser implementations.
         </p>
@@ -633,19 +643,19 @@
               <code>TextTrack</code> and inspect the track's
               <code>activeCues</code> list. Because <code>activeCues</code>
               contains the list of cues that are active at the time that
-              <em>time marches on</em></a> is run, it is possible for cues to be
+              <a>time marches on</a> is run, it is possible for cues to be
               missed by a web application using this method, where cues appear
               on the <a>media timeline</a> between successive executions of
-              <em>time marches on</em> during media playback. This may occur
+              <a>time marches on</a> during media playback. This may occur
               if the cues have short duration, or by a long-running event
               handler function.
             </li>
             <li>
               Add <code>onenter</code> and <code>onexit</code> handler functions
-              to each cue. The <em>time marches on</em> steps guarantee that
+              to each cue. The <a>time marches on</a> steps guarantee that
               <code>enter</code> and <code>exit</code> events will be fired for
               all cues, including those that appear on the <a>media timeline</a>
-              between successive executions of <em>time marches on</em>
+              between successive executions of <a>time marches on</a>
               during media playback. This method is only possible for cues
               created by the web application, i.e., <code>VTTCue</code> objects,
               and not cue objects created by the user agent.
@@ -669,7 +679,7 @@
           web application to manage the <a>media timed events</a> to be triggered,
           rather than add use the text track cue APIs in [[HTML]]. This has the
           same synchronization limitations as described above, because the 250
-          millisecond update rate specified in <em>time marches on</em> is too
+          millisecond update rate specified in <a>time marches on</a> is too
           infrequent to ensure that the web content can be updated smoothly
           (for example, rendering a playhead position marker in an audio
           waveform visualization), or to occur at specific points on the
@@ -767,8 +777,8 @@
         <h3>Synchronization</h3>
         <p>
           In order to acheive greater synchronization accuracy between media
-          playback and web content rendered by an application, the <em>time
-          marches on</em> steps in [[HTML]] should be modified to allow delivery
+          playback and web content rendered by an application, the <a>time
+          marches on</a> steps in [[HTML]] should be modified to allow delivery
           of <a>media timed event</a> start time and end time notifications within 20
           milliseconds of their positions on the <a>media timeline</a>.
         </p>
