@@ -764,37 +764,37 @@
             miss cues as described above.
           </p>
         </section>
-
         <section>
-          <h4>Polling the current position on the media timeline</h4>
+          <h4>Using <code>timeupdate</code> events from the media element</h4>
           <p>
             Another approach to synchronizing rendering of web content to media
             playback is to use the <a>timeupdate</a> event, and for the
             web application to manage the <a>media timed events</a> to be
-            triggered, rather than use the text track cue APIs in [[HTML]]. This
-            has the same synchronization limitations as described above, because
-            the 250 millisecond update rate specified in <a>time marches on</a>
-            is too infrequent to ensure that the web content can be updated
-            smoothly (for example, rendering a playhead position marker in an
-            audio waveform visualization), or to occur at specific points on the
-            <a>media timeline</a>. In addition, the timing variability of
+            triggered, rather than use the text track cue APIs in [[HTML]].
+            This approach has the same synchronization
+            limitations as described above due to the 250 millisecond update
+            rate specified in <a>time marches on</a>, and so is
+            <a data-cite="HTML/media.html#best-practices-for-metadata-text-tracks:event-media-timeupdate">explicitly
+            discouraged</a> in [[HTML]]. In addition, the timing variability of
             <a>timeupdate</a> events between browser engines makes them
             unreliable for the purpose of synchronized rendering of web content.
-            [[HTML]] <a data-cite="HTML/media.html#best-practices-for-metadata-text-tracks:event-media-timeupdate">explicitly
-            discourages the use of <code>timeupdate</code> events</a> for such
-            cue processing.
           </p>
+        </section>
+        <section>
+          <h4>Polling the current position on the media timeline</h4>
           <p>
             Synchronization accuracy can be improved by polling the media
-            element's <a>currentTime</a> property from a
-            <a>setInterval()</a> callback, or by using
-            <a>requestAnimationFrame()</a> for greater accuracy. However,
-            the use of <a>setInterval()</a> or
+            element's <a>currentTime</a> property from a <a>setInterval()</a>
+            callback, or by using <a>requestAnimationFrame()</a> for greater
+            accuracy. This technique can be useful in where content should be
+            animated smoothly in synchronicity with the media, for example,
+            rendering a playhead position marker in an audio waveform
+            visualization, or displaying web content at specific points on the
+            <a>media timeline</a>. However, the use of <a>setInterval()</a> or
             <a>requestAnimationFrame()</a> for media synchronized rendering
             is CPU intensive.
           </p>
         </section>
-
         <section>
           <h4>Detecting when the next media frame will be rendered</h4>
           <p>
