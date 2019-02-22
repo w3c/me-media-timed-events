@@ -124,6 +124,9 @@
       </p>
       <ul>
         <li>
+          <dfn data-cite="HTML/media.html#media-element">media element</dfn>
+        </li>
+        <li>
           <dfn data-cite="HTML/media.html#media-timeline">media timeline</dfn>
         </li>
         <li>
@@ -131,6 +134,61 @@
         </li>
         <li>
           <dfn data-cite="HTML/media.html#time-marches-on">time marches on</dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#dom-texttrack-activecues"><code>activeCues</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#dom-media-currenttime"><code>currentTime</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#media.html#event-media-enter"><code>enter</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#media.html#event-media-exit"><code>exit</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#handler-texttrack-oncuechange"><code>oncuechange</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#handler-texttrackcue-onenter"><code>onenter</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#handler-texttrackcue-onexit"><code>onexit</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#texttrack"><code>TextTrack</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#texttrackcue"><code>TextTrackCue</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/media.html#event-media-timeupdate"><code>timeupdate</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/timers-and-user-prompts.html#dom-settimeout"><code>setTimeout()</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/timers-and-user-prompts.html#dom-setinterval"><code>setInterval()</code></dfn>
+        </li>
+        <li>
+          <dfn data-cite="HTML/imagebitmap-and-animations.html#dom-animationframeprovider-requestanimationframe"><code>requestAnimationFrame()</code></dfn>
+        </li>
+      </ul>
+      <p>
+        The following term is defined in [[HR-TIME]]:
+      </p>
+      <ul>
+        <li>
+          <dfn data-cite="HR-TIME#dom-performance-now"><code>Performance.now()</code></dfn>
+        </li>
+      </ul>
+      <p>
+        The following term is defined in [[WEBVTT]]:
+      </p>
+      <ul>
+        <li>
+          <dfn data-cite="WEBVTT#vttcue"><code>VTTCue</code></dfn>
         </li>
       </ul>
     </section>
@@ -240,7 +298,7 @@
         <p>
           [[WEBVMT]] is an open format for metadata cues, synchronized with a
           timed media file, that can be used to drive an online map rendered in
-          a separate HTML element alongside the media element on the web page.
+          a separate HTML element alongside the <a>media element</a> on the web page.
           The media playhead position controls presentation and animation of the
           map, e.g., pan and zoom, and allows annotations to be added and
           removed, e.g., markers, at specified times during media playback.
@@ -483,16 +541,16 @@
         <h3>WebVTT</h3>
         <p>
           [[WEBVTT]] is a W3C specification that provides a format for web video
-          text tracks. A <code>VTTCue</code> is a text track cue, and may have
+          text tracks. A <a>VTTCue</a> is a text track cue, and may have
           attributes that affect rendering of the cue text on a web page.
           WebVTT metadata cues are text that is aligned to the
-          <a>media timeline</a>. Web applications can use <code>VTTCue</code>
+          <a>media timeline</a>. Web applications can use <a>VTTCue</a>
           to schedule <a>out-of-band</a> metadata events by serializing the
           event data to a string format (JSON, for example) when creating the
           cue, and deserializing the data when the cue is triggered.
         </p>
         <p>
-          Web applications can also use <code>VTTCue</code> to trigger
+          Web applications can also use <a>VTTCue</a> to trigger
           rendering of <a>out-of-band</a> delivered timed text cues, such as
           TTML or IMSC format captions.
         </p>
@@ -592,109 +650,180 @@
         <p>
           [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
           fields described <a href="#mpeg-dash">above</a>
-          and the <a href="https://html.spec.whatwg.org/multipage/media.html#texttrack"><code>TextTrack</code></a>
+          and the <a>TextTrack</a>
           and <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#datacue"><code>DataCue</code></a>
-          APIs. A <code>TextTrack</code> instance is created for each event
+          APIs. A <a>TextTrack</a> instance is created for each event
           stream signalled in the MPD document (as identified by the
           <code>schemeIdUri</code> and <code>value</code>), and the
           <a href="https://html.spec.whatwg.org/multipage/media.html#dom-texttrack-inbandmetadatatrackdispatchtype"><code>inBandMetadataTrackDispatchType</code></a>
-          <code>TextTrack</code> attribute contains the <code>scheme_id_uri</code>
+          <a>TextTrack</a> attribute contains the <code>scheme_id_uri</code>
           and <code>value</code> values. Because HbbTV devices include a native
           DASH client, parsing of the MPD document and creation of the
-          <code>TextTrack</code>s is done by the user agent, rather than by
+          <a>TextTrack</a>s is done by the user agent, rather than by
           application JavaScript code.
-        </p>
-      </section>
-      <section>
-        <h3>Synchronization of text track cue rendering</h3>
-        <p>
-          Subtitles for video are typically authored against video at
-          a nominal frame rate, e.g., 25 frames per second, which corresponds to
-          40 milliseconds per frame. The actual video frame rate may be adjusted
-          dynamically according to the video encoding, but the subtitle timing
-          must remain the same ([[EBU-TT-D]], Annex E).
-        </p>
-        <p>
-          This places a requirement on user agents for timely delivery of
-          <code>TextTrackCue</code> and <code>VTTCue</code> events, so that
-          application code can respond and render the cues. For subtitle
-          rendering to be possible with frame accuracy, we recommend that cue
-          events are fired within 20 milliseconds of their position on the
-          <a>media timeline</a>.
-        </p>
-        <p>
-          The <a>time marches on</a> steps in [[HTML]] control the firing of cue
-          events during media playback. <a>Time marches on</a> requires a
-          <code>timeupdate</code> event to be fired at the
-          <code>HTMLMediaElement</code> between 15 and 250 milliseconds since
-          the last such event, and this requirement therefore specifies the rate
-          at which <a>time marches on</a> is executed during playback. In
-          practice it <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
-          been found</a> that the timing varies between browser implementations.
-        </p>
-        <p>
-          There are two methods a web application can use to handle text track
-          cues:
-        </p>
-        <p>
-          <ul>
-            <li>
-              Add an <code>oncuechange</code> handler function to the
-              <code>TextTrack</code> and inspect the track's
-              <code>activeCues</code> list. Because <code>activeCues</code>
-              contains the list of cues that are active at the time that
-              <a>time marches on</a> is run, it is possible for cues to be
-              missed by a web application using this method, where cues appear
-              on the <a>media timeline</a> between successive executions of
-              <a>time marches on</a> during media playback. This may occur
-              if the cues have short duration, or by a long-running event
-              handler function.
-            </li>
-            <li>
-              Add <code>onenter</code> and <code>onexit</code> handler functions
-              to each cue. The <a>time marches on</a> steps guarantee that
-              <code>enter</code> and <code>exit</code> events will be fired for
-              all cues, including those that appear on the <a>media timeline</a>
-              between successive executions of <a>time marches on</a>
-              during media playback. This method is only possible for cues
-              created by the web application, i.e., <code>VTTCue</code> objects,
-              and not cue objects created by the user agent.
-            </li>
-          </ul>
-        </p>
-        <p>
-          An issue with handling of text track and data cue events in HbbTV
-          <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">was
-          reported</a> in 2013. HbbTV requires the user agent to implement an
-          MPEG-DASH client, and so applications must use the first of the above
-          methods for cue handling, which means that applications can miss cues
-          as described above.
         </p>
       </section>
       <section>
         <h3>Synchronized rendering of web resources</h3>
         <p>
-          Another approach to synchronizing rendering of web content to media
-          playback is to use the <code>timeupdate</code> event, and for the
-          web application to manage the <a>media timed events</a> to be triggered,
-          rather than use the text track cue APIs in [[HTML]]. This has the
-          same synchronization limitations as described above, because the 250
-          millisecond update rate specified in <a>time marches on</a> is too
-          infrequent to ensure that the web content can be updated smoothly
-          (for example, rendering a playhead position marker in an audio
-          waveform visualization), or to occur at specific points on the
-          <a>media timeline</a>. In addition, the timing variability of
-          <code>timeupdate</code> events between browser engines makes them
-          unreliable for the purpose of synchronized rendering of web content.
+          In browsers, non media web rendering is handled through repaint
+          operations at a rate that generally matches the display refresh rate
+          (e.g., 60 times per second), following the user's wall clock. A web
+          application can schedule actions and render web content at specific
+          points on the user's wall clock, notably through
+          <a>Performance.now()</a>, <a>setTimeout()</a>, <a>setInterval()</a>,
+          and <a>requestAnimationFrame()</a>.
         </p>
         <p>
-          Synchronization accuracy can be improved by polling the media
-          element's <code>currentTime</code> property from a
-          <code>setInterval</code> callback, or by using
-          <code>requestAnimationFrame</code> for greater accuracy. However, the
-          use of <code>setInterval</code> or <code>requestAnimationFrame</code>
-          for media synchronized rendering is CPU intensive.
+          In most cases, media rendering follows a different path, be it because
+          it gets handled by a dedicated background process or by dedicated
+          hardware circuitry. As a result, progress along the <a>media
+          timeline</a> may follow a
+          <a data-cite="HTML/media.html#offsets-into-the-media-resource:media-timeline-8">
+          clock</a> different from the user's wall clock. [[HTML]] recommends
+          that the media clock approximate the user's wall clock but does not
+          require it to match the user's wall clock.
         </p>
+        <p>
+          To synchronize rendering of web content to a video with frame
+          accuracy, a web application needs:
+        </p>
+        <ul>
+          <li>
+            A way to track progress along the <a>media timeline</a> with
+            <em>sufficient precision</em>. The actual precision required depends
+            on the use case. Subtitles for video are typically authored against
+            video at the nominal video frame rate, e.g., 25 frames per second,
+            which corresponds to 40 milliseconds per frame, even when the actual
+            video frame rate gets adjusted dynamically ([[EBU-TT-D]], Annex E).
+            This suggests a 20 milliseconds precision, or half of the duration
+            of a typical video frame, to render subtitles with frame accuracy.
+          </li>
+          <li>
+            In cases where synchronization needs to occur at frame boundaries, a
+            way to tie the rendering of non media content, typically done at the
+            display refresh rate, with the rendering of a video frame. This need
+            does not replace the former one: a web application that needs to
+            render web content at media frame boundaries may also need to
+            perform actions at specific points on the <a>media timeline</a>
+            regardless of when the next frame gets rendered.
+          </li>
+        </ul>
+        <p>
+          The following sub-sections discusses mechanisms currently available to
+          web applications to track progress on the <a>media timeline</a> and
+          render content at frame boundaries.
+        </p>
+        <section>
+          <h4>Using cues to track progress on the media timeline</h4>
+          <p>
+            Cues (e.g., <a>TextTrackCue</a>, or <a>VTTCue</a>) are
+            units of time-sensitive data on a <a>media timeline</a> [[HTML]]. The
+            <a>time marches on</a> steps in [[HTML]] control the firing of cue
+            events during media playback. <a>Time marches on</a> requires a
+            <a>timeupdate</a> event to be fired at the <a>media element</a>
+            between 15 and 250 milliseconds since the last such event, and this
+            requirement therefore specifies the rate at which <a>time marches
+            on</a> is executed during playback. In practice it
+            <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
+            been found</a> that the timing varies between browser
+            implementations.
+          </p>
+          <p>
+            There are two methods a web application can use to handle cues:
+          </p>
+          <ul>
+            <li>
+              Add an <a>oncuechange</a> handler function to the <a>TextTrack</a>
+              and inspect the track's <a>activeCues</a> list. Because
+              <a>activeCues</a> contains the list of cues that are active at the
+              time that <a>time marches on</a> is run, it is possible for cues
+              to be missed by a web application using this method, where cues
+              appear on the <a>media timeline</a> between successive executions
+              of <a>time marches on</a> during media playback. This may occur
+              if the cues have short duration, or by a long-running event
+              handler function.
+            </li>
+            <li>
+              Add <a>onenter</a> and <a>onexit</a> handler functions
+              to each cue. The <a>time marches on</a> steps guarantee that
+              <a>enter</a> and <a>exit</a> events will be fired for all cues,
+              including those that appear on the <a>media timeline</a> between
+              successive executions of <a>time marches on</a> during media
+              playback. This method is only possible for cues created by the web
+              application, i.e., <a>VTTCue</a> objects, and not cue
+              objects created by the user agent.
+            </li>
+          </ul>
+          <p>
+            An issue with handling of text track and data cue events in HbbTV
+            <a href="https://lists.w3.org/Archives/Public/public-inbandtracks/2013Dec/0004.html">was
+            reported</a> in 2013. HbbTV requires the user agent to implement an
+            MPEG-DASH client, and so applications must use the first of the
+            above methods for cue handling, which means that applications can
+            miss cues as described above.
+          </p>
+        </section>
+        <section>
+          <h4>Using <code>timeupdate</code> events from the media element</h4>
+          <p>
+            Another approach to synchronizing rendering of web content to media
+            playback is to use the <a>timeupdate</a> event, and for the
+            web application to manage the <a>media timed events</a> to be
+            triggered, rather than use the text track cue APIs in [[HTML]].
+            This approach has the same synchronization
+            limitations as described above due to the 250 millisecond update
+            rate specified in <a>time marches on</a>, and so is
+            <a data-cite="HTML/media.html#best-practices-for-metadata-text-tracks:event-media-timeupdate">explicitly
+            discouraged</a> in [[HTML]]. In addition, the timing variability of
+            <a>timeupdate</a> events between browser engines makes them
+            unreliable for the purpose of synchronized rendering of web content.
+          </p>
+        </section>
+        <section>
+          <h4>Polling the current position on the media timeline</h4>
+          <p>
+            Synchronization accuracy can be improved by polling the media
+            element's <a>currentTime</a> property from a <a>setInterval()</a>
+            callback, or by using <a>requestAnimationFrame()</a> for greater
+            accuracy. This technique can be useful in where content should be
+            animated smoothly in synchronicity with the media, for example,
+            rendering a playhead position marker in an audio waveform
+            visualization, or displaying web content at specific points on the
+            <a>media timeline</a>. However, the use of <a>setInterval()</a> or
+            <a>requestAnimationFrame()</a> for media synchronized rendering
+            is CPU intensive.
+          </p>
+        </section>
+        <section>
+          <h4>Detecting when the next media frame will be rendered</h4>
+          <p>
+            [[HTML]] does not expose any precise mechanism to assess the time,
+            from a user's wall clock perspective, at which a particular media
+            frame is going to be rendered. A web application may only infer this
+            information by looking at the <a>media element</a>'s
+            <a>currentTime</a> property to infer the frame being rendered
+            and the time at which the user will see the next frame. This has
+            several limitations:
+          </p>
+          <ul>
+            <li>
+              <a>currentTime</a> is represented as a <code>double</code>
+              value, which does not allow to identify individual frames due to
+              rounding errors. This is a
+              <a href="https://github.com/whatwg/html/issues/609">known
+              issue</a>.
+            </li>
+            <li>
+              <a>currentTime</a> is updated at a user-agent defined rate
+              (typically the rate at which <a>time marches on</a> runs), and is
+              kept stable while scripts are running. When a web application
+              reads <a>currentTime</a>, it cannot tell when this property
+              was last updated, and thus cannot reliably assess whether this
+              property still represents the frame currently being rendered.
+            </li>
+          </ul>
+        </section>
       </section>
     </section>
     <section>
@@ -781,6 +910,17 @@
           marches on</a> steps in [[HTML]] should be modified to allow delivery
           of <a>media timed event</a> start time and end time notifications within 20
           milliseconds of their positions on the <a>media timeline</a>.
+        </p>
+        <p>
+          Additionally, to allow such synchronization to happen at frame
+          boundaries, we recommend introducing a mechanism that would allow a
+          web application to accurately predict, using the user's wall clock,
+          when the next frame will be rendered (e.g., as done in the
+          <a href="https://webaudio.github.io/web-audio-api/#dom-audiocontext-getoutputtimestamp">Web
+          Audio API</a>). The same outcome could perhaps be achieved
+          through a mechanism similar to <a>requestAnimationFrame()</a> that
+          would allow to couple rendering of non media web content and rendering
+          of the next media frame.
         </p>
       </section>
     </section>
