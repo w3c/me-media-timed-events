@@ -668,7 +668,7 @@
         <p>
           In browsers, non media web rendering is handled through repaint
           operations at a rate that generally matches the display refresh rate
-          (e.g. 60 times per second), following the user's wall clock. A web
+          (e.g., 60 times per second), following the user's wall clock. A web
           application can schedule actions and render web content at specific
           points on the user's wall clock, notably through
           <a>Performance.now()</a>, <a>setTimeout()</a>, <a>setInterval()</a>,
@@ -693,7 +693,7 @@
             A way to track progress along the <a>media timeline</a> with
             <em>sufficient precision</em>. The actual precision required depends
             on the use case. Subtitles for video are typically authored against
-            video at the nominal video frame rate, e.g. 25 frames per second,
+            video at the nominal video frame rate, e.g., 25 frames per second,
             which corresponds to 40 milliseconds per frame, even when the actual
             video frame rate gets adjusted dynamically ([[EBU-TT-D]], Annex E).
             This suggests a 20 milliseconds precision, or half of the duration
@@ -717,7 +717,7 @@
         <section>
           <h4>Using cues to track progress on the media timeline</h4>
           <p>
-            Cues (e.g. <a>TextTrackCue</a>, or <a>VTTCue</a>) are
+            Cues (e.g., <a>TextTrackCue</a>, or <a>VTTCue</a>) are
             units of time-sensitive data on a <a>media timeline</a> [[HTML]]. The
             <a>time marches on</a> steps in [[HTML]] control the firing of cue
             events during media playback. <a>Time marches on</a> requires a
@@ -915,7 +915,7 @@
           Additionally, to allow such synchronization to happen at frame
           boundaries, we recommend introducing a mechanism that would allow a
           web application to accurately predict, using the user's wall clock,
-          when the next frame will be rendered (e.g. as done in the
+          when the next frame will be rendered (e.g., as done in the
           <a href="https://webaudio.github.io/web-audio-api/#dom-audiocontext-getoutputtimestamp">Web
           Audio API</a>). The same outcome could perhaps be achieved
           through a mechanism similar to <a>requestAnimationFrame()</a> that
