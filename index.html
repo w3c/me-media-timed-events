@@ -837,11 +837,12 @@
         <h3>Subscribing to event streams</h3>
         <p>
           The API should allow web applications to subscribe to receive specific
-          event types. For example, to support DASH <code>emsg</code> and MPD events,
-          the API should allow subscription by <code>id</code> and (optional) <code>value</code>.
-          This is to make receiving events opt-in from the application point of view.
-          The user agent should deliver only those events to a web application
-          for which the application has subscribed. The API should also allow web
+          event streams by event type. For example, to support MPEG-DASH
+          <code>emsg</code> and MPD events, the API should allow subscription by
+          <code>id</code> and (optional) <code>value</code>. This is to make
+          receiving events opt-in from the application point of view. The user
+          agent should deliver only those events to a web application for which
+          the application has subscribed. The API should also allow web
           applications to unsubscribe from specific event streams by event type.
         </p>
       </section>
