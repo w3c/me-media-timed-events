@@ -14,27 +14,41 @@
 ---
 >         "https://www.w3.org/TR/2019/NOTE-media-timed-events-20190404/">
 >         https://www.w3.org/TR/2019/NOTE-media-timed-events-20190404/</a>
-548c548
+469c469
+<       <dt>Editors:</dt>
+---
+>       <dt>Editor:</dt>
+476a477
+>       <dt>Former Editor:</dt>
+478,481c479,480
+<         <a class="ed_mailto u-email email p-name" href=
+<         "mailto:mandyam@qti.qualcomm.com">Giridhar Mandyam</a>
+<         (<a class="p-org org h-org h-card" href=
+<         "https://www.qualcomm.com">Qualcomm</a>)
+---
+>         Giridhar Mandyam</a>
+>         (Qualcomm) (until December 2018)
+548c547
 <     <p>This document was published by the <a href=
 ---
 >     <p data-deliverer="46300">This document was published by the <a href=
-834c834
+834c833
 <       "https://html.spec.whatwg.org/multipage/media.html#media.html#event-media-enter">
 ---
 >       "https://html.spec.whatwg.org/multipage/media.html#event-media-enter">
-837c837
+837c836
 <       "https://html.spec.whatwg.org/multipage/media.html#media.html#event-media-exit">
 ---
 >       "https://html.spec.whatwg.org/multipage/media.html#event-media-exit">
-1617c1617
+1617c1616
 <             "https://html.spec.whatwg.org/multipage/media.html#media.html#event-media-enter">
 ---
 >             "https://html.spec.whatwg.org/multipage/media.html#event-media-enter">
-1619c1619
+1619c1618
 <             href="https://html.spec.whatwg.org/multipage/media.html#media.html#event-media-exit">
 ---
 >             href="https://html.spec.whatwg.org/multipage/media.html#event-media-exit">
-2148c2148
+2148c2147
 <   "#title"><abbr title="Back to Top">↑</abbr></a></p>
 ---
 >   "#toc"><abbr title="Back to Top">↑</abbr></a></p>
