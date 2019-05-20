@@ -816,6 +816,21 @@
         </p>
       </section>
       <section>
+        <h3><a>TextTrackCue</a>s with unbounded duration</h3>
+        <p>
+          It is not currently possible to create a <a>TextTrackCue</a> that
+          extends from a given start time to the end of a live media stream. If
+          the stream duration is known, the content author can set the cue's
+          <code>endTime</code> equal to the media duration. However, for live
+          media streams, where the duration is unbounded, it would be useful to
+          allow content authors to specify that the <a>TextTrackCue</a> duration
+          is also unbounded, e.g., by allowing the <code>endTime</code> to be
+          set to <code>Infinity</code>. This would be consistent with the
+          <a>media element</a>'s <code>duration</code> property, which can be
+          <code>Infinity</code> for unbounded streams.
+        </p>
+      </section>
+      <section>
         <h3>Synchronized rendering of web resources</h3>
         <p>
           In browsers, non media web rendering is handled through repaint
@@ -1057,6 +1072,16 @@
           <a>in-band</a> events and MPD <a>out-of-band</a> events, as part of
           their support for the MPEG Common Media Application Format (CMAF)
           [[MPEGCMAF]].
+        </p>
+      </section>
+      <section>
+        <h3>Media timed events with unbounded duration</h3>
+        <p>
+          To support cues with unknown end time, where the cue is active from
+          its start time to the end of the media stream, we recommend that
+          the <a>TextTrackCue</a> interface be modified to allow the cue
+          duration to be unbounded. It should also be possible to update the
+          cue's end time, should the end time subsequently become known.
         </p>
       </section>
       <section>
