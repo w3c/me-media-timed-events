@@ -62,10 +62,10 @@
         synchronization to a playing audio or video media stream is needed,
         and makes recommendations for new or changed web APIs to realize these
         requirements. The goal is to extend the existing support in HTML for
-        text track cue events to add support for dynamic content replacement
-        cues and generic metadata events that drive synchronized interactive
-        media experiences, and improve the timing accuracy of rendering of web
-        content intended to be synchronized with audio or video media playback.
+        text track cues to add support for dynamic content replacement cues and
+        generic metadata cues that drive synchronized interactive media
+        experiences, and improve the timing accuracy of rendering of web content
+        intended to be synchronized with audio or video media playback.
       </p>
     </section>
     <section id="sotd">
@@ -86,16 +86,19 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        There is a need in the media industry for an API to support metadata
-        events synchronized to audio or video media, specifically for both
-        <a>out-of-band</a> event streams and <a>in-band</a> discrete events
-        (for example, MPD and <code>emsg</code> events in MPEG-DASH).
-        These <a>media timed events</a> can be used to support use cases
-        such as dynamic content replacement, ad insertion, or presentation of
-        supplemental content alongside the audio or video, or more generally,
-        making changes to a web page, or executing application code triggered
-        from JavaScript events, at specific points on the <a>media timeline</a>
-        of an audio or video media stream.
+        There is a need in the media industry for an API to support timed
+        metadata, i.e., metadata that is synchronized to audio or video media,
+        and used to support use cases such as dynamic content replacement,
+        ad insertion, presentation of supplemental content alongside the audio
+        or video, or more generally, making changes to a web page, or executing
+        application code triggered from DOM events at specific points on the
+        <a>media timeline</a> of an audio or video media stream.
+      </p>
+      <p>
+        Timed metadata may be carried either "in-band", meaning that they are
+        delivered within the audio or video media container or multiplexed with
+        the media stream, or "out-of-band", meaning that they are delivered
+        externally to the media container or media stream.
       </p>
     </section>
     <section>
@@ -105,19 +108,19 @@
       </p>
       <ul>
         <li>
-          <dfn data-lt="media timed event">media timed events</dfn> &mdash;
-          metadata events synchronized to the <a>media timeline</a> of a
-          <a>media resource</a>.
+          <dfn data-lt="timed metadata">timed metadata</dfn> &mdash;
+          metadata that is associated with a point in time or a region of time,
+          synchronized to the <a>media timeline</a> of a <a>media resource</a>.
         </li>
         <li>
-          <dfn>in-band</dfn> &mdash; timed event information that is delivered
+          <dfn>in-band</dfn> &mdash; <a>timed metadata</a> that is delivered
           within the audio or video media container or multiplexed with the
           media stream.
         </li>
         <li>
-          <dfn>out-of-band</dfn> &mdash; timed event information that is
-          delivered over some other mechanism external to the media container
-          or media stream.
+          <dfn>out-of-band</dfn> &mdash; <a>timed metadata</a> that is delivered
+          over some other mechanism external to the media container or media
+          stream.
         </li>
       </ul>
       <p>
@@ -196,16 +199,15 @@
     <section>
       <h2>Use cases</h2>
       <p>
-        <a>Media timed events</a> carry metadata that is related to points in time,
-        or regions of time on the <a>media timeline</a>, which can be used to
-        trigger retrieval and/or rendering of web resources synchronized with
+        <a>Timed metadata</a> carries information that is related to points in
+        time or regions of time on the <a>media timeline</a>, which can be used
+        to trigger retrieval and/or rendering of web resources synchronized with
         media playback. Such resources can be used to enhance user experience
         in the context of media that is being rendered. Some examples include
         display of social media feeds corresponding to a live video stream such
         as a sporting event, banner advertisements for sponsored content,
         accessibility-related assets such as large print rendering of
-        captions, and display of track titles or images alongside an audio
-        stream.
+        captions.
       </p>
       <p>
         The following sections describe a few use cases in more detail.
@@ -213,11 +215,11 @@
       <section id="dynamic-content-insertion">
         <h3>Dynamic content insertion</h3>
         <p>
-          A media content provider wants to allow insertion of content,
-          such as personalised video, local news, or advertisements,
-          into a video media stream that contains the main program content.
-          To achieve this, <a>media timed events</a> can be used to describe the points
-          on the <a>media timeline</a>, known as splice points, where switching
+          A media content provider wants to allow insertion of content, such as
+          personalised video, local news, or advertisements, into a video media
+          stream that contains the main program content. To achieve this,
+          <a>timed metadata</a> can be used to describe the points on the
+          <a>media timeline</a>, known as splice points, where switching
           playback to inserted content is possible.
         </p>
         <p>
@@ -248,9 +250,9 @@
       <section>
         <h3>Control messages for media streaming clients</h3>
         <p>
-          A media streaming server uses <a>media timed events</a> to send control
+          A media streaming server uses <a>timed metadata</a> to send control
           messages to media client library, such as <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a>.
-          Typically segmented streaming protocols such as HLS and MPEG-DASH make
+          Segmented streaming protocols such as HLS and MPEG-DASH typically make
           use of a manifest document that informs the client of the available
           encodings of a media stream, e.g., the Media Presentation Description
           (MPD) document in [[MPEGDASH]].
@@ -312,23 +314,23 @@
           recognize objects shown in the video. This system generates metadata
           describing the objects, including timestamps that describe the when
           the objects are visible, together with position information (e.g.,
-          bounding boxes). A web application then uses this timed metadata to
-          overlay labels and annotations on the video using HTML and CSS.
+          bounding boxes). A web application then uses this <a>timed metadata</a>
+          to overlay labels and annotations on the video using HTML and CSS.
         </p>
       </section>
       <section>
         <h3>Presentation of auxiliary content in live media</h3>
         <p>
-          During a live media presentation, dynamic and unpredictable events
-          may occur which cause temporary suspension of the media presentation.
-          During that suspension interval, auxiliary content such as the presentation
-          of UI controls and media files, may be unavailable. Depending on the
-          specific user engagement (or not) with the UI controls and the time
-          at which any such engagement occurs, specific web resources may be
-          rendered at defined times in a synchronized manner. For example,
-          a multimedia A/V clip along with subtitles corresponding to an
-          advertisement, and which were previously downloaded and cached
-          by the UA, are played out.
+          During a live media presentation, dynamic and unpredictable events may
+          occur which cause temporary suspension of the media presentation.
+          During that suspension interval, auxiliary content such as the
+          presentation of UI controls and media files, may be unavailable.
+          Depending on the specific user engagement (or not) with the UI
+          controls and the time at which any such engagement occurs, specific
+          web resources may be rendered at defined times in a synchronized
+          manner. For example, a multimedia A/V clip along with subtitles
+          corresponding to an advertisement, and which were previously
+          downloaded and cached by the UA, are played out.
         </p>
       </section>
     </section>
@@ -336,9 +338,9 @@
       <h2>Related industry specifications</h2>
       <p>
         This section describes existing media industry specifications and
-        standards that specify carriage of <a>media timed events</a>, or otherwise
-        provide requirements for web APIs related to the triggering of media
-        timed events.
+        standards that specify carriage of <a>timed metadata</a>, or otherwise
+        provide requirements for web APIs related to the triggering of
+        DOM events synchronized with the <a>media timeline</a>.
       </p>
       <section>
         <h3>MPEG Common Media Application Format (CMAF)</h3>
@@ -349,12 +351,12 @@
           devices and adaptive streaming methods, including HTTP Live Streaming
           [[RFC8216]] and MPEG-DASH [[MPEGDASH]]. It is based on the ISO BMFF
           [[ISOBMFF]] and supports the AVC, AAC, HEVC codecs, Common Encryption
-          (CENC), and subtitles using IMSC1 and WebVTT. The goal is to reduce
+          (CENC), and subtitles using IMSC1 and WebVTT. Its goal is to reduce
           media storage and delivery costs by using a single common media format
           across different client devices.
         </p>
         <p>
-          CMAF media may contain <a>in-band</a> events in the form of
+          CMAF media may contain <a>in-band</a> timed metadata in the form of
           Event Message (<code>emsg</code>) boxes in ISO BMFF files.
           <code>emsg</code> is specified in [[MPEGDASH]], section 5.10.3.3,
           and described in more detail in the following section of this
@@ -373,20 +375,21 @@
           MPEG-2 transport stream.
         </p>
         <p>
-          In MPEG-DASH, <a>media timed events</a> may be delivered either
+          In MPEG-DASH, <a>timed metadata </a> may be delivered either
           <a>in-band</a> or <a>out-of-band</a>:
         </p>
         <ul>
           <li>
-            <a>In-band</a> events are <code>emsg</code> boxes in ISO BMFF files.
-            The presence of <code>emsg</code> events in the media container for
-            given event schemes is signaled in the MPD document using an
+            <a>In-band</a> <a>timed metadata</a> is delivered via "event message"
+            (<code>emsg</code>) boxes in ISO BMFF files. The presence of
+            <code>emsg</code> events in the media container for given event
+            schemes is signaled in the MPD document using an
             <code>EventStream</code> XML element ([[MPEGDASH]], section 5.10.2).
           </li>
           <li>
-            <a>Out-of-band</a> events are represented by <code>Event</code>
-            XML elements </code>contained within an <code>EventStream</code>
-            element in the MPD.
+            <a>Out-of-band</a> <a>timed metadata</a> is delivered via
+            <code>Event</code> XML elements </code>contained within an
+            <code>EventStream</code> element in the MPD.
           </li>
         </ul>
         <p>
@@ -414,7 +417,7 @@
           HbbTV is an interactive TV application standard that supports both
           broadcast (DVB) media delivery, and internet streaming using
           MPEG-DASH. The HbbTV application environment is based on HTML and
-          JavaScript. MPEG-DASH streaming is implemented nativey by the user
+          JavaScript. MPEG-DASH streaming is implemented natively by the user
           agent, rather than through a JavaScript web application using Media
           Source Extensions.
         </p>
@@ -437,20 +440,21 @@
         <h3>DASH Industry Forum APIs for Interactivity</h3>
         <p>
           The DASH-IF InterOp Working Group has an ongoing work item,
-          <em>DAInty</em>, "DASH APIs for Interactivity", which aims to
-          specify a set of APIs between the DASH client/player and interactivity-capable
-          applications, for both web and native applications [[DASHIFIOP]]. The origin of this
-          work is a related
+          <em>DAInty</em>, "DASH APIs for Interactivity", which aims to specify
+          a set of APIs between the DASH client/player and interactivity-capable
+          applications, for both web and native applications [[DASHIFIOP]]. The
+          origin of this work is a related
           <a href="http://www.3gpp.org/ftp/tsg_sa/TSG_SA/TSGS_77/Docs/SP-170796.zip">3GPP
           work item</a> on Service Interactivity [[3GPP-INTERACTIVITY]].
           The objective is to provide service enablers for user engagement with
           auxiliary content and UIs on mobile device during live or time-shifted
           viewing of streaming content delivered over 3GPP broadcast or unicast
-          bearers, and the measurement and reporting of such interactive consumption.
+          bearers, and the measurement and reporting of such interactive
+          consumption.
         </p>
         <p>
-          Two APIs are being developed that are relevant to the scope of the present
-          document:
+          Two APIs are being developed that are relevant to the scope of the
+          present document:
         </p>
         <ul>
           <li>
@@ -466,13 +470,13 @@
         <p>
           Two modes for dispatching events
           <a href="https://www.w3.org/2018/08/20-me-minutes.html#item05"></a>are
-          defined</a>. In Mode 1 events are
-          dispatched at the time the event arrives, and in Mode 2 events are
-          dispatched at the given time on the <a>media timeline</a>. The
-          "arrival" of events from the DASH client perspective may be either
-          static or pre-provisioned, in the case MPD Events, or dynamic in the
-          case of <a>in-band</a> events carried in the <code>emsg</code>. The
-          application can register with the DASH client which Mode to use.
+          defined</a>. In Mode 1 events are dispatched at the time the event
+          arrives, and in Mode 2 events are dispatched at the given time on the
+          <a>media timeline</a>. The "arrival" of events from the DASH client
+          perspective may be either static or pre-provisioned, in the case MPD
+          Events, or dynamic in the case of <a>in-band</a> events carried in
+          <code>emsg</code> boxes. The application can register with the DASH
+          client which Mode to use.
         </p>
       </section>
       <section>
@@ -480,14 +484,13 @@
         <p>
           The Society for Cable and Televison Engineers (SCTE) has produced the
           SCTE-35 specification "Digital Program Insertion Cueing for Cable"
-          [[SCTE35]], which defines a data cue format for describing
-          insertion points, to support the
-          <a href="#dynamic-content-insertion">dynamic content insertion</a> use
-          case.
+          [[SCTE35]], which defines a data cue format for describing insertion
+          points, to support the <a href="#dynamic-content-insertion">dynamic
+          content insertion</a> use case.
         </p>
         <p>
           [[SCTE214-1]] section 6.7 describes the carriage of SCTE-35 events
-          in a MPEG-DASH MPD document, as <a>out-of-band</a> events.
+          as <a>out-of-band</a> events in a MPEG-DASH MPD document.
           [[SCTE214-2]] section 9 and [[SCTE214-3]] section 7.3 describe
           the carriage of SCTE-35 events as <a>in-band</a> events in MPEG-DASH
           using MPEG2-TS and ISO BMFF respectively, using <code>emsg</code>.
@@ -536,9 +539,10 @@
           attributes that affect rendering of the cue text on a web page.
           WebVTT metadata cues are text that is aligned to the
           <a>media timeline</a>. Web applications can use <a>VTTCue</a>
-          to schedule <a>out-of-band</a> metadata events by serializing the
-          event data to a string format (JSON, for example) when creating the
-          cue, and deserializing the data when the cue is triggered.
+          to schedule <a>out-of-band</a> timed metadata events by serializing
+          the metadata to a string format (JSON, for example) when creating the
+          cue, and deserializing the data when the cue's <code>onenter</code>
+          DOM event is fired.
         </p>
         <p>
           Web applications can also use <a>VTTCue</a> to trigger
@@ -560,8 +564,8 @@
         <h3>MPEG-DASH and ISO BMFF emsg events</h3>
         <p>
           The <code>DataCue</code> API has been previously discussed as a means
-          to deliver <a>in-band</a> event data to web applications, but this is
-          not implemented in all of the main browser engines. It is
+          to deliver <a>in-band</a> timed metadata to web applications, but this
+          is not implemented in all of the main browser engines. It is
           <a href="https://www.w3.org/TR/2018/WD-html53-20181018/semantics-embedded-content.html#text-tracks-exposing-inband-metadata">included</a>
           in the 18 October 2018 HTML 5.3 draft [[HTML53-20181018]], but is
           <a href="https://html.spec.whatwg.org/multipage/media.html#timed-text-tracks">not included</a>
@@ -616,7 +620,8 @@
           </tbody>
         </table>
         <p>
-          and <code>value</code> is an object with the metadata item key, data, and optionally a locale:
+          and <code>value</code> is an object with the metadata item key, data,
+          and optionally a locale:
         </p>
         <pre class="example">
           value = {
@@ -626,8 +631,8 @@
           }
         </pre>
         <p>
-          Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]] describe
-          handling of <code>emsg</code> boxes.
+          Neither [[MSE-BYTE-STREAM-FORMAT-ISOBMFF]] nor [[INBANDTRACKS]]
+          describe handling of <code>emsg</code> boxes.
         </p>
         <p>
           On resource constrained devices such as smart TVs and streaming sticks,
@@ -646,8 +651,7 @@
         </p>
         <p>
           [[HBBTV]] section 9.3.2 describes a mapping between the <code>emsg</code>
-          fields described <a href="#mpeg-dash">above</a>
-          and the <a>TextTrack</a>
+          fields described <a href="#mpeg-dash">above</a> and the <a>TextTrack</a>
           and <a href="https://www.w3.org/TR/2018/WD-html53-20180426/semantics-embedded-content.html#datacue"><code>DataCue</code></a>
           APIs. A <a>TextTrack</a> instance is created for each event
           stream signalled in the MPD document (as identified by the
@@ -717,7 +721,7 @@
             Cues (e.g., <a>TextTrackCue</a>, or <a>VTTCue</a>) are
             units of time-sensitive data on a <a>media timeline</a> [[HTML]]. The
             <a>time marches on</a> steps in [[HTML]] control the firing of cue
-            events during media playback. <a>Time marches on</a> requires a
+            DOM events during media playback. <a>Time marches on</a> requires a
             <a>timeupdate</a> event to be fired at the <a>media element</a>
             between 15 and 250 milliseconds since the last such event, and this
             requirement therefore specifies the rate at which <a>time marches
@@ -765,8 +769,8 @@
           <h4>Using <code>timeupdate</code> events from the media element</h4>
           <p>
             Another approach to synchronizing rendering of web content to media
-            playback is to use the <a>timeupdate</a> event, and for the
-            web application to manage the <a>media timed events</a> to be
+            playback is to use the <a>timeupdate</a> DOM event, and for the
+            web application to manage the <a>timed metadata</a> to be
             triggered, rather than use the text track cue APIs in [[HTML]].
             This approach has the same synchronization
             limitations as described above due to the 250 millisecond update
@@ -827,34 +831,35 @@
       <h2>Recommendations</h2>
       <p>
         This section describes recommendations from the Media &amp; Entertainment
-        Interest Group for the development of a generic <a>media timed event</a> API,
-        and associated synchronization considerations.
+        Interest Group for the development of a generic <a>timed metadata</a>
+        API, and associated synchronization considerations.
       </p>
       <section>
         <h3>Subscribing to event streams</h3>
         <p>
           The API should allow web applications to subscribe to receive specific
-          event streams by event type. For example, to support MPEG-DASH
+          <a>timed metadata</a> cues by schema. For example, to support MPEG-DASH
           <code>emsg</code> and MPD events, the API should allow subscription by
           <code>id</code> and (optional) <code>value</code>. This is to make
-          receiving events opt-in from the application point of view. The user
-          agent should deliver only those events to a web application for which
-          the application has subscribed. The API should also allow web
-          applications to unsubscribe from specific event streams by event type.
+          receiving the cues opt-in from the application's point of view. The
+          user agent should deliver only those cues to a web application for
+          which the application has subscribed. The API should also allow web
+          applications to unsubscribe from specific schemas.
         </p>
       </section>
       <section>
         <h3>Out-of-band events</h3>
         <p>
-          To be able to handle out of band events, including MPEG-DASH MPD
-          events, the API should allow web applications to create events to be
-          added to the <a>media timeline</a>, to be triggered by the user agent.
-          The API should allow the web application to provide all necessary
-          parameters to define the event, including start and end times, event
-          type, and data payload. The payload should be any data type (e.g., the
-          set of types supported by the WebKit <code>DataCue</code>). For
-          MPEG-DASH MPD events, the event type is defined by the <code>id</code>
-          and (optional) <code>value</code> fields.
+          To be able to handle <a>out-of-band</a> <a>timed metadata</a>,
+          including MPEG-DASH MPD events, the API should allow web applications
+          to create <a>timed metadata</a> cues to be added to the <a>media
+          timeline</a>, to be triggered by the user agent. The API should allow
+          the web application to provide all necessary parameters to define the
+          cue, including start and end times, schema identifier, and data
+          payload. The payload should be any data type (e.g., the set of types
+          supported by the WebKit <code>DataCue</code>). For MPEG-DASH MPD
+          events, the schema is defined by the <code>id</code> and (optional)
+          <code>value</code> fields.
         </p>
       </section>
       <section>
@@ -865,30 +870,31 @@
         </p>
         <ul>
           <li>
-            Generate a JavaScript event when an <a>in-band</a> <a>media timed event</a>
-            is parsed from the media container or media stream (DAInty Mode 1).
+            Generate a DOM event when an <a>in-band</a> <a>timed metadata</a>
+            cue is parsed from the media container or media stream (DAInty
+            Mode 1).
           </li>
           <li>
-            Generate JavaScript events when the current media playback
-            position reaches the start time and the end time of a media timed
-            event during playback (DAInty Mode 2). This applies equally to
-            <a>in-band</a> events that the user agent has extracted from the
-            media container, and <a>out-of-band</a> events added by the web
+            Generate DOM events when the current media playback position reaches
+            the start time and the end time of a <a>timed metadata</a> cue
+            during playback (DAInty Mode 2). This applies equally to timed
+            metadata cues generated by the user agent and cues added by the web
             application.
           </li>
         </ul>
         <p>
-          The API should provide guarantees that no events can be missed during
-          linear playback of the media.
+          The API should provide guarantees that no <a>timed metadata</a> cues
+          can be missed during linear playback of the media.
         </p>
       </section>
       <section>
-        <h3>In-band event processing</h3>
+        <h3>In-band timed metadata processing</h3>
         <p>
           We recommend updating [[INBANDTRACKS]] to describe handling of
-          <a>in-band</a> <a>media timed events</a> supported on the web platform,
+          <a>in-band</a> <a>timed metadata</a> supported on the web platform,
           following a registry approach with one specification per media format
-          that describes the event details for that format.
+          that describes the details of the <a>timed metadata</a> supported for
+          that format.
         </p>
       </section>
       <section>
@@ -906,8 +912,8 @@
           In order to achieve greater synchronization accuracy between media
           playback and web content rendered by an application, the <a>time
           marches on</a> steps in [[HTML]] should be modified to allow delivery
-          of <a>media timed event</a> start time and end time notifications within 20
-          milliseconds of their positions on the <a>media timeline</a>.
+          of <a>timed metadata</a> start time and end time notifications within
+          20 milliseconds of their positions on the <a>media timeline</a>.
         </p>
         <p>
           Additionally, to allow such synchronization to happen at frame
@@ -928,4 +934,3 @@
     </section>
   </body>
 </html>
-
