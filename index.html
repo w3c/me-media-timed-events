@@ -86,19 +86,20 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        There is a need in the media industry for an API to support timed
-        metadata, i.e., metadata that is synchronized to audio or video media,
-        and used to support use cases such as dynamic content replacement,
-        ad insertion, presentation of supplemental content alongside the audio
-        or video, or more generally, making changes to a web page, or executing
-        application code triggered from DOM events at specific points on the
-        <a>media timeline</a> of an audio or video media stream.
+        There is a need in the media industry for an API to support <a>timed
+        metadata</a>, i.e., metadata that is synchronized to audio or video
+        media, and used to support use cases such as dynamic content
+        replacement, ad insertion, presentation of supplemental content
+        alongside the audio or video, or more generally, making changes to a web
+        page, or executing application code triggered from DOM events at
+        specific points on the <a>media timeline</a> of an audio or video media
+        stream.
       </p>
       <p>
-        Timed metadata may be carried either "in-band", meaning that they are
-        delivered within the audio or video media container or multiplexed with
-        the media stream, or "out-of-band", meaning that they are delivered
-        externally to the media container or media stream.
+        Timed metadata may be carried either <a>in-band</a>, meaning that they
+        are delivered within the audio or video media container or multiplexed
+        with the media stream, or <a>out-of-band</a>, meaning that they are
+        delivered externally to the media container or media stream.
       </p>
     </section>
     <section>
@@ -121,6 +122,10 @@
           <dfn>out-of-band</dfn> &mdash; <a>timed metadata</a> that is delivered
           over some other mechanism external to the media container or media
           stream.
+        </li>
+        <li>
+          <dfn>cue</dfn> &mdash; a unit of <a>timed metadata</a> that occurs
+          on the <a>media timeline</a>.
         </li>
       </ul>
       <p>
@@ -506,7 +511,7 @@
         </p>
         <p>
           This places an implicit requirement on the user agent in handling of
-          media-timed events related to insertion cues. The content originator
+          event synchronization related to insertion cues. The content originator
           may provide the cue in advance with as little as 2 seconds of the
           insertion time. Therefore the propagation of the event data associated
           with the insertion cue to the application by the user agent should be
@@ -527,8 +532,9 @@
         </p>
         <p>
           The Media &amp; Entertainment Interest Group is actively tracking
-          this work is open to discussing specific requirements for media
-          timed events as development progresses.
+          this work and is open to discussing specific requirements for
+          synchronized rendering of <a>in-band</a> delivered web resources, as
+          development progresses.
         </p>
       </section>
       <section>
@@ -718,7 +724,7 @@
         <section>
           <h4>Using cues to track progress on the media timeline</h4>
           <p>
-            Cues (e.g., <a>TextTrackCue</a>, or <a>VTTCue</a>) are
+            <a>Cues</a> (e.g., <a>TextTrackCue</a>, or <a>VTTCue</a>) are
             units of time-sensitive data on a <a>media timeline</a> [[HTML]]. The
             <a>time marches on</a> steps in [[HTML]] control the firing of cue
             DOM events during media playback. <a>Time marches on</a> requires a
@@ -835,10 +841,10 @@
         API, and associated synchronization considerations.
       </p>
       <section>
-        <h3>Subscribing to event streams</h3>
+        <h3>Subscribing to receive timed metadata cues</h3>
         <p>
           The API should allow web applications to subscribe to receive specific
-          <a>timed metadata</a> cues by schema. For example, to support MPEG-DASH
+          schemas of <a>timed metadata</a> cue. For example, to support MPEG-DASH
           <code>emsg</code> and MPD events, the API should allow subscription by
           <code>id</code> and (optional) <code>value</code>. This is to make
           receiving the cues opt-in from the application's point of view. The
@@ -848,7 +854,7 @@
         </p>
       </section>
       <section>
-        <h3>Out-of-band events</h3>
+        <h3>Out-of-band timed metadata cue delivery</h3>
         <p>
           To be able to handle <a>out-of-band</a> <a>timed metadata</a>,
           including MPEG-DASH MPD events, the API should allow web applications
