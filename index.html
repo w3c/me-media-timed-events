@@ -49,6 +49,12 @@
               "Giridhar Mandyam"
             ],
             date: "February 2018"
+          },
+          "DASHIF-EVENTS": {
+            title: "DASH Player’s Application Events and Timed Metadata Processing Models and APIs",
+            href: "https://dashif-documents.azurewebsites.net/Events/master/event.html",
+            publisher: "DASH Industry Forum",
+            date: "3 July 2019"
           }
         }
       };
@@ -464,15 +470,14 @@
           </li>
         </ul>
         <p>
-          Two modes for dispatching events
-          <a href="https://www.w3.org/2018/08/20-me-minutes.html#item05"></a>are
-          defined</a>. In Mode 1 events are
-          dispatched at the time the event arrives, and in Mode 2 events are
+          Two modes for dispatching events are defined [[DASHIF-EVENTS]].
+          In <em>on-receive</em> mode, events are dispatched at the
+          time the event arrives, and in <em>on-start</em> mode, events are
           dispatched at the given time on the <a>media timeline</a>. The
           "arrival" of events from the DASH client perspective may be either
           static or pre-provisioned, in the case MPD Events, or dynamic in the
-          case of <a>in-band</a> events carried in the <code>emsg</code>. The
-          application can register with the DASH client which Mode to use.
+          case of <a>in-band</a> events carried in <code>emsg</code> boxes. The
+          application can register with the DASH client which mode to use.
         </p>
       </section>
       <section>
