@@ -747,9 +747,9 @@
               <a>enter</a> and <a>exit</a> events will be fired for all cues,
               including those that appear on the <a>media timeline</a> between
               successive executions of <a>time marches on</a> during media
-              playback. This method is only possible for cues created by the web
-              application, i.e., <a>VTTCue</a> objects, and not cue
-              objects created by the user agent.
+              playback. The timing accuracy of these events varies between
+              browser implementations, as the firing of the events is controlled
+              by the rate of execution of <a>time marches on</a>.
             </li>
           </ul>
           <p>
