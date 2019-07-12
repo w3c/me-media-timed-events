@@ -261,21 +261,23 @@
       <section>
         <h3>Control messages for media streaming clients</h3>
         <p>
-          A media streaming server uses <a>timed metadata</a> to send control
-          messages to media client library, such as <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a>.
           Segmented streaming protocols such as HLS and MPEG-DASH typically make
           use of a manifest document that informs the client of the available
-          encodings of a media stream, e.g., the Media Presentation Description
-          (MPD) document in [[MPEGDASH]].
+          encodings of a media stream. Should any of the content in the manifest
+          document need to change, the client should refresh it by requesting an
+          updated copy from the server.
         </p>
         <p>
-          Should any of the content in the manifest document need to change, the
-          client should refresh it by requesting an updated copy from the
-          server. Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific
-          event that is used to notify a client application. An <a>in-band</a>
-          <code>emsg</code> event is used as an alternative to setting a cache
-          duration in the response to the HTTP request for the manifest, so the
-          client can refresh the MPD when it actually changes, as opposed to
+          Section 5.10.4 of [[MPEGDASH]] describes an MPEG-DASH specific
+          control message, which is delivered as an <a>in-band</a>
+          <code>emsg</code> event, and is used to notify a client application or
+          library such as <a href="https://github.com/Dash-Industry-Forum/dash.js">dash.js</a>
+          that its copy of the manifest document should be refreshed.
+        </p>
+        <p>
+          This method is used as an alternative to setting a cache duration in
+          the response to the HTTP request for the manifest, so the client can
+          refresh the manifest document when it actually changes, as opposed to
           waiting for a cache duration expiry period to elapse. This also has
           the benefit of reducing the load on HTTP servers caused by frequent
           server requests.
