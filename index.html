@@ -400,6 +400,7 @@
           as specified in [[MPEGDASH]], section 5.10.3.3:
         </p>
         <ul>
+          <li><code>id</code> &mdash; Event message identifier</li>
           <li><code>scheme_id_uri</code> &mdash; A URI that identifies
           the message scheme</li>
           <li><code>value</code> &mdash; The event value (string)</li>
@@ -410,8 +411,40 @@
           in <code>timescale</code> units</li>
           <li><code>event_duration</code> &mdash; Event duration,
           in <code>timescale</code> units</li>
-          <li><code>id</code> &mdash; Event message identifier</li>
           <li><code>message_data</code> &mdash; Message body (may be empty)</li>
+        </ul>
+      </section>
+      <section>
+        <h3>HTTP Live Streaming</h3>
+        <p>
+          HTTP Live Streaming (HLS) allows for delivery of timed metadata
+          events, both <a>in-band</a> and <a>out-of-band</a>:
+        </p>
+        <ul>
+          <li>
+            HLS supports delivery of ID3 timed metadata carried <a>in-band</a>
+            within MPEG-2 Transport Streams [[HLS-TIMED-METADATA]]. ID3 metadata
+            is stored as a complete ID3v2.4 frame in an elementary stream (PES)
+            packet, including a complete ID3 header [[ID3v2]].
+          </li>
+          <li>
+            <a>Out-of-band</a> events are delivered using the
+            <code>EXT-X-DATERANGE</code> tag in a HLS playlist file.
+          </li>
+        </ul>
+        <p>
+          An <code>EXT-X-DATERANGE</code> tag contains the following information, as specified in
+          [[RFC8216]], section 4.3.2.7:
+        </p>
+        <ul>
+          <li><code>ID</code> &mdash; Unique event identifier</li>
+          <li><code>CLASS</code> &mdash; An identifier that indicates the event semantics. All events with the same <code>CLASS</code> have the same semantics</li>
+          <li><code>START-DATE</code> &mdash; The date and time of the start of the event</li>
+          <li><code>END-DATE</code> &mdash; The date and time of the end of the event (optional)</li>
+          <li><code>DURATION</code> &mdash; Event duration, in seconds (optional). May be zero</li>
+          <li><code>PLANNED-DURATION</code> &mdash; Expected event duration, where the actual duration is not yet known (optional)</li>
+          <li><code>END-ON-NEXT</code> &mdash; Indicates that the event automatically ends when the next event of the same <code>CLASS</code> starts. If present, this attribute replaces <code>END-DATE</code> and <code>DURATION</code></li>
+          <li><code>X-&lt;client-attribute&gt;</code> &mdash; Allows the application to define its own key/value metadata pairs</li>
         </ul>
       </section>
       <section>
@@ -496,6 +529,12 @@
           [[SCTE214-2]] section 9 and [[SCTE214-3]] section 7.3 describe
           the carriage of SCTE-35 events as <a>in-band</a> events in MPEG-DASH
           using MPEG2-TS and ISO BMFF respectively, using <code>emsg</code>.
+        </p>
+        <p>
+          [[RFC8216]] section 4.3.2.7.1 specifies how to map SCTE-35 events into
+          HLS timed metadata, using the <code>EXT-X-DATERANGE</code> tag, with
+          <code>SCTE35-CMD</code>, <code>SCTE35-OUT</code>, and
+          <code>SCTE35-IN</code> attributes.
         </p>
           [[SCTE35]] section 9.1 describes the requirements for content
           splicing: "In order to give advance warning of the impending splice
