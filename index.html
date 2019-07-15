@@ -853,13 +853,14 @@
         <h3>Subscribing to receive timed metadata cues</h3>
         <p>
           The API should allow web applications to subscribe to receive specific
-          schemas of <a>timed metadata</a> cue. For example, to support MPEG-DASH
-          <code>emsg</code> and MPD events, the API should allow subscription by
-          <code>id</code> and (optional) <code>value</code>. This is to make
-          receiving the cues opt-in from the application's point of view. The
-          user agent should deliver only those cues to a web application for
-          which the application has subscribed. The API should also allow web
-          applications to unsubscribe from specific schemas.
+          types of <a>timed metadata</a> cue. For example, to support MPEG-DASH
+          <code>emsg</code> and MPD events, the cue type is identified by a
+          combination of the <code>scheme_id_uri</code> and (optional)
+          <code>value</code>. The purpose of this is to make receiving cues
+          of each type opt-in from the application's point of view. The user
+          agent should deliver only those cues to a web application for which
+          the application has subscribed. The API should also allow web
+          applications to unsubscribe from specific cue types.
         </p>
       </section>
       <section>
@@ -870,11 +871,9 @@
           to create <a>timed metadata</a> cues to be added to the <a>media
           timeline</a>, to be triggered by the user agent. The API should allow
           the web application to provide all necessary parameters to define the
-          cue, including start and end times, schema identifier, and data
+          cue, including start and end times, cue type identifier, and data
           payload. The payload should be any data type (e.g., the set of types
-          supported by the WebKit <code>DataCue</code>). For MPEG-DASH MPD
-          events, the schema is defined by the <code>id</code> and (optional)
-          <code>value</code> fields.
+          supported by the WebKit <code>DataCue</code>).
         </p>
       </section>
       <section>
