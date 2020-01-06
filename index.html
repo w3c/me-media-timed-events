@@ -92,20 +92,41 @@
     <section>
       <h2>Introduction</h2>
       <p>
-        There is a need in the media industry for an API to support <a>timed
-        metadata</a>, i.e., information that is synchronized to audio or video
-        media, and used to support use cases such as dynamic content
-        replacement, ad insertion, presentation of supplemental content
-        alongside the audio or video, or more generally, making changes to a web
-        page, or executing application code triggered from DOM events at
-        specific points on the <a>media timeline</a> of an audio or video media
-        stream.
+        There is a need in the media industry for an API to support arbitrary
+        data associated with points in time or periods of time in a continuous
+        media (audio or video) presentation. This data may include:
+      </p>
+      <ul>
+        <li>
+          metadata that describes the content in some way, such as program or
+          chapter titles, geolocation information, often referred to as <em>timed
+          metadata</em>; or
+        </li>
+        <li>
+          control messages for the media player that are expected to take effect
+          at specific times during media playback, such as ad insertion cues.
+        </li>
+      </ul>
+      <p>
+        For the purpose of this document, we refer to these collectively as
+        <a>media timed events</a>. These events can be used to carry
+        information intended to be synchronized with the media stream, used to
+        support use cases such as dynamic content replacement, ad insertion,
+        presentation of supplemental content alongside the audio or video, or
+        more generally, making changes to a web page, or executing application
+        code triggered at specific points on the <a>media timeline</a> of an
+        audio or video media stream.
       </p>
       <p>
-        Timed metadata may be carried either <a>in-band</a>, meaning that they
-        are delivered within the audio or video media container or multiplexed
-        with the media stream, or <a>out-of-band</a>, meaning that they are
-        delivered externally to the media container or media stream.
+        <a>Media timed events</a> may be carried either <a>in-band</a>, meaning
+        that they are delivered within the audio or video media container or
+        multiplexed with the media stream, or <a>out-of-band</a>, meaning that
+        they are delivered externally to the media container or media stream.
+      </p>
+      <p>
+        This document describes use cases and requirements that go beyond the
+        existing support for timed text, using <a>TextTrack</a> and related
+        APIs.
       </p>
     </section>
     <section>
