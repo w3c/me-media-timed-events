@@ -802,14 +802,15 @@
             Cues (e.g., <a>TextTrackCue</a> and <a>VTTCue</a>) are units of
             time-sensitive data on a <a>media timeline</a> [[HTML]]. The <a>time
             marches on</a> steps in [[HTML]] control the firing of cue DOM
-            events during media playback. <a>Time marches on</a> requires a
-            <a>timeupdate</a> event to be fired at the <a>media element</a>
-            between 15 and 250 milliseconds since the last such event, and this
-            requirement therefore specifies the rate at which <a>time marches
-            on</a> is executed during playback. In practice it
+            events during media playback. <a>Time marches on</a> is specified to
+            run "when the current playback position of a media element changes"
+            but <em>how often</em> this should happen is unspecified.
+            In practice it
             <a href="https://www.w3.org/2018/12/17-me-minutes.html#item06">has
             been found</a> that the timing varies between browser
-            implementations.
+            implementations, in some cases with a delay up to 250 milliseconds
+            (which corresponds to the lowest rate at which <a>timeupdate</a>
+            events are expected to be fired).
           </p>
           <p>
             There are two methods a web application can use to handle cues:
