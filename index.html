@@ -32,6 +32,16 @@
           branch: "master"
         },
         localBiblio: {
+          "ID3-EMSG": {
+            title: "Timed Metadata in the Common Media Application Format (CMAF)",
+            href: "https://aomediacodec.github.io/id3-emsg/",
+            authors: [
+              "Krasimir Kolarov",
+              "John Simmons"
+            ],
+            publisher: "AOM",
+            date: "25 June 2019"
+          },
           "DASH-EVENTING": {
             title: "DASH Eventing and HTML5",
             href: "https://www.w3.org/2011/webtv/wiki/images/a/a5/DASH_Eventing_and_HTML5.pdf",
@@ -509,6 +519,11 @@
           <li><code>END-ON-NEXT</code> &mdash; Indicates that the event automatically ends when the next event of the same <code>CLASS</code> starts. If present, this attribute replaces <code>END-DATE</code> and <code>DURATION</code></li>
           <li><code>X-&lt;client-attribute&gt;</code> &mdash; Allows the application to define its own key/value metadata pairs</li>
         </ul>
+        <p>
+          For interoperability between HLS and CMAF, The Alliance for Open Media
+          has published [[ID3-EMSG]], which specifies how to include ID3 metadata
+          in <code>emsg</code> boxes.
+        </p>
       </section>
       <section>
         <h3>HbbTV</h3>
