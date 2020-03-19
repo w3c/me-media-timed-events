@@ -55,6 +55,12 @@
             href: "https://dashif-documents.azurewebsites.net/Events/master/event.html",
             publisher: "DASH Industry Forum",
             date: "3 July 2019"
+          },
+          "NORDIG": {
+            title: "NorDig Unified Requirements for Integrated Receiver Decoders for use in cable, satellite, terrestrial and managed IPTV based networks",
+            href: "https://nordig.org/wp-content/uploads/2018/10/NorDig-Unified-Requirements-ver.-3.1.pdf",
+            publisher: "NorDig",
+            date: "27 October 2018"
           }
         }
       };
@@ -323,10 +329,36 @@
           A subtitle or caption author wants ensure that subtitle changes are
           aligned as closely as possible to shot changes in the video.
           The BBC Subtitle Guidelines [[BBC-SUBTITLE]] describes authoring
-          best practices. In particular, in section 6.1 authors are advised
-          "it is likely to be less tiring for the viewer if shot changes
+          best practices. In particular, in section 6.1 authors are advised:
+        </p>
+        <blockquote>
+          "[...] it is likely to be less tiring for the viewer if shot changes
           and subtitle changes occur at the same time. Many subtitles therefore
           start on the first frame of the shot and end on the last frame."
+        </blockquote>
+        <p>
+         The NorDig technical specifications for DVB receivers for the Nordic
+         and Irish markets [[NORDIG]], section 7.3.1, mandates that receivers
+         support TTML in MPEG-2 Transport Streams. The presentation timing
+         precision for subtitles is specified as being within 2 frames.
+        </p>
+        <p>
+          Another important use case is maintaining synchronization of subtitles
+          during program content with fast dialog. The BBC Subtitle Guidelines,
+          section 5.1 says:
+        </p>
+        <blockquote>
+          "Impaired viewers make use of visual cues from the
+          faces of television speakers. Therefore subtitle appearance should
+          coincide with speech onset. [...] When two or more people are
+          speaking, it is particularly important to keep in sync. Subtitles for
+          new speakers must, as far as possible, come up as the new speaker
+          starts to speak. Whether this is possible will depend on the action on
+          screen and rate of speech."
+        </blockquote>
+        <p>
+          A very fast word rate, for example, 240 words per minute, corresponds
+          on average to one word every 250 milliseconds.
         </p>
       </section>
       <section>
