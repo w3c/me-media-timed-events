@@ -919,15 +919,13 @@
         </p>
       </section>
       <section>
-        <h3>Updating event times</h3>
+        <h3>Updating media timed events</h3>
         <p>
-          The API should allow a cue's position on the media timeline to be
-          changed. This includes the ability to change an end time from a known
-          time on the media timeline to an unknown time, and vice versa, as
-          described <a href="#media-timed-events-with-unbounded-duration">above</a>.
-          The user agent should generate events as appropriate to notify the web
-          application of such changes.
-        </p>
+          We recommend that the API allows <a>media timed event</a> information
+          to be updated, such as an event's position on the media timeline,
+          and its data payload. Where the <a>media timed event</a> is updated
+          by the user agent, such as for <a>in-band</a> events, we recommend that
+          the API allows the web application to be notified of any changes.
       </section>
       <section>
         <h3>Synchronization</h3>
