@@ -264,6 +264,11 @@
           MPEG-DASH and HLS streams is described in [[SCTE35]], sections 12.1
           and 12.2.
         </p>
+        <p>
+          This use case typically requires frame accuracy, so that inserted
+          content is played at the right time, and continuous playback is
+          maintained.
+        </p>
       </section>
       <section>
         <h3>Audio stream with titles and images</h3>
@@ -280,6 +285,10 @@
           defines <a>in-band</a> event messages that contain image URLs and text
           messages to be displayed, with information about when the content
           should be displayed in relation to the <a>media timeline</a>.
+        </p>
+        <p>
+          The visual information should be rendered within a hundred millseconds
+          or so to maintain good synchronization with the audio content.
         </p>
       </section>
       <section>
@@ -376,9 +385,13 @@
           map, e.g., pan and zoom, and allows annotations to be added and
           removed, e.g., markers, at specified times during media playback.
           Control can also be overridden by the user with the usual interactive
-          features of the map at any time, e.g., zoom. Concrete examples are
-          provided by the <a href="http://webvmt.org/demos">tech demos</a> at
-          the WebVMT website.
+          features of the map at any time, e.g., zoom. The rendering of the map
+          animation and annotations should be to within a hundred millseconds
+          or so to maintain good synchronization with the video.
+        </p>
+        <p>
+          Concrete examples are provided by the
+          <a href="http://webvmt.org/demos">tech demos</a> at the WebVMT website.
         </p>
       </section>
       <section>
@@ -390,6 +403,10 @@
           the objects are visible, together with position information (e.g.,
           bounding boxes). A web application then uses this timed metadata
           to overlay labels and annotations on the video using HTML and CSS.
+        </p>
+        <p>
+          This use cases requires frame accurate synchronization of the content
+          being rendered over the video.
         </p>
       </section>
       <section>
