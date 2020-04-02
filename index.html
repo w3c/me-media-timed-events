@@ -386,8 +386,11 @@
           removed, e.g., markers, at specified times during media playback.
           Control can also be overridden by the user with the usual interactive
           features of the map at any time, e.g., zoom. The rendering of the map
-          animation and annotations should be to within a hundred millseconds
-          or so to maintain good synchronization with the video.
+          animation and annotations should usually be to within a hundred
+          millseconds or so to maintain good synchronization with the video.
+          However, a shot change which instantly moves to a different location
+          would require the map to be updated simultaneously, ideally with frame
+          accuracy.
         </p>
         <p>
           Concrete examples are provided by the
